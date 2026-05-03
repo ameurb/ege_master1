@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 7 — Final Project</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#b71c1c);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #ffebee}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+.tag-project{background:#fce4ec;color:#b71c1c}
+h2{font-size:15px;color:#b71c1c;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #b71c1c;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#ef9a9a;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:6px 0 6px 28px;position:relative;font-size:13px;border-bottom:1px solid #f5f5f5}
+.checklist li::before{content:"☐";position:absolute;left:0;font-size:16px;color:#b71c1c}
+.milestone{background:#fff3e0;border:1px solid #ffe0b2;border-radius:8px;padding:14px;margin:10px 0}
+.milestone h3{color:#e65100;margin:0 0 8px}
+.milestone ul{margin:0;padding-left:18px}
+.milestone li{padding:3px 0;font-size:13px}
+.rubric-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.rubric-item{border:1px solid #eee;border-radius:6px;padding:10px;text-align:center}
+.rubric-item .pts{font-size:20px;font-weight:700;color:#b71c1c}
+.rubric-item .label{font-size:11px;color:#555;margin-top:3px}
+.structure-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:16px;font-size:13px}
+.structure-box ol{margin:0;padding-left:20px}
+.structure-box li{padding:4px 0}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 7 — Final Project / المشروع النهائي</h1>
+  <p>Instructions + Rubric + Submission Guide &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-project">Project / المشروع</span> Description &amp; Objectives</div>
+  <p><strong>EN:</strong> Working in pairs (binomes), students will perform a complete economic data analysis using Python. The project integrates all course skills: data loading, cleaning, descriptive statistics, visualization, OLS regression, and (optionally) a machine learning model.</p>
+  <div class="ar">يعمل الطلاب في ثنائيات لإجراء تحليل اقتصادي متكامل باستخدام Python. يدمج المشروع جميع مهارات المقياس: تحميل البيانات، التنظيف، الإحصاء الوصفي، التمثيل البياني، انحدار OLS، ونموذج تعلم آلي اختياري.</div>
+
+  <table>
+    <tr><th>Item</th><th>Detail / التفاصيل</th></tr>
+    <tr><td><strong>Teams / الفرق</strong></td><td>Binomes — pairs of students / ثنائيات من الطلاب</td></tr>
+    <tr><td><strong>Dataset / مجموعة البيانات</strong></td><td>algeria_economic_combined.csv OR world_bank_economic_indicators.csv</td></tr>
+    <tr><td><strong>Deliverables / التسليمات</strong></td><td>Jupyter Notebook (.ipynb) + PDF Report (3–5 pages) + Dashboard PNG</td></tr>
+    <tr><td><strong>Presentation / العرض</strong></td><td>10 minutes in-class — both partners must speak / 10 دقائق في القاعة — كلا الطالبين يتكلمان</td></tr>
+    <tr><td><strong>Total / المجموع</strong></td><td>30 pts → converted to /20</td></tr>
+    <tr><td><strong>Bonus / مكافأة</strong></td><td>+3 pts for a working ML model with R², MAE, RMSE</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Project Structure Guide</div>
+
+  <h2>Required Notebook Structure / هيكل الدفتر المطلوب</h2>
+  <div class="structure-box">
+    <ol>
+      <li><strong>Introduction</strong> — Team names, dataset description, research question (English + Arabic)</li>
+      <li><strong>Data Loading &amp; Cleaning</strong> — read_csv, shape, dtypes, missing values (isnull, fillna or dropna)</li>
+      <li><strong>Descriptive Statistics</strong> — describe(), mean/std/median for key variables, skewness</li>
+      <li><strong>Visualizations</strong> — minimum 4 charts: line, bar, scatter, histogram (or heatmap). Each chart has title, labels, and 2–3 sentence interpretation.</li>
+      <li><strong>Statistical Analysis</strong> — Correlation matrix + heatmap. OLS regression: state hypothesis, run model, interpret R², 2+ significant coefficients, residuals.</li>
+      <li><strong>Conclusion</strong> — 3 economic insights drawn from the analysis, limitations, possible extensions.</li>
+      <li><strong>[Bonus] ML Model</strong> — Train/test split, LinearRegression or RandomForest, report R²/MAE/RMSE, plot actual vs predicted.</li>
+    </ol>
+  </div>
+  <div class="ar">هيكل الدفتر: 1-المقدمة وسؤال البحث  2-تحميل البيانات وتنظيفها  3-الإحصاء الوصفي  4-التمثيل البياني (4 مخططات)  5-التحليل الإحصائي (مصفوفة الارتباط + OLS)  6-الخلاصة والاستنتاجات  7-[اختياري] نموذج التعلم الآلي</div>
+
+  <h2>Grading Summary / ملخص التقييم</h2>
+  <div class="rubric-summary">
+    <div class="rubric-item"><div class="pts">5</div><div class="label">Data Loading &amp; Cleaning</div></div>
+    <div class="rubric-item"><div class="pts">4</div><div class="label">Descriptive Statistics</div></div>
+    <div class="rubric-item"><div class="pts">4</div><div class="label">Statistical Analysis</div></div>
+    <div class="rubric-item"><div class="pts">4</div><div class="label">Chart Quality</div></div>
+    <div class="rubric-item"><div class="pts">3</div><div class="label">Chart Variety</div></div>
+    <div class="rubric-item"><div class="pts">5</div><div class="label">Economic Interpretation</div></div>
+    <div class="rubric-item"><div class="pts">5</div><div class="label">Oral Presentation</div></div>
+    <div class="rubric-item"><div class="pts">+3</div><div class="label">Bonus: ML Model</div></div>
+    <div class="rubric-item"><div class="pts">30</div><div class="label">TOTAL → /20</div></div>
+  </div>
+  <p style="font-size:12px;color:#666">Final grade = (raw score / 30) × 20 &nbsp;|&nbsp; العلامة النهائية = (النتيجة / 30) × 20</p>
+
+  <h2>Suggested Research Questions / أسئلة بحثية مقترحة</h2>
+  <table>
+    <tr><th>#</th><th>Question / السؤال</th></tr>
+    <tr><td>1</td><td>Does oil revenue growth drive GDP growth in Algeria? / هل نمو عائدات النفط يحرك نمو الناتج المحلي؟</td></tr>
+    <tr><td>2</td><td>What is the relationship between inflation and unemployment in North Africa? / ما العلاقة بين التضخم والبطالة؟</td></tr>
+    <tr><td>3</td><td>Can we predict GDP growth from macroeconomic indicators? / هل يمكن التنبؤ بنمو الناتج من المؤشرات الاقتصادية؟</td></tr>
+    <tr><td>4</td><td>How has Algeria's economic structure evolved since 2000? / كيف تطور الهيكل الاقتصادي الجزائري منذ 2000؟</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> Session 7 — Project Work &amp; Checkpoint</div>
+
+  <div class="milestone">
+    <h3>In-class Milestone / نقطة تقدّم في القاعة</h3>
+    <ul>
+      <li>Dataset loaded and cleaned — show df.shape and isnull().sum()</li>
+      <li>Research question defined (written as markdown cell in notebook)</li>
+      <li>At least 2 charts drafted</li>
+      <li>Correlation matrix computed</li>
+    </ul>
+  </div>
+  <div class="ar">للحصة 7: أظهر تحميل البيانات وتنظيفها، سؤال البحث، مخطط أو اثنين، ومصفوفة الارتباط — يُسجّل كتقدّم أوّلي.</div>
+
+  <h2>Presentation Tips / نصائح العرض الشفهي</h2>
+  <ul style="font-size:13px;line-height:1.8">
+    <li><strong>Structure:</strong> Introduction (1 min) → Data &amp; Methods (2 min) → Results &amp; Charts (4 min) → Conclusion (2 min) → Q&amp;A (1 min)</li>
+    <li><strong>Both partners must speak</strong> — split the sections equally / كلا الطالبين يتكلمان — قسّما الأقسام بالتساوي</li>
+    <li><strong>Use the dashboard PNG</strong> as your main visual / استخدما صورة لوحة البيانات كوسيلة بصرية رئيسية</li>
+    <li><strong>Economic language:</strong> use terms like "statistically significant", "positive correlation", "R² explains…" / استخدما المصطلحات الاقتصادية</li>
+  </ul>
+
+  <h2>Submission Checklist / قائمة التسليم</h2>
+  <ul class="checklist">
+    <li>Jupyter Notebook (.ipynb) — runs without errors, all cells executed / يعمل بدون أخطاء، جميع الخلايا منفّذة</li>
+    <li>PDF Report (3–5 pages) — includes charts, interpretations, conclusion / يتضمن المخططات والتفسيرات والخلاصة</li>
+    <li>Dashboard PNG — exported from notebook / مصدَّرة من الدفتر</li>
+    <li>Both files uploaded to Moodle before deadline / كلا الملفين مرفوعان على Moodle قبل الموعد</li>
+    <li>In-class presentation delivered / العرض الشفهي في القاعة</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 7 — 6 Project Guidance Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> What is the minimum number of charts required? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما الحد الأدنى لعدد المخططات؟</span><br><span class="answer">→ 4 charts of different types / 4 مخططات من أنواع مختلفة</span></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> What must each chart include? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يجب أن يتضمن كل مخطط؟</span><br><span class="answer">→ Title, axis labels, legend, and a 2–3 sentence interpretation / عنوان، تسميات المحاور، مفتاح، وفقرة تفسيرية</span></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> What statistical model is required in the project? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما النموذج الإحصائي المطلوب؟</span><br><span class="answer">→ OLS regression (statsmodels) with R², coefficients, p-values interpreted / انحدار OLS مع تفسير R² والمعاملات وقيم p</span></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> How is the final grade calculated? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تُحسب العلامة النهائية؟</span><br><span class="answer">→ (raw score out of 30) / 30 × 20 / (النتيجة من 30) ÷ 30 × 20</span></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> What earns the bonus 3 points? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما الذي يُكسب نقاط المكافأة الـ3؟</span><br><span class="answer">→ A working ML model (LinearRegression or RandomForest) with R², MAE, RMSE reported and actual vs predicted plotted</span></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> How long is the oral presentation? <span class="ar" style="display:inline;border:none;background:none;padding:0">كم مدة العرض الشفهي؟</span><br><span class="answer">→ 10 minutes maximum — both partners must speak / 10 دقائق كحد أقصى — كلا الطالبين يتكلمان</span></div>
+</div>
+</body></html>

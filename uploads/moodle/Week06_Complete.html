@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 6 — Machine Learning</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#6a1b9a);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #f3e5f5}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#6a1b9a;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #6a1b9a;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#ce93d8;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:4px 0 4px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.activity-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px}
+.activity-box .file{background:white;border:1px solid #c8e6c9;border-radius:6px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:13px}
+.pipeline{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.step{background:#f3e5f5;border:1px solid #ce93d8;border-radius:6px;padding:8px 12px;font-size:12px;font-weight:700;color:#6a1b9a;text-align:center}
+.arrow{align-self:center;color:#6a1b9a;font-size:18px;font-weight:700}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 6 — Introduction to Machine Learning / مقدمة في التعلم الآلي</h1>
+  <p>Course + Activity + Quiz &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Understand the ML pipeline: features → split → train → evaluate</li>
+    <li>Apply Linear Regression and Random Forest with scikit-learn</li>
+    <li>Evaluate models using R², MAE, RMSE</li>
+    <li>Plot actual vs predicted values and interpret model quality</li>
+  </ul>
+  <div class="ar">فهم مسار التعلم الآلي — تطبيق الانحدار الخطي والغابة العشوائية — تقييم النماذج بـ R² وMAE وRMSE — رسم الفعلي مقابل المتوقع وتفسير جودة النموذج</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 6 — Predictive Modeling with scikit-learn</div>
+
+  <h2>1. The ML Pipeline / مسار التعلم الآلي</h2>
+  <div class="pipeline">
+    <div class="step">Load &amp;<br>Clean Data</div>
+    <div class="arrow">→</div>
+    <div class="step">Select<br>Features</div>
+    <div class="arrow">→</div>
+    <div class="step">Train /Test<br>Split</div>
+    <div class="arrow">→</div>
+    <div class="step">Train<br>Model</div>
+    <div class="arrow">→</div>
+    <div class="step">Evaluate<br>Metrics</div>
+    <div class="arrow">→</div>
+    <div class="step">Interpret<br>Results</div>
+  </div>
+  <div class="ar">مسار نموذجي: تحميل البيانات وتنظيفها ← اختيار المتغيرات ← تقسيم التدريب/الاختبار ← تدريب النموذج ← حساب المقاييس ← التفسير</div>
+
+  <h2>2. Setup &amp; Feature Selection / الإعداد واختيار المتغيرات</h2>
+  <pre>import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('algeria_economic_combined.csv').dropna()
+
+# Features (X) and target (y)
+features = ['Inflation_Percent', 'Unemployment_Rate', 'Oil_Revenue_Percent']
+target   = 'GDP_Growth_Percent'
+
+X = df[features]
+y = df[target]
+
+print(f"Dataset: {X.shape[0]} rows, {X.shape[1]} features")</pre>
+
+  <h2>3. Train / Test Split / تقسيم البيانات</h2>
+  <pre># 80% train, 20% test — random_state for reproducibility
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+print(f"Train size: {len(X_train)}  |  Test size: {len(X_test)}")</pre>
+  <div class="ar">نقسّم البيانات: 80% للتدريب، 20% للاختبار. random_state=42 يضمن إعادة إنتاج نفس النتائج.</div>
+
+  <h2>4. Linear Regression / الانحدار الخطي</h2>
+  <pre>lr = LinearRegression()
+lr.fit(X_train, y_train)
+y_pred_lr = lr.predict(X_test)
+
+# Metrics / المقاييس
+r2_lr  = r2_score(y_test, y_pred_lr)
+mae_lr = mean_absolute_error(y_test, y_pred_lr)
+rmse_lr= np.sqrt(mean_squared_error(y_test, y_pred_lr))
+
+print(f"Linear Regression:")
+print(f"  R²   = {r2_lr:.3f}")
+print(f"  MAE  = {mae_lr:.3f}")
+print(f"  RMSE = {rmse_lr:.3f}")</pre>
+
+  <h2>5. Random Forest / الغابة العشوائية</h2>
+  <pre>rf = RandomForestRegressor(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+y_pred_rf = rf.predict(X_test)
+
+r2_rf  = r2_score(y_test, y_pred_rf)
+mae_rf = mean_absolute_error(y_test, y_pred_rf)
+rmse_rf= np.sqrt(mean_squared_error(y_test, y_pred_rf))
+
+print(f"Random Forest:")
+print(f"  R²   = {r2_rf:.3f}")
+print(f"  MAE  = {mae_rf:.3f}")
+print(f"  RMSE = {rmse_rf:.3f}")
+
+# Feature importance / أهمية المتغيرات
+importance = pd.Series(rf.feature_importances_, index=features).sort_values(ascending=True)
+importance.plot(kind='barh', title='Feature Importance / أهمية المتغيرات')</pre>
+
+  <h2>6. Metrics Reference / مرجع المقاييس</h2>
+  <table>
+    <tr><th>Metric</th><th>Formula</th><th>Interpretation / التفسير</th></tr>
+    <tr><td><code>R²</code></td><td>1 − SS_res/SS_tot</td><td>0–1; closer to 1 is better / كلما اقترب من 1 كان أفضل</td></tr>
+    <tr><td><code>MAE</code></td><td>mean(|y − ŷ|)</td><td>Average error in original units / متوسط الخطأ بالوحدات الأصلية</td></tr>
+    <tr><td><code>RMSE</code></td><td>√mean((y − ŷ)²)</td><td>Penalizes large errors / يعاقب الأخطاء الكبيرة</td></tr>
+  </table>
+
+  <h2>7. Actual vs Predicted Plot / مخطط الفعلي مقابل المتوقع</h2>
+  <pre>fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+
+for ax, y_pred, name, color in zip(
+        axes,
+        [y_pred_lr, y_pred_rf],
+        ['Linear Regression', 'Random Forest'],
+        ['#2E86AB', '#6a1b9a']):
+
+    ax.scatter(y_test, y_pred, color=color, alpha=0.7)
+    mn = min(y_test.min(), y_pred.min())
+    mx = max(y_test.max(), y_pred.max())
+    ax.plot([mn, mx], [mn, mx], 'r--', linewidth=1.5)   # perfect fit line
+    ax.set_title(f'{name} — Actual vs Predicted')
+    ax.set_xlabel('Actual / الفعلي')
+    ax.set_ylabel('Predicted / المتوقع')
+
+plt.tight_layout()
+plt.savefig('actual_vs_predicted.png', dpi=150)
+plt.show()</pre>
+  <div class="ar">النقاط القريبة من الخط الأحمر تعني تنبؤات دقيقة. الانتشار الواسع يدل على ضعف النموذج.</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP6 — GDP Growth Prediction</div>
+  <div class="activity-box">
+    <p><strong>EN:</strong> Build two models (Linear Regression + Random Forest) to predict GDP growth using at least 3 economic features. Report R², MAE, RMSE for both. Plot actual vs predicted. Show feature importance bar chart. Write a model comparison paragraph (which is better and why).</p>
+    <div class="ar">أنشئ نموذجَين (انحدار خطي + غابة عشوائية) للتنبؤ بنمو الناتج المحلي. أبلّغ عن R² وMAE وRMSE لكليهما. ارسم الفعلي مقابل المتوقع. أظهر مخطط أهمية المتغيرات. اكتب فقرة مقارنة بين النموذجَين.</div>
+    <div class="file">📓 TP6_MachineLearning_Starter.ipynb &nbsp;&nbsp; 📊 algeria_economic_combined.csv</div>
+    <p style="margin-top:10px"><strong>Grade / التقييم:</strong> /20 — Ex1:4 · Ex2:6 · Ex3:6 · Ex4:4</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 6 — 8 Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> What does train_test_split do? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تفعل train_test_split؟</span><br><span class="answer">→ Splits data into training and testing subsets / تقسّم البيانات إلى مجموعة تدريب ومجموعة اختبار</span></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> Import LinearRegression from scikit-learn? <span class="ar" style="display:inline;border:none;background:none;padding:0">استيراد LinearRegression؟</span><br><span class="answer">→ from sklearn.linear_model import LinearRegression</span></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> How to train (fit) a model called <code>lr</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تدرّب النموذج lr؟</span><br><span class="answer">→ lr.fit(X_train, y_train)</span></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> How to make predictions on the test set? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحسب التنبؤات؟</span><br><span class="answer">→ y_pred = lr.predict(X_test)</span></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> R² = 0.85 vs R² = 0.60 — which model is better? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي نموذج أفضل؟</span><br><span class="answer">→ R² = 0.85 (explains more variance / يفسر تبايناً أكبر)</span></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> What is MAE? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما هو MAE؟</span><br><span class="answer">→ Mean Absolute Error — average of |actual − predicted| / متوسط القيمة المطلقة للفرق بين الفعلي والمتوقع</span></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> How to compute RMSE from MSE? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحسب RMSE من MSE؟</span><br><span class="answer">→ RMSE = np.sqrt(mean_squared_error(y_test, y_pred))</span></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> What does <code>rf.feature_importances_</code> show? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يُظهر feature_importances_؟</span><br><span class="answer">→ The relative importance of each feature in the Random Forest model / الأهمية النسبية لكل متغير في نموذج الغابة العشوائية</span></div>
+</div>
+</body></html>

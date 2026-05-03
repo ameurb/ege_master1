@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 8 — Exam Prep &amp; Review</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#37474f);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #eceff1}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#37474f;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #37474f;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#b0bec5;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.week-card{border:1px solid #e0e0e0;border-radius:8px;padding:12px;margin:8px 0;background:#fafafa}
+.week-card h3{color:#1a1a2e;margin:0 0 6px;font-size:13px}
+.week-card .keywords{font-size:12px;color:#555}
+.week-card .keywords code{background:#e8f4fd;color:#1565c0}
+.cheatsheet{background:#1a1a2e;color:#a8ff78;padding:16px;border-radius:8px;font-family:monospace;font-size:12px;line-height:2;margin:10px 0}
+.cheatsheet .comment{color:#546e7a}
+.tip{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 8 — Exam Preparation &amp; Course Review / مراجعة المقياس وتحضير الامتحان</h1>
+  <p>Review + Cheat Sheet + Practice Quiz &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Review / المراجعة</span> Course Summary — Weeks 1–7</div>
+
+  <div class="week-card">
+    <h3>Week 1 — Python Fundamentals / أساسيات Python</h3>
+    <div class="keywords">Key: <code>int</code> <code>float</code> <code>str</code> <code>bool</code> <code>f-string</code> <code>**</code> <code>:</code></div>
+    <p style="font-size:12px;margin:4px 0 0">GDP growth formula, CPI inflation, compound interest, f-string formatting</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 2 — Data Structures &amp; Control Flow / هياكل البيانات والتحكم</h3>
+    <div class="keywords">Key: <code>list</code> <code>dict</code> <code>for</code> <code>while</code> <code>if/elif/else</code> <code>append</code> <code>items()</code></div>
+    <p style="font-size:12px;margin:4px 0 0">Storing economic series, iterating countries, classifying growth rates</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 3 — Pandas / تحليل البيانات مع Pandas</h3>
+    <div class="keywords">Key: <code>read_csv</code> <code>head()</code> <code>describe()</code> <code>isnull()</code> <code>fillna</code> <code>groupby</code> <code>corr()</code></div>
+    <p style="font-size:12px;margin:4px 0 0">Load Algeria dataset, filter rows, aggregate by category, correlation pairs</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 4 — Visualization / التمثيل البياني</h3>
+    <div class="keywords">Key: <code>plt.subplots</code> <code>ax.plot</code> <code>ax.bar</code> <code>ax.scatter</code> <code>ax.hist</code> <code>set_title</code> <code>savefig</code></div>
+    <p style="font-size:12px;margin:4px 0 0">Line, bar, scatter, histogram; 2×2 dashboard; PNG export</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 5 — Statistics &amp; Econometrics / الإحصاء والاقتصاد القياسي</h3>
+    <div class="keywords">Key: <code>skew()</code> <code>kurtosis()</code> <code>sns.heatmap</code> <code>sm.OLS</code> <code>add_constant</code> <code>model.summary()</code></div>
+    <p style="font-size:12px;margin:4px 0 0">Descriptive stats, correlation heatmap, OLS regression, R², p-values, residuals</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 6 — Machine Learning / التعلم الآلي</h3>
+    <div class="keywords">Key: <code>train_test_split</code> <code>LinearRegression</code> <code>RandomForestRegressor</code> <code>r2_score</code> <code>MAE</code> <code>RMSE</code></div>
+    <p style="font-size:12px;margin:4px 0 0">ML pipeline, feature selection, model training, metric evaluation, actual vs predicted</p>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 7 — Final Project / المشروع النهائي</h3>
+    <div class="keywords">Key: research question, data cleaning, 4+ charts, OLS, conclusion, oral presentation</div>
+    <p style="font-size:12px;margin:4px 0 0">Integrate all skills — 30 pts → /20, binomes, 10-min presentation</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Complete Python Cheat Sheet / ورقة المراجع الكاملة</div>
+
+  <div class="cheatsheet">
+<span class="comment"># === WEEK 1 ===</span>
+gdp_growth = ((gdp_new - gdp_old) / gdp_old) * 100
+inflation  = ((cpi_new - cpi_old) / cpi_old) * 100
+compound   = principal * (1 + rate) ** years
+print(f"GDP: {value:,.2f}")       <span class="comment"># formatted output</span>
+
+<span class="comment"># === WEEK 2 ===</span>
+lst = [2.4, 3.1, 1.8]
+lst.append(4.0)          <span class="comment"># add element</span>
+sum(lst); max(lst); min(lst); sorted(lst)
+d = {"Algeria": 25100}
+for k, v in d.items():   <span class="comment"># loop dict</span>
+    print(k, v)
+
+<span class="comment"># === WEEK 3 ===</span>
+import pandas as pd
+df = pd.read_csv('data.csv')
+df.head(); df.shape; df.describe(); df.isnull().sum()
+df[df['GDP'] > 3]                 <span class="comment"># filter</span>
+df.groupby('Country')['GDP'].mean()
+df.fillna(df.mean())              <span class="comment"># fill missing</span>
+
+<span class="comment"># === WEEK 4 ===</span>
+import matplotlib.pyplot as plt
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+ax.plot(x, y, color='blue', linewidth=2)
+ax.bar(cats, vals); ax.scatter(x, y)
+ax.hist(data, bins=10)
+ax.set_title('..'); ax.set_xlabel('..'); ax.legend()
+plt.tight_layout(); plt.savefig('chart.png', dpi=150)
+
+<span class="comment"># === WEEK 5 ===</span>
+import statsmodels.api as sm
+import seaborn as sns
+df[cols].corr()                   <span class="comment"># correlation matrix</span>
+sns.heatmap(corr, annot=True, cmap='RdYlGn')
+X = sm.add_constant(X)
+model = sm.OLS(Y, X).fit()
+print(model.summary())            <span class="comment"># R², coef, p-values</span>
+
+<span class="comment"># === WEEK 6 ===</span>
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+import numpy as np
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+r2_score(y_test, y_pred); mean_absolute_error(y_test, y_pred)
+np.sqrt(mean_squared_error(y_test, y_pred))   <span class="comment"># RMSE</span>
+  </div>
+
+  <h2>Common Exam Questions / أسئلة الامتحان الشائعة</h2>
+  <table>
+    <tr><th>Topic / الموضوع</th><th>What you must know / ما يجب معرفته</th></tr>
+    <tr><td>Variables &amp; Types</td><td>Identify int/float/str/bool; invalid variable names; type() result</td></tr>
+    <tr><td>Operators</td><td>// vs /, ** for power, % for remainder; f-string with :.2f</td></tr>
+    <tr><td>Lists &amp; Dicts</td><td>Index access (0-based), append(), len(), .items() for dict loops</td></tr>
+    <tr><td>Pandas</td><td>read_csv, head, describe, isnull, fillna, filter with boolean mask</td></tr>
+    <tr><td>Matplotlib</td><td>plt.subplots, correct chart for each data type, savefig with dpi</td></tr>
+    <tr><td>OLS Regression</td><td>Interpret R², read coefficient sign, state significance from p-value</td></tr>
+    <tr><td>ML Metrics</td><td>R² range (0–1), MAE = average absolute error, RMSE penalizes large errors</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> Session 8 — Project Presentations &amp; Q&amp;A</div>
+
+  <div class="tip">Each binome presents their project (10 minutes). The professor will ask at least 2 questions after each presentation. Be ready to explain your code, your charts, and your economic conclusions.</div>
+  <div class="ar">كل ثنائية تعرض مشروعها (10 دقائق). الأستاذ سيطرح سؤالين على الأقل بعد كل عرض. كونوا مستعدّين لشرح الكود والمخططات والاستنتاجات الاقتصادية.</div>
+
+  <h2>Final Submission Reminder / تذكير التسليم النهائي</h2>
+  <table>
+    <tr><th>Item</th><th>Format</th><th>Where / أين</th></tr>
+    <tr><td>Jupyter Notebook</td><td>.ipynb (all cells run)</td><td>Moodle — Final Project</td></tr>
+    <tr><td>PDF Report</td><td>3–5 pages</td><td>Moodle — Final Project</td></tr>
+    <tr><td>Dashboard Image</td><td>PNG, dpi=150</td><td>Attached to notebook</td></tr>
+    <tr><td>Presentation</td><td>In-class, 10 min</td><td>Week 8 session</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 8 — 10 Comprehensive Review Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> <code>df.describe()</code> shows which statistics? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تُظهر describe()؟</span><br><span class="answer">→ count, mean, std, min, 25%, 50%, 75%, max for each numeric column</span></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> How do you create a 2×2 grid of subplots? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تنشئ شبكة 2×2؟</span><br><span class="answer">→ fig, axes = plt.subplots(2, 2, figsize=(12, 8))</span></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> <code>df[df['GDP'] > 3]</code> — what does this do? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تفعل هذه الشيفرة؟</span><br><span class="answer">→ Filters rows where GDP column value is greater than 3 / تُصفّي الصفوف التي تكون فيها قيمة GDP أكبر من 3</span></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> OLS result: coef = -0.45, p = 0.02 for Inflation. Interpretation? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تفسّر هذه النتيجة؟</span><br><span class="answer">→ A 1% increase in inflation is associated with a 0.45% decrease in GDP growth, and this effect is statistically significant (p &lt; 0.05)</span></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> What is the difference between MAE and RMSE? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما الفرق بين MAE وRMSE؟</span><br><span class="answer">→ MAE treats all errors equally; RMSE squares errors, so large errors are penalized more / MAE يعطي أهمية متساوية لكل الأخطاء؛ RMSE يعاقب الأخطاء الكبيرة أكثر</span></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> How to handle missing values by replacing with column mean? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تعالج القيم المفقودة بالمتوسط؟</span><br><span class="answer">→ df.fillna(df.mean())</span></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> Best chart type to show a relationship between 2 numeric variables? <span class="ar" style="display:inline;border:none;background:none;padding:0">أفضل مخطط لإظهار العلاقة بين متغيرَين كميَّين؟</span><br><span class="answer">→ Scatter plot / مخطط التشتت</span></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> What does <code>random_state=42</code> ensure in train_test_split? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يضمن random_state=42؟</span><br><span class="answer">→ Reproducible split — same division of data every run / نفس التقسيم في كل مرة يُشغَّل الكود</span></div>
+
+  <div class="quiz-q"><span class="num">Q9.</span> <code>df.groupby('Country')['GDP'].mean()</code> — what does this compute? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تحسب هذه الشيفرة؟</span><br><span class="answer">→ Average GDP for each country group / متوسط الناتج المحلي لكل دولة</span></div>
+
+  <div class="quiz-q"><span class="num">Q10.</span> Name 3 metrics used to evaluate a regression model. <span class="ar" style="display:inline;border:none;background:none;padding:0">سمّ 3 مقاييس لتقييم نموذج الانحدار.</span><br><span class="answer">→ R² (coefficient of determination), MAE (mean absolute error), RMSE (root mean squared error)</span></div>
+</div>
+</body></html>

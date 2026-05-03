@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+  <question type="multichoice">
+    <name><text>W5-Q1 Import statsmodels</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What is the correct import statement for statsmodels OLS?<br>
+      <span dir="rtl">ما هو الاستيراد الصحيح لـ OLS من statsmodels؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>import statsmodels.api as sm</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>from statsmodels import OLS</text><feedback><text>OLS is accessed via sm.OLS after importing the api.</text></feedback></answer>
+    <answer fraction="0"><text>import statsmodels as sm</text><feedback><text>Should be statsmodels.api, not just statsmodels.</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn.linear_model import OLS</text><feedback><text>OLS is in statsmodels, not scikit-learn.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q2 add_constant</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Why do we call <code>sm.add_constant(X)</code> before fitting an OLS model?<br>
+      <span dir="rtl">لماذا نستدعي sm.add_constant(X) قبل تطبيق OLS؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>To add an intercept (β₀) to the model / لإضافة الثابت (β₀) للنموذج</text><feedback><text>Correct — statsmodels OLS does not add an intercept automatically.</text></feedback></answer>
+    <answer fraction="0"><text>To normalize the data / لتطبيع البيانات</text><feedback><text>add_constant adds a column of 1s for the intercept, not normalization.</text></feedback></answer>
+    <answer fraction="0"><text>To increase model accuracy / لزيادة دقة النموذج</text><feedback><text>Not the purpose — it adds the intercept term.</text></feedback></answer>
+    <answer fraction="0"><text>It is optional and has no effect / اختياري وليس له أثر</text><feedback><text>Without it, the model has no intercept (forced through origin).</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q3 R-squared meaning</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>An OLS model gives R² = 0.64. What does this mean?<br>
+      <span dir="rtl">نموذج OLS يعطي R² = 0.64. ماذا يعني ذلك؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>The model explains 64% of the variance in the dependent variable / النموذج يفسر 64% من تباين المتغير التابع</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>The model is 64% accurate / دقة النموذج 64%</text><feedback><text>R² measures explained variance, not accuracy percentage.</text></feedback></answer>
+    <answer fraction="0"><text>64% of predictions are correct / 64% من التنبؤات صحيحة</text><feedback><text>This interpretation applies to classification, not regression.</text></feedback></answer>
+    <answer fraction="0"><text>The error rate is 36% / معدل الخطأ 36%</text><feedback><text>R² measures explained variance — 1-R² is unexplained variance fraction.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q4 p-value significance</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>A coefficient has p-value = 0.03. At the 5% significance level, this means:<br>
+      <span dir="rtl">معامل له قيمة p = 0.03. عند مستوى دلالة 5%، هذا يعني:</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>The coefficient is statistically significant / المعامل ذو دلالة إحصائية</text><feedback><text>Correct — p = 0.03 &lt; 0.05, so we reject the null hypothesis.</text></feedback></answer>
+    <answer fraction="0"><text>The coefficient is not significant / المعامل غير ذي دلالة</text><feedback><text>p = 0.03 is below 0.05, so it IS significant.</text></feedback></answer>
+    <answer fraction="0"><text>We cannot determine significance / لا يمكن تحديد الدلالة</text><feedback><text>p = 0.03 &lt; 0.05 → significant at 5% level.</text></feedback></answer>
+    <answer fraction="0"><text>The model should be rejected / يجب رفض النموذج</text><feedback><text>The coefficient is significant, so we do NOT reject it.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q5 seaborn heatmap</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which seaborn function creates a correlation heatmap with annotations?<br>
+      <span dir="rtl">أي دالة seaborn ترسم خريطة حرارة الارتباط مع قيم مُعلَّقة؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>sns.heatmap(corr, annot=True)</text><feedback><text>Correct — annot=True displays the correlation values in each cell.</text></feedback></answer>
+    <answer fraction="0"><text>sns.corrplot(corr)</text><feedback><text>No such function in seaborn.</text></feedback></answer>
+    <answer fraction="0"><text>sns.matplot(corr, annotate=True)</text><feedback><text>No such function — use sns.heatmap.</text></feedback></answer>
+    <answer fraction="0"><text>plt.heatmap(corr, annot=True)</text><feedback><text>heatmap is from seaborn (sns), not matplotlib (plt).</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q6 positive skewness</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What does a positive skewness value indicate?<br>
+      <span dir="rtl">ماذا يعني الالتواء الموجب؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>The distribution has a long tail to the right (right-skewed) / التوزيع له ذيل طويل جهة اليمين</text><feedback><text>Correct — mean &gt; median in a right-skewed distribution.</text></feedback></answer>
+    <answer fraction="0"><text>The distribution has a long tail to the left / ذيل جهة اليسار</text><feedback><text>Left tail means negative skewness.</text></feedback></answer>
+    <answer fraction="0"><text>The distribution is symmetric / التوزيع متماثل</text><feedback><text>Symmetric distributions have skewness ≈ 0.</text></feedback></answer>
+    <answer fraction="0"><text>All values are positive / جميع القيم موجبة</text><feedback><text>Skewness refers to distribution shape, not the sign of values.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>W5-Q7 run OLS</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Write the two lines to fit an OLS model (Y and X already defined) and print the summary.<br>
+      <span dir="rtl">اكتب سطرَين لتطبيق نموذج OLS وطباعة الملخص.</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>model = sm.OLS(Y, X).fit()
+print(model.summary())</text></answer>
+    <answer fraction="75"><text>model = sm.OLS(Y, X).fit(); print(model.summary())</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q8 Durbin-Watson</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>A Durbin-Watson statistic of <strong>1.95</strong> suggests:<br>
+      <span dir="rtl">إحصائية Durbin-Watson بقيمة 1.95 تشير إلى:</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>No significant autocorrelation in residuals / لا يوجد ارتباط ذاتي معنوي في البواقي</text><feedback><text>Correct — values close to 2 indicate no autocorrelation.</text></feedback></answer>
+    <answer fraction="0"><text>Strong positive autocorrelation / ارتباط ذاتي موجب قوي</text><feedback><text>Positive autocorrelation → DW near 0.</text></feedback></answer>
+    <answer fraction="0"><text>Strong negative autocorrelation / ارتباط ذاتي سالب قوي</text><feedback><text>Negative autocorrelation → DW near 4.</text></feedback></answer>
+    <answer fraction="0"><text>The model should be rejected / يجب رفض النموذج</text><feedback><text>DW near 2 is actually a good sign — no autocorrelation issue.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+</quiz>

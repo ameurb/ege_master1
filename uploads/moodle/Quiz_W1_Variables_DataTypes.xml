@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Moodle Quiz XML — Week 1: Variables & Data Types -->
+<!-- Import: Moodle → Course Admin → Question Bank → Import → Moodle XML -->
+<quiz>
+
+  <question type="category">
+    <category><text>$course$/Week 1 - Python Fundamentals</text></category>
+  </question>
+
+  <!-- Q1: Data type of integer variable -->
+  <question type="multichoice">
+    <name><text>W1-Q1: Data type of gdp = 25100</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What data type is the variable <code>gdp = 25100</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> ما هو نوع البيانات للمتغير <code>gdp = 25100</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>float</text><feedback format="html"><text><![CDATA[<p>EN: No — floats have decimals (e.g. 25100.0). Integers are whole numbers.<br>AR: لا — الأعداد العشرية تحتوي فاصلة (مثل 25100.0). الأعداد الصحيحة هي أرقام كاملة.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>str</text><feedback format="html"><text><![CDATA[<p>EN: No — strings are text in quotes.<br>AR: لا — النصوص توضع بين علامتَي اقتباس.</p>]]></text></feedback></answer>
+    <answer fraction="100"><text>int</text><feedback format="html"><text><![CDATA[<p>EN: Correct! 25100 is a whole number → int.<br>AR: صحيح! 25100 عدد كامل → int.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>bool</text><feedback format="html"><text><![CDATA[<p>EN: No — bool is True or False only.<br>AR: لا — bool هي True أو False فقط.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q2: Result of 10/4 -->
+  <question type="numerical">
+    <name><text>W1-Q2: Result of 10 / 4</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What is the result of <code>10 / 4</code> in Python?</p>
+        <p dir="rtl"><strong>AR:</strong> ما هي نتيجة <code>10 / 4</code> في بايثون؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>2.5</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! In Python 3, division always returns a float.<br>AR: صحيح! في بايثون 3، القسمة دائماً تُعطي عدداً عشرياً.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>2</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: No — use // for integer division: 10 // 4 = 2.<br>AR: لا — استخدم // للقسمة الصحيحة: 10 // 4 = 2.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q3: Invalid variable name -->
+  <question type="multichoice">
+    <name><text>W1-Q3: Invalid variable name</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> Which variable name is <strong>invalid</strong> in Python?</p>
+        <p dir="rtl"><strong>AR:</strong> أيّ اسم متغير <strong>غير صحيح</strong> في بايثون؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>gdp_2024</text><feedback format="html"><text><![CDATA[<p>EN: Valid — underscores and numbers are allowed (not at the start).<br>AR: صحيح — الشرطة السفلية والأرقام مسموح بها (ليس في البداية).</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>total_gdp</text><feedback format="html"><text><![CDATA[<p>EN: Valid — letters and underscores only.<br>AR: صحيح — أحرف وشرطات سفلية فقط.</p>]]></text></feedback></answer>
+    <answer fraction="100"><text>2024_gdp</text><feedback format="html"><text><![CDATA[<p>EN: Correct! Variable names cannot start with a digit.<br>AR: صحيح! أسماء المتغيرات لا تبدأ برقم.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>gdp_growth</text><feedback format="html"><text><![CDATA[<p>EN: Valid — good descriptive name.<br>AR: صحيح — اسم وصفي جيد.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q4: type() of float -->
+  <question type="multichoice">
+    <name><text>W1-Q4: type(3.14)</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What does <code>type(3.14)</code> return?</p>
+        <p dir="rtl"><strong>AR:</strong> ماذا تُرجع <code>type(3.14)</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>&lt;class 'int'&gt;</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100"><text>&lt;class 'float'&gt;</text><feedback format="html"><text><![CDATA[<p>EN: Correct! 3.14 has a decimal point → float.<br>AR: صحيح! 3.14 يحتوي فاصلة عشرية → float.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>&lt;class 'str'&gt;</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="0"><text>&lt;class 'double'&gt;</text><feedback format="html"><text><![CDATA[<p>EN: Python has no 'double' type — use float.<br>AR: لا يوجد نوع 'double' في بايثون — استخدم float.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q5: Inflation calculation -->
+  <question type="numerical">
+    <name><text>W1-Q5: Calculate inflation rate</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> Calculate the inflation rate. CPI 2023 = 108.5, CPI 2024 = 111.2.<br>
+        Formula: <code>((111.2 - 108.5) / 108.5) * 100</code>. Round to 2 decimal places.</p>
+        <p dir="rtl"><strong>AR:</strong> احسب معدل التضخم. مؤشر أسعار 2023 = 108.5، مؤشر أسعار 2024 = 111.2.<br>
+        الصيغة: <code>((111.2 - 108.5) / 108.5) * 100</code>. قرّب لمنزلتين عشريتين.</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>2.49</text><tolerance>0.01</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! ((111.2-108.5)/108.5)*100 = 2.4885... ≈ 2.49%<br>AR: صحيح! النتيجة ≈ 2.49%</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q6: int() conversion -->
+  <question type="shortanswer">
+    <name><text>W1-Q6: int(25.9)</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What does <code>int(25.9)</code> return?</p>
+        <p dir="rtl"><strong>AR:</strong> ماذا تُرجع <code>int(25.9)</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>0</usecase>
+    <answer fraction="100"><text>25</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! int() truncates (does not round) → drops the .9.<br>AR: صحيح! int() يقطع (لا يقرّب) → يحذف .9.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>26</text>
+      <feedback format="html"><text><![CDATA[<p>EN: No — int() does not round. Use round(25.9) to get 26.<br>AR: لا — int() لا يقرّب. استخدم round(25.9) للحصول على 26.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q7: len() of string -->
+  <question type="numerical">
+    <name><text>W1-Q7: len("Algeria")</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> <code>country = "Algeria"</code> — what is <code>len(country)</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> <code>country = "Algeria"</code> — ما هي قيمة <code>len(country)</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>7</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! A-l-g-e-r-i-a = 7 characters.<br>AR: صحيح! A-l-g-e-r-i-a = 7 أحرف.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q8: Modulo operator -->
+  <question type="multichoice">
+    <name><text>W1-Q8: Remainder operator</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> Which operator gives the <strong>remainder</strong> of a division in Python?</p>
+        <p dir="rtl"><strong>AR:</strong> أيّ عملية تُعطي <strong>باقي القسمة</strong> في بايثون؟</p>
+        <p>Example / مثال: <code>10 ? 3 = 1</code></p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>//</text><feedback format="html"><text><![CDATA[<p>EN: // is integer division (quotient). 10//3=3.<br>AR: // هي القسمة الصحيحة (الحاصل). 10//3=3.</p>]]></text></feedback></answer>
+    <answer fraction="100"><text>%</text><feedback format="html"><text><![CDATA[<p>EN: Correct! % is the modulo operator. 10%3=1.<br>AR: صحيح! % هي عملية باقي القسمة. 10%3=1.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>/</text><feedback format="html"><text><![CDATA[<p>EN: / gives the float result. 10/3=3.333...<br>AR: / تعطي النتيجة العشرية. 10/3=3.333...</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>**</text><feedback format="html"><text><![CDATA[<p>EN: ** is exponentiation (power). 10**3=1000.<br>AR: ** هي الأس. 10**3=1000.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q9: f-string formatting -->
+  <question type="shortanswer">
+    <name><text>W1-Q9: f-string output</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What is the exact output of: <code>f"Rate: {2.4876:.2f}%"</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> ما هو الناتج الدقيق لـ: <code>f"Rate: {2.4876:.2f}%"</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>1</usecase>
+    <answer fraction="100"><text>Rate: 2.49%</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! :.2f rounds to 2 decimal places → 2.49.<br>AR: صحيح! :.2f يقرّب لمنزلتين عشريتين → 2.49.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>Rate: 2.4876%</text>
+      <feedback format="html"><text><![CDATA[<p>EN: No — :.2f truncates to 2 decimal places.<br>AR: لا — :.2f يُقلّص لمنزلتين عشريتين.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>Rate: 2.49 %</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Almost — but no space before %.<br>AR: تقريباً — لكن لا مسافة قبل %.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q10: Boolean type -->
+  <question type="multichoice">
+    <name><text>W1-Q10: Boolean type</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> <code>is_growing = True</code> — what is the type of this variable?</p>
+        <p dir="rtl"><strong>AR:</strong> <code>is_growing = True</code> — ما هو نوع هذا المتغير؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>int</text><feedback format="html"><text><![CDATA[<p>EN: Note: bool is a subclass of int in Python (True=1, False=0), but its type is bool.<br>AR: ملاحظة: bool هي فئة فرعية من int في بايثون، لكن نوعها bool.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>str</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="0"><text>float</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100"><text>bool</text><feedback format="html"><text><![CDATA[<p>EN: Correct! True and False are boolean values → type bool.<br>AR: صحيح! True وFalse قيم منطقية → النوع bool.</p>]]></text></feedback></answer>
+  </question>
+
+</quiz>

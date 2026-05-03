@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Moodle Quiz XML — Week 2: Lists, Dicts & Control Flow -->
+<quiz>
+
+  <question type="category">
+    <category><text>$course$/Week 2 - Data Structures and Control Flow</text></category>
+  </question>
+
+  <!-- Q1: List indexing -->
+  <question type="shortanswer">
+    <name><text>W2-Q1: List indexing — 3rd element</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> How do you access the <strong>3rd element</strong> of <code>gdp = [1000, 1100, 1200, 1350]</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> كيف تصل إلى <strong>العنصر الثالث</strong> في <code>gdp = [1000, 1100, 1200, 1350]</code>؟</p>
+        <p><em>EN: Write only the Python expression. / AR: اكتب التعبير البايثوني فقط.</em></p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>1</usecase>
+    <answer fraction="100"><text>gdp[2]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! Python uses 0-based indexing: index 2 = 3rd element = 1200.<br>AR: صحيح! بايثون يبدأ العد من 0: الفهرس 2 = العنصر الثالث = 1200.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>gdp[3]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: No — gdp[3] = 1350 (4th element). Remember: 0-based indexing.<br>AR: لا — gdp[3] = 1350 (العنصر الرابع). تذكر: الفهرس يبدأ من 0.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q2: len() of list -->
+  <question type="numerical">
+    <name><text>W2-Q2: len() of a list</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What does <code>len([2, 4, 6, 8])</code> return?</p>
+        <p dir="rtl"><strong>AR:</strong> ماذا تُرجع <code>len([2, 4, 6, 8])</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>4</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! The list has 4 elements.<br>AR: صحيح! القائمة تحتوي 4 عناصر.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q3: append() -->
+  <question type="shortanswer">
+    <name><text>W2-Q3: append to list</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> How do you add <code>3.1</code> to <code>rates = [2.1, 2.5, 1.8]</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> كيف تُضيف <code>3.1</code> إلى <code>rates = [2.1, 2.5, 1.8]</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>1</usecase>
+    <answer fraction="100"><text>rates.append(3.1)</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! append() adds an element to the end of the list.<br>AR: صحيح! append() تضيف عنصراً في نهاية القائمة.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q4: sum() -->
+  <question type="numerical">
+    <name><text>W2-Q4: sum() of a list</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What does <code>sum([100, 200, 300])</code> return?</p>
+        <p dir="rtl"><strong>AR:</strong> ماذا تُرجع <code>sum([100, 200, 300])</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>600</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! 100+200+300=600.<br>AR: صحيح!</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q5: and logic -->
+  <question type="multichoice">
+    <name><text>W2-Q5: Boolean and logic</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> True or False: <code>5 &gt; 3 and 2 &lt; 1</code> evaluates to <code>True</code>.</p>
+        <p dir="rtl"><strong>AR:</strong> صح أم خطأ: <code>5 &gt; 3 and 2 &lt; 1</code> تُساوي <code>True</code>.</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>false</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="0"><text>True</text><feedback format="html"><text><![CDATA[<p>EN: No — both conditions must be True for 'and'. Here 2&lt;1 is False, so the whole expression is False.<br>AR: لا — كلا الشرطين يجب أن يكونا صحيحين مع 'and'. هنا 2&lt;1 خاطئ، إذن التعبير كله False.</p>]]></text></feedback></answer>
+    <answer fraction="100"><text>False</text><feedback format="html"><text><![CDATA[<p>EN: Correct! 5&gt;3 is True but 2&lt;1 is False → True AND False = False.<br>AR: صحيح! 5&gt;3 صحيح لكن 2&lt;1 خاطئ → True AND False = False.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q6: break keyword -->
+  <question type="shortanswer">
+    <name><text>W2-Q6: Exit loop early</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What Python keyword is used to <strong>exit a loop early</strong>?</p>
+        <p dir="rtl"><strong>AR:</strong> ما هي الكلمة المفتاحية في بايثون للـ<strong>خروج من حلقة التكرار مبكراً</strong>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>0</usecase>
+    <answer fraction="100"><text>break</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! break exits the current loop immediately.<br>AR: صحيح! break يخرج من الحلقة فوراً.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>exit</text>
+      <feedback format="html"><text><![CDATA[<p>EN: exit() stops the whole program, not just the loop.<br>AR: exit() يوقف البرنامج كله، ليس فقط الحلقة.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>stop</text>
+      <feedback format="html"><text><![CDATA[<p>EN: 'stop' is not a Python keyword. Use 'break'.<br>AR: 'stop' ليست كلمة مفتاحية في بايثون. استخدم 'break'.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q7: range() iterations -->
+  <question type="numerical">
+    <name><text>W2-Q7: range() iterations</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> How many times does the loop <code>for i in range(4):</code> run?</p>
+        <p dir="rtl"><strong>AR:</strong> كم مرة تتكرر حلقة <code>for i in range(4):</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <answer fraction="100"><text>4</text><tolerance>0</tolerance>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! range(4) = [0, 1, 2, 3] → 4 iterations.<br>AR: صحيح! range(4) = [0, 1, 2, 3] → 4 تكرارات.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q8: Dictionary access -->
+  <question type="shortanswer">
+    <name><text>W2-Q8: Dictionary access</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> How do you access the value <code>"Algeria"</code> from:<br>
+        <code>data = {"country": "Algeria", "gdp": 25100}</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> كيف تصل إلى القيمة <code>"Algeria"</code> من:<br>
+        <code>data = {"country": "Algeria", "gdp": 25100}</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>1</usecase>
+    <answer fraction="100"><text>data["country"]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! Use the key in square brackets.<br>AR: صحيح! استخدم المفتاح بين قوسين مربعين.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>data[0]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: No — dictionaries use keys (strings), not index numbers.<br>AR: لا — القواميس تستخدم المفاتيح (نصوص)، ليس أرقام الفهرس.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+  <!-- Q9: Correct and syntax -->
+  <question type="multichoice">
+    <name><text>W2-Q9: Correct and condition syntax</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> Which is the correct Python syntax to check that <code>gdp &gt; 1000</code> AND <code>inflation &lt; 5</code>?</p>
+        <p dir="rtl"><strong>AR:</strong> أيّ صياغة صحيحة للتحقق أن <code>gdp &gt; 1000</code> وأيضاً <code>inflation &lt; 5</code>؟</p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <answer fraction="100"><text>if gdp &gt; 1000 and inflation &lt; 5:</text><feedback format="html"><text><![CDATA[<p>EN: Correct! Use 'and' keyword (lowercase) between conditions.<br>AR: صحيح! استخدم كلمة 'and' (بالأحرف الصغيرة) بين الشروط.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>if gdp &gt; 1000 &amp; inflation &lt; 5:</text><feedback format="html"><text><![CDATA[<p>EN: No — &amp; is bitwise AND, not logical AND. Use 'and' keyword.<br>AR: لا — &amp; هي AND البتية، ليست AND المنطقية. استخدم 'and'.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>if gdp &gt; 1000 AND inflation &lt; 5:</text><feedback format="html"><text><![CDATA[<p>EN: No — Python keywords are lowercase: 'and', not 'AND'.<br>AR: لا — الكلمات المفتاحية في بايثون بالأحرف الصغيرة: 'and' ليس 'AND'.</p>]]></text></feedback></answer>
+    <answer fraction="0"><text>if gdp &gt; 1000, inflation &lt; 5:</text><feedback format="html"><text><![CDATA[<p>EN: No — comma is not a logical operator in conditions.<br>AR: لا — الفاصلة ليست مشغّل منطقي في الشروط.</p>]]></text></feedback></answer>
+  </question>
+
+  <!-- Q10: sorted() -->
+  <question type="shortanswer">
+    <name><text>W2-Q10: sorted() result</text></name>
+    <questiontext format="html">
+      <text><![CDATA[
+        <p><strong>EN:</strong> What does <code>sorted([3.2, 1.1, 2.5])</code> return?</p>
+        <p dir="rtl"><strong>AR:</strong> ماذا تُرجع <code>sorted([3.2, 1.1, 2.5])</code>؟</p>
+        <p><em>Write the answer as a Python list / اكتب الجواب كقائمة بايثون</em></p>
+      ]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <usecase>0</usecase>
+    <answer fraction="100"><text>[1.1, 2.5, 3.2]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: Correct! sorted() returns a new sorted list in ascending order.<br>AR: صحيح! sorted() تُرجع قائمة مرتّبة جديدة تصاعدياً.</p>]]></text></feedback>
+    </answer>
+    <answer fraction="0"><text>[3.2, 2.5, 1.1]</text>
+      <feedback format="html"><text><![CDATA[<p>EN: No — that is descending. For descending: sorted(..., reverse=True).<br>AR: لا — ذلك تنازلي. للترتيب التنازلي: sorted(..., reverse=True).</p>]]></text></feedback>
+    </answer>
+  </question>
+
+</quiz>

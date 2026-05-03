@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Final Project Grading Rubric / معيار تقييم المشروع النهائي</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #f8f9fa; }
+  .page { max-width: 1050px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 20px; color: #1a1a2e; text-align: center; margin-bottom: 4px; }
+  h2 { font-size: 13px; font-weight: normal; color: #555; text-align: center; margin-bottom: 20px; }
+  .meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .badge { background: #e8f4fd; color: #1565c0; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: center; font-size: 12px; }
+  th.left { text-align: left; }
+  td { padding: 9px 12px; border-bottom: 1px solid #e9ecef; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .criterion-en { font-weight: 600; color: #1a1a2e; margin-bottom: 3px; }
+  .criterion-ar { color: #555; font-size: 12px; direction: rtl; text-align: right; }
+  .pts { text-align: center; font-weight: 700; color: #1565c0; font-size: 14px; }
+  .level { padding: 5px 8px; border-radius: 5px; font-size: 11.5px; line-height: 1.45; }
+  .level-4 { background: #e8f5e9; color: #2e7d32; }
+  .level-3 { background: #e3f2fd; color: #1565c0; }
+  .level-2 { background: #fff8e1; color: #f57c00; }
+  .level-1 { background: #fce4ec; color: #c62828; }
+  .level-label { font-weight: 700; display: block; margin-bottom: 2px; }
+  .section-header td { background: #f0f4ff; font-weight: 700; color: #1a1a2e; padding: 7px 12px; }
+  .total-row td { background: #1a1a2e; color: white; font-weight: 700; font-size: 14px; text-align: center; padding: 10px; }
+  .footer { text-align: center; color: #999; font-size: 11px; margin-top: 16px; }
+  @media print {
+    body { background: white; }
+    .page { padding: 10px; }
+    table { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Final Project Grading Rubric</h1>
+  <h2 dir="rtl">معيار تقييم المشروع النهائي</h2>
+
+  <div class="meta">
+    <span class="badge">Course / المقياس: Python &amp; Data Analysis for Economics</span>
+    <span class="badge">Level / المستوى: Master 1</span>
+    <span class="badge">Total / المجموع: 30 pts → /20</span>
+    <span class="badge">Teams / الفرق: Binomes (pairs)</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="left" style="width:22%">Criterion / المعيار</th>
+        <th style="width:7%">Max<br>pts</th>
+        <th style="width:18%"><span class="level-4">Excellent / ممتاز</span><br>4–5 pts</th>
+        <th style="width:18%"><span class="level-3">Good / جيد</span><br>3 pts</th>
+        <th style="width:18%"><span class="level-2">Satisfactory / مقبول</span><br>2 pts</th>
+        <th style="width:17%"><span class="level-1">Needs Work / ضعيف</span><br>0–1 pts</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="section-header">
+        <td colspan="6">A. Data Preparation / تحضير البيانات</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">1. Data Loading &amp; Cleaning</div>
+          <div class="criterion-ar">تحميل البيانات وتنظيفها</div>
+        </td>
+        <td class="pts">5</td>
+        <td><div class="level level-4"><span class="level-label">5 pts</span>File loaded correctly. All missing values handled with clear justification. Correct dtypes verified. Dataset shape and columns shown.</div></td>
+        <td><div class="level level-3"><span class="level-label">3–4 pts</span>File loaded. Missing values handled but justification weak. Minor dtype issues.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>File loaded. Missing values acknowledged but not properly handled.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>File not loaded or major errors. No handling of missing values.</div></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">B. Analysis / التحليل</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">2. Descriptive Statistics</div>
+          <div class="criterion-ar">الإحصاء الوصفي</div>
+        </td>
+        <td class="pts">4</td>
+        <td><div class="level level-4"><span class="level-label">4 pts</span>describe() shown for all numeric columns. Mean, median, std computed and compared. Skewness discussed.</div></td>
+        <td><div class="level level-3"><span class="level-label">3 pts</span>describe() shown. Key statistics computed but not all compared.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>Only basic mean/max computed. No describe() table.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>No statistics computed.</div></td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">3. Statistical Analysis</div>
+          <div class="criterion-ar">التحليل الإحصائي</div>
+        </td>
+        <td class="pts">4</td>
+        <td><div class="level level-4"><span class="level-label">4 pts</span>Correlation matrix computed and plotted. OLS regression or ML model trained. R², coefficients, p-values correctly reported.</div></td>
+        <td><div class="level level-3"><span class="level-label">3 pts</span>Correlation computed. Regression run but results not fully interpreted.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>Only correlations between 2 variables. No regression.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>No statistical analysis.</div></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">C. Visualizations / التمثيل البياني</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">4. Chart Quality</div>
+          <div class="criterion-ar">جودة المخططات</div>
+        </td>
+        <td class="pts">4</td>
+        <td><div class="level level-4"><span class="level-label">4 pts</span>4+ charts. Each has title, labeled axes, legend. Appropriate chart type chosen. Clean, readable layout. Saved as PNG.</div></td>
+        <td><div class="level level-3"><span class="level-label">3 pts</span>3–4 charts. Most have titles and labels. Minor formatting issues.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>2 charts. Missing titles or labels on some. Chart type sometimes inappropriate.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>1 chart or no charts. Missing labels.</div></td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">5. Chart Variety</div>
+          <div class="criterion-ar">تنوع أنواع المخططات</div>
+        </td>
+        <td class="pts">3</td>
+        <td><div class="level level-4"><span class="level-label">3 pts</span>Uses 3+ different chart types (line, bar, scatter, histogram, heatmap…) each well-suited to the data shown.</div></td>
+        <td><div class="level level-3"><span class="level-label">2 pts</span>2 different chart types. Generally appropriate.</div></td>
+        <td><div class="level level-2"><span class="level-label">1 pt</span>Only 1 chart type used throughout.</div></td>
+        <td><div class="level level-1"><span class="level-label">0 pts</span>No variety or charts missing.</div></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">D. Written Interpretation / التفسير المكتوب</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">6. Economic Interpretation</div>
+          <div class="criterion-ar">التفسير الاقتصادي</div>
+        </td>
+        <td class="pts">5</td>
+        <td><div class="level level-4"><span class="level-label">5 pts</span>Each chart and result has 2–3 sentence interpretation. Interpretation is economically meaningful, references real context (Algeria, MENA…). Draws conclusions supported by data.</div></td>
+        <td><div class="level level-3"><span class="level-label">3–4 pts</span>Most results interpreted. Some interpretations are shallow or generic.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>Interpretations are present but mostly describe the data rather than interpreting it economically.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>No interpretation or only 1 comment.</div></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">E. Presentation / العرض الشفهي</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">7. Oral Presentation</div>
+          <div class="criterion-ar">العرض الشفهي</div>
+        </td>
+        <td class="pts">5</td>
+        <td><div class="level level-4"><span class="level-label">5 pts</span>Clear structure (intro → analysis → conclusion). Both partners speak. Key results explained clearly. Handles Q&amp;A well. Stays within 10 min.</div></td>
+        <td><div class="level level-3"><span class="level-label">3–4 pts</span>Good structure. Some results unclear. Minor time issues.</div></td>
+        <td><div class="level level-2"><span class="level-label">2 pts</span>One partner does most of the talking. Results presented but not explained. Over/under time.</div></td>
+        <td><div class="level level-1"><span class="level-label">0–1 pts</span>No clear structure. Cannot explain the work. Did not present.</div></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">F. Bonus / مكافأة</td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="criterion-en">Bonus: ML Model</div>
+          <div class="criterion-ar">مكافأة: نموذج تعلم الآلة</div>
+        </td>
+        <td class="pts">+3</td>
+        <td colspan="4"><div class="level level-3">Trained a working ML model (e.g., Random Forest, Linear Regression with sklearn). Reports R², MAE, RMSE. Plots actual vs predicted. Interprets model quality. <br><br>تدريب نموذج تعلم الآلة (مثل Random Forest أو الانحدار الخطي). الإبلاغ عن R², MAE, RMSE. رسم الفعلي مقابل المتوقع. تفسير جودة النموذج.</div></td>
+      </tr>
+
+      <tr class="total-row">
+        <td colspan="2">TOTAL / المجموع</td>
+        <td>30 pts</td>
+        <td colspan="3">Final grade = (total / 30) × 20 → /20<br>العلامة النهائية = (المجموع / 30) × 20</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- Conversion table -->
+  <table>
+    <thead>
+      <tr>
+        <th colspan="6">Grade Conversion / جدول تحويل العلامات</th>
+      </tr>
+      <tr>
+        <th>Raw / الخام</th><th>0–9</th><th>10–15</th><th>16–20</th><th>21–25</th><th>26–30 (+bonus)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Grade /20</strong></td>
+        <td>0–6</td><td>6.7–10</td><td>10.7–13.3</td><td>14–16.7</td><td>17.3–20 (capped at 20)</td>
+      </tr>
+      <tr>
+        <td><strong>Mention</strong></td>
+        <td class="level level-1">Fail / راسب</td>
+        <td class="level level-2">Pass / مقبول</td>
+        <td class="level level-3">Good / جيد</td>
+        <td class="level level-4">Very Good / جيد جداً</td>
+        <td class="level level-4">Excellent / ممتاز</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Submission checklist -->
+  <table>
+    <thead>
+      <tr><th colspan="2">Submission Checklist / قائمة التسليم</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>☐</td><td><strong>EN:</strong> Jupyter Notebook (.ipynb) — complete, runs without errors, uploaded to Moodle<br><strong>AR:</strong> دفتر Jupyter (.ipynb) — مكتمل، يعمل بدون أخطاء، مرفوع على Moodle</td></tr>
+      <tr><td>☐</td><td><strong>EN:</strong> PDF Report (3–5 pages) — includes charts, interpretations, conclusion<br><strong>AR:</strong> تقرير PDF (3–5 صفحات) — يتضمن المخططات والتفسيرات والخلاصة</td></tr>
+      <tr><td>☐</td><td><strong>EN:</strong> Dashboard PNG image exported from notebook<br><strong>AR:</strong> صورة PNG للوحة البيانات مصدَّرة من الدفتر</td></tr>
+      <tr><td>☐</td><td><strong>EN:</strong> Presentation delivered in-class (10 min max, both partners speak)<br><strong>AR:</strong> العرض الشفهي في القاعة (10 دقائق كحد أقصى، كلا الطالبين يتكلمان)</td></tr>
+      <tr><td>☐</td><td><strong>EN:</strong> Submission deadline: as announced on Moodle<br><strong>AR:</strong> موعد التسليم: كما أُعلن على Moodle</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Python &amp; Data Analysis for Economics — Master 1 &nbsp;|&nbsp; EGE Platform &nbsp;|&nbsp; Academic Year 2025–2026
+  </div>
+
+</div>
+</body>
+</html>

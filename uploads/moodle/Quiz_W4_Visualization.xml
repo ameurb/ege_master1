@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+  <question type="multichoice">
+    <name><text>W4-Q1 Import matplotlib</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What is the standard import statement for matplotlib's pyplot?<br>
+      <span dir="rtl">ما هو الاستيراد القياسي لـ pyplot من matplotlib؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>import matplotlib.pyplot as plt</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>import pyplot as plt</text><feedback><text>pyplot is a submodule — must include matplotlib.</text></feedback></answer>
+    <answer fraction="0"><text>from matplotlib import plot as plt</text><feedback><text>Incorrect — the submodule is pyplot, not plot.</text></feedback></answer>
+    <answer fraction="0"><text>import matplotlib as plt</text><feedback><text>This imports the top-level package, not pyplot.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q2 Best chart for time trend</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which chart type is best for showing a trend over time (e.g., GDP growth 2000–2023)?<br>
+      <span dir="rtl">أي نوع مخطط هو الأنسب لإظهار اتجاه عبر الزمن؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Line chart / مخطط خطي</text><feedback><text>Correct — line charts are ideal for continuous time-series data.</text></feedback></answer>
+    <answer fraction="0"><text>Histogram / مدرّج تكراري</text><feedback><text>Histograms show distributions, not time trends.</text></feedback></answer>
+    <answer fraction="0"><text>Scatter plot / مخطط تشتت</text><feedback><text>Scatter plots show relationships between two variables.</text></feedback></answer>
+    <answer fraction="0"><text>Pie chart / مخطط دائري</text><feedback><text>Pie charts show proportions of a whole, not time trends.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q3 Best chart for distribution</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which chart type is best for showing the distribution of unemployment rates?<br>
+      <span dir="rtl">أي مخطط يُظهر توزيع معدلات البطالة؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Histogram / مدرّج تكراري</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>Line chart / مخطط خطي</text><feedback><text>Line charts show trends over time.</text></feedback></answer>
+    <answer fraction="0"><text>Bar chart / مخطط الأعمدة</text><feedback><text>Bar charts compare discrete categories.</text></feedback></answer>
+    <answer fraction="0"><text>Scatter plot / مخطط التشتت</text><feedback><text>Scatter plots show relationships between 2 variables.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q4 plt.subplots 2x2</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you create a 2×2 grid of subplots with figsize (12, 8)?<br>
+      <span dir="rtl">كيف تنشئ شبكة 2×2 بحجم (12, 8)؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>fig, axes = plt.subplots(2, 2, figsize=(12, 8))</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>fig, axes = plt.subplot(2, 2, figsize=(12, 8))</text><feedback><text>It's plt.subplots (plural), not plt.subplot.</text></feedback></answer>
+    <answer fraction="0"><text>fig = plt.subplots(2, 2)</text><feedback><text>subplots returns two objects: fig and axes.</text></feedback></answer>
+    <answer fraction="0"><text>fig, axes = plt.figure(2, 2, figsize=(12, 8))</text><feedback><text>plt.figure() doesn't create subplots directly.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q5 set_title</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you set the title of subplot <code>ax</code>?<br>
+      <span dir="rtl">كيف تضع عنواناً للمحور ax؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>ax.set_title('My Title')</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>plt.title('My Title')</text><feedback><text>plt.title() works for single figures; for subplots use ax.set_title().</text></feedback></answer>
+    <answer fraction="0"><text>ax.title = 'My Title'</text><feedback><text>Cannot set title as a property directly — use set_title().</text></feedback></answer>
+    <answer fraction="0"><text>ax.add_title('My Title')</text><feedback><text>No such method.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q6 savefig</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you save a figure as PNG with 150 DPI?<br>
+      <span dir="rtl">كيف تحفظ الشكل كـ PNG بدقة 150؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>plt.savefig('chart.png', dpi=150)</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>plt.save('chart.png', dpi=150)</text><feedback><text>No plt.save() — use plt.savefig().</text></feedback></answer>
+    <answer fraction="0"><text>fig.export('chart.png', dpi=150)</text><feedback><text>No export() method.</text></feedback></answer>
+    <answer fraction="0"><text>plt.savefig('chart', format='png', res=150)</text><feedback><text>The parameter is dpi=, not res=.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q7 scatter plot</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which code creates a scatter plot of GDP_Growth vs Inflation_Percent with 60% transparency?<br>
+      <span dir="rtl">أي كود يرسم مخطط تشتت بين الناتج والتضخم بشفافية 60%؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>ax.scatter(df['GDP_Growth'], df['Inflation_Percent'], alpha=0.6)</text><feedback><text>Correct — alpha=0.6 means 60% opacity.</text></feedback></answer>
+    <answer fraction="0"><text>ax.plot(df['GDP_Growth'], df['Inflation_Percent'], alpha=0.6)</text><feedback><text>ax.plot creates a line chart, not scatter.</text></feedback></answer>
+    <answer fraction="0"><text>ax.scatter(df['GDP_Growth'], df['Inflation_Percent'], opacity=0.6)</text><feedback><text>The parameter is alpha=, not opacity=.</text></feedback></answer>
+    <answer fraction="0"><text>ax.dot(df['GDP_Growth'], df['Inflation_Percent'], alpha=0.6)</text><feedback><text>No ax.dot() method.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q8 tight_layout</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What does <code>plt.tight_layout()</code> do?<br>
+      <span dir="rtl">ماذا تفعل plt.tight_layout()؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Automatically adjusts subplot spacing to prevent overlap / تضبط التباعد تلقائياً لمنع التداخل</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>Saves the figure to disk / تحفظ الشكل على القرص</text><feedback><text>Use plt.savefig() for that.</text></feedback></answer>
+    <answer fraction="0"><text>Sets the figure background to white / تجعل خلفية الشكل بيضاء</text><feedback><text>Incorrect.</text></feedback></answer>
+    <answer fraction="0"><text>Displays the figure / تعرض الشكل</text><feedback><text>Use plt.show() for that.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W4-Q9 horizontal bar</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you create a horizontal bar chart?<br>
+      <span dir="rtl">كيف ترسم مخطط أعمدة أفقية؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>ax.barh(categories, values)</text><feedback><text>Correct — barh is the horizontal version of bar.</text></feedback></answer>
+    <answer fraction="0"><text>ax.bar(categories, values, horizontal=True)</text><feedback><text>No horizontal parameter in ax.bar().</text></feedback></answer>
+    <answer fraction="0"><text>ax.hbar(categories, values)</text><feedback><text>No ax.hbar() method.</text></feedback></answer>
+    <answer fraction="0"><text>ax.bar(values, categories)</text><feedback><text>Swapping axes doesn't make it horizontal.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>W4-Q10 show plot</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Write the single command to display a matplotlib figure.<br>
+      <span dir="rtl">اكتب الأمر الوحيد لعرض الشكل.</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>plt.show()</text></answer>
+    <answer fraction="75"><text>plt.show</text></answer>
+  </question>
+
+</quiz>

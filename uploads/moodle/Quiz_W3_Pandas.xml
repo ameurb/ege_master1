@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+  <question type="multichoice">
+    <name><text>W3-Q1 Import pandas</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What is the correct way to import pandas with the alias <code>pd</code>?<br>
+      <span dir="rtl">ما هي الطريقة الصحيحة لاستيراد pandas باسم pd؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>import pandas as pd</text><feedback><text>Correct! This is the standard alias used universally.</text></feedback></answer>
+    <answer fraction="0"><text>import pd as pandas</text><feedback><text>Incorrect — the alias comes after "as".</text></feedback></answer>
+    <answer fraction="0"><text>from pandas import pd</text><feedback><text>Incorrect syntax.</text></feedback></answer>
+    <answer fraction="0"><text>include pandas as pd</text><feedback><text>Incorrect — Python uses "import", not "include".</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q2 Load CSV</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you load a CSV file named <code>data.csv</code> into a DataFrame <code>df</code>?<br>
+      <span dir="rtl">كيف تحمّل ملف CSV باسم data.csv في DataFrame اسمه df؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df = pd.read_csv('data.csv')</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>df = pd.load_csv('data.csv')</text><feedback><text>No such function — use read_csv.</text></feedback></answer>
+    <answer fraction="0"><text>df = open('data.csv')</text><feedback><text>open() returns a file object, not a DataFrame.</text></feedback></answer>
+    <answer fraction="0"><text>df = pd.DataFrame('data.csv')</text><feedback><text>This does not read a file.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q3 df.head()</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What does <code>df.head(3)</code> return?<br>
+      <span dir="rtl">ماذا تُرجع df.head(3)؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>The first 3 rows of the DataFrame / أول 3 صفوف من الـDataFrame</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>The last 3 rows / آخر 3 صفوف</text><feedback><text>Use df.tail(3) for last rows.</text></feedback></answer>
+    <answer fraction="0"><text>The 3rd row only / الصف الثالث فقط</text><feedback><text>Incorrect — head(n) returns the first n rows.</text></feedback></answer>
+    <answer fraction="0"><text>3 random rows / 3 صفوف عشوائية</text><feedback><text>Incorrect — use df.sample(3) for random rows.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q4 isnull().sum()</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>What does <code>df.isnull().sum()</code> compute?<br>
+      <span dir="rtl">ماذا تحسب df.isnull().sum()؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Number of missing values per column / عدد القيم المفقودة لكل عمود</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>Total number of rows / العدد الكلي للصفوف</text><feedback><text>Use df.shape[0] for that.</text></feedback></answer>
+    <answer fraction="0"><text>Sum of all column values / مجموع قيم كل الأعمدة</text><feedback><text>Use df.sum() for that.</text></feedback></answer>
+    <answer fraction="0"><text>Number of duplicate rows / عدد الصفوف المكررة</text><feedback><text>Use df.duplicated().sum() for that.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q5 Filter rows</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you filter rows where <code>GDP_Growth</code> is greater than 3?<br>
+      <span dir="rtl">كيف تُصفّي الصفوف حيث GDP_Growth أكبر من 3؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df[df['GDP_Growth'] &gt; 3]</text><feedback><text>Correct — boolean indexing.</text></feedback></answer>
+    <answer fraction="0"><text>df.filter('GDP_Growth &gt; 3')</text><feedback><text>filter() works on labels, not conditions.</text></feedback></answer>
+    <answer fraction="0"><text>df.where(GDP_Growth &gt; 3)</text><feedback><text>Incorrect syntax — needs df['GDP_Growth'].</text></feedback></answer>
+    <answer fraction="0"><text>df.select(GDP_Growth &gt; 3)</text><feedback><text>No such method in pandas.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q6 describe()</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which statistics does <code>df.describe()</code> <em>not</em> include by default?<br>
+      <span dir="rtl">أي إحصاء لا تتضمنه describe() افتراضياً؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Skewness / الالتواء</text><feedback><text>Correct — describe() does not include skewness. Use df.skew() separately.</text></feedback></answer>
+    <answer fraction="0"><text>Mean / المتوسط</text><feedback><text>Mean IS included in describe().</text></feedback></answer>
+    <answer fraction="0"><text>Standard deviation / الانحراف المعياري</text><feedback><text>Std IS included.</text></feedback></answer>
+    <answer fraction="0"><text>Median (50%) / الوسيط</text><feedback><text>The 50th percentile (median) IS included.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>W3-Q7 groupby mean</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Write the pandas code to compute the average GDP_Growth for each Country.<br>
+      <span dir="rtl">اكتب الكود لحساب متوسط GDP_Growth لكل دولة.</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df.groupby('Country')['GDP_Growth'].mean()</text></answer>
+    <answer fraction="50"><text>df.groupby('Country')['GDP_Growth'].mean</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q8 fillna</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which code fills all missing values with the column mean?<br>
+      <span dir="rtl">أي كود يملأ القيم المفقودة بمتوسط كل عمود؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df.fillna(df.mean())</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>df.replace(NaN, df.mean())</text><feedback><text>Incorrect syntax for handling NaN.</text></feedback></answer>
+    <answer fraction="0"><text>df.fill(df.mean())</text><feedback><text>No such method — use fillna.</text></feedback></answer>
+    <answer fraction="0"><text>df.dropna(df.mean())</text><feedback><text>dropna removes rows — it doesn't fill values.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q9 correlation</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>A correlation value of <strong>-0.85</strong> between GDP_Growth and Unemployment_Rate means:<br>
+      <span dir="rtl">قيمة ارتباط -0.85 بين نمو الناتج والبطالة تعني:</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Strong negative relationship — when GDP grows, unemployment tends to fall / علاقة سالبة قوية — عندما ينمو الناتج تنخفض البطالة</text><feedback><text>Correct! This aligns with Okun's Law.</text></feedback></answer>
+    <answer fraction="0"><text>Strong positive relationship / علاقة موجبة قوية</text><feedback><text>Negative value means negative relationship.</text></feedback></answer>
+    <answer fraction="0"><text>No relationship / لا توجد علاقة</text><feedback><text>Values near 0 indicate no relationship; -0.85 is strong.</text></feedback></answer>
+    <answer fraction="0"><text>Perfect relationship / علاقة تامة</text><feedback><text>Perfect negative correlation would be exactly -1.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W3-Q10 idxmax</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you find the year with the highest inflation?<br>
+      <span dir="rtl">كيف تجد السنة ذات أعلى تضخم؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df.loc[df['Inflation_Percent'].idxmax(), 'Year']</text><feedback><text>Correct — idxmax() returns the index of the max value, then loc retrieves the Year.</text></feedback></answer>
+    <answer fraction="0"><text>df['Inflation_Percent'].max()</text><feedback><text>This returns the max value, not the year.</text></feedback></answer>
+    <answer fraction="0"><text>df['Year'].max()</text><feedback><text>This returns the most recent year, not the highest inflation year.</text></feedback></answer>
+    <answer fraction="0"><text>df.sort_values('Inflation_Percent')[0]</text><feedback><text>sort_values ascending gives the minimum first, not maximum.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+</quiz>

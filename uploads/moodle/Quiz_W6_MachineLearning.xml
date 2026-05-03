@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+  <question type="multichoice">
+    <name><text>W6-Q1 train_test_split import</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which import statement provides <code>train_test_split</code>?<br>
+      <span dir="rtl">أي استيراد يُوفّر train_test_split؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>from sklearn.model_selection import train_test_split</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn.preprocessing import train_test_split</text><feedback><text>Incorrect module — it's model_selection, not preprocessing.</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn import train_test_split</text><feedback><text>Must specify the submodule: model_selection.</text></feedback></answer>
+    <answer fraction="0"><text>import sklearn.train_test_split</text><feedback><text>Incorrect syntax — use from...import.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q2 train_test_split usage</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which call creates an 80/20 train/test split with reproducible results?<br>
+      <span dir="rtl">أي استدعاء ينشئ تقسيم 80/20 قابلاً للإعادة؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</text><feedback><text>Correct — test_size=0.2 means 20% test, random_state ensures reproducibility.</text></feedback></answer>
+    <answer fraction="0"><text>X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.2)</text><feedback><text>train_size=0.2 would give only 20% for training — swapped.</text></feedback></answer>
+    <answer fraction="0"><text>X_train, y_train = train_test_split(X, y, 0.8)</text><feedback><text>Incorrect — train_test_split returns 4 objects, not 2.</text></feedback></answer>
+    <answer fraction="0"><text>X_train, X_test = train_test_split(X, test_size=0.2)</text><feedback><text>Must pass y as well to get y_train and y_test.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q3 fit model</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Given <code>lr = LinearRegression()</code>, how do you train it?<br>
+      <span dir="rtl">عندما يكون lr = LinearRegression()، كيف تدرّبه؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>lr.fit(X_train, y_train)</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>lr.train(X_train, y_train)</text><feedback><text>No .train() method — use .fit().</text></feedback></answer>
+    <answer fraction="0"><text>lr.run(X_train, y_train)</text><feedback><text>No .run() method — use .fit().</text></feedback></answer>
+    <answer fraction="0"><text>lr.fit(X, y)</text><feedback><text>Should use training data only (X_train, y_train), not the full dataset.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q4 predict</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>After training model <code>rf</code>, how do you generate predictions on the test set?<br>
+      <span dir="rtl">بعد تدريب النموذج rf، كيف تحسب التنبؤات على بيانات الاختبار؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>y_pred = rf.predict(X_test)</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>y_pred = rf.forecast(X_test)</text><feedback><text>No .forecast() in scikit-learn — use .predict().</text></feedback></answer>
+    <answer fraction="0"><text>y_pred = rf.predict(y_test)</text><feedback><text>predict takes features (X_test), not labels (y_test).</text></feedback></answer>
+    <answer fraction="0"><text>y_pred = rf.score(X_test)</text><feedback><text>.score() returns R², not predictions.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q5 R2 comparison</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Linear Regression gives R² = 0.55 and Random Forest gives R² = 0.82. Which is better?<br>
+      <span dir="rtl">الانحدار الخطي: R² = 0.55 والغابة العشوائية: R² = 0.82. أيهما أفضل؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>Random Forest (R² = 0.82) — it explains more variance / الغابة العشوائية — تفسر تبايناً أكبر</text><feedback><text>Correct — higher R² means better fit.</text></feedback></answer>
+    <answer fraction="0"><text>Linear Regression (simpler = better) / الانحدار الخطي (أبسط = أفضل)</text><feedback><text>Simplicity is a consideration but R² = 0.82 > 0.55 means Random Forest fits better.</text></feedback></answer>
+    <answer fraction="0"><text>Both are equally good / كلاهما جيد بالتساوي</text><feedback><text>0.82 ≠ 0.55 — one is clearly better.</text></feedback></answer>
+    <answer fraction="0"><text>Cannot compare / لا يمكن المقارنة</text><feedback><text>R² on the same test set allows direct comparison.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q6 MAE vs RMSE</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Why is RMSE generally larger than MAE for the same model?<br>
+      <span dir="rtl">لماذا يكون RMSE عادةً أكبر من MAE لنفس النموذج؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>RMSE squares errors before averaging, so large errors are penalized more / RMSE يربّع الأخطاء مما يزيد من تأثير الأخطاء الكبيرة</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>RMSE uses a different dataset / RMSE يستخدم مجموعة بيانات مختلفة</text><feedback><text>Both use the same test set.</text></feedback></answer>
+    <answer fraction="0"><text>MAE counts only positive errors / MAE يحسب الأخطاء الموجبة فقط</text><feedback><text>MAE uses absolute values of all errors.</text></feedback></answer>
+    <answer fraction="0"><text>They are always equal / هما دائماً متساويان</text><feedback><text>RMSE ≥ MAE by Jensen's inequality.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>W6-Q7 RMSE formula</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Write the Python code to compute RMSE given <code>y_test</code> and <code>y_pred</code>.<br>
+      <span dir="rtl">اكتب الكود لحساب RMSE.</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>np.sqrt(mean_squared_error(y_test, y_pred))</text></answer>
+    <answer fraction="75"><text>rmse = np.sqrt(mean_squared_error(y_test, y_pred))</text></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q8 feature_importances_</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you access feature importances from a trained RandomForestRegressor <code>rf</code>?<br>
+      <span dir="rtl">كيف تصل إلى أهمية المتغيرات من نموذج rf؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>rf.feature_importances_</text><feedback><text>Correct — this returns an array of importance scores.</text></feedback></answer>
+    <answer fraction="0"><text>rf.importance()</text><feedback><text>No such method — use the attribute feature_importances_.</text></feedback></answer>
+    <answer fraction="0"><text>rf.coef_</text><feedback><text>coef_ is for LinearRegression; RandomForest uses feature_importances_.</text></feedback></answer>
+    <answer fraction="0"><text>rf.features_</text><feedback><text>No such attribute.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q9 RandomForest import</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>Which import provides RandomForestRegressor?<br>
+      <span dir="rtl">أي استيراد يُوفّر RandomForestRegressor؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>from sklearn.ensemble import RandomForestRegressor</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn.tree import RandomForestRegressor</text><feedback><text>Incorrect — Random Forest is in sklearn.ensemble, not sklearn.tree.</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn.forest import RandomForestRegressor</text><feedback><text>No sklearn.forest module.</text></feedback></answer>
+    <answer fraction="0"><text>from sklearn.linear_model import RandomForestRegressor</text><feedback><text>linear_model contains linear models; Random Forest is in ensemble.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W6-Q10 actual vs predicted</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>In an actual vs predicted scatter plot, what does a point lying exactly on the 45° red dashed line indicate?<br>
+      <span dir="rtl">في مخطط الفعلي مقابل المتوقع، ماذا تعني نقطة تقع على الخط الأحمر المنقوط بالضبط؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>The prediction is perfect — predicted = actual / التنبؤ مثالي — المتوقع = الفعلي</text><feedback><text>Correct — points on the 45° line mean perfect predictions.</text></feedback></answer>
+    <answer fraction="0"><text>The model has overfit / النموذج مُفرط في التدريب</text><feedback><text>Overfitting is about train vs test gap, not individual point position.</text></feedback></answer>
+    <answer fraction="0"><text>The prediction is worst / التنبؤ الأسوأ</text><feedback><text>The worst predictions are far from the line.</text></feedback></answer>
+    <answer fraction="0"><text>The residual equals 1 / البقية تساوي 1</text><feedback><text>On the line means residual = 0 (perfect), not 1.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+</quiz>
