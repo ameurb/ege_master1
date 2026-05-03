@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ tp.title }} - Steps - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/tp/manage" class="hover:text-gray-700">TP Management</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">{{ tp.title }} - Steps</span>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h1 class="text-xl font-bold text-gray-800">{{ tp.title }}</h1>
+            <p class="text-sm text-gray-500 mt-1">{{ tp.description }}</p>
+        </div>
+        <div class="text-sm text-gray-500">
+            {% set enabled_count = tp.steps|selectattr("enabled")|list|length %}
+            <span class="font-medium text-brand-600">{{ enabled_count }}</span> / {{ tp.steps|length }} steps enabled
+        </div>
+    </div>
+
+    <div class="space-y-3">
+        {% for step in tp.steps %}
+        <div class="flex items-center gap-4 p-4 rounded-lg border {{ 'border-green-200 bg-green-50' if step.enabled else 'border-gray-200 bg-gray-50' }}">
+            <!-- Step number -->
+            <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm {{ 'bg-green-600 text-white' if step.enabled else 'bg-gray-300 text-gray-600' }}">
+                {{ step.num }}
+            </div>
+
+            <!-- Step info -->
+            <div class="flex-1 min-w-0">
+                <div class="font-medium {{ 'text-gray-800' if step.enabled else 'text-gray-500' }}">
+                    {{ step.title }}
+                </div>
+                <div class="text-sm {{ 'text-gray-600' if step.enabled else 'text-gray-400' }} truncate">
+                    {{ step.description }}
+                </div>
+            </div>
+
+            <!-- Toggle button -->
+            <form action="/api/tp/{{ tp.id }}/steps/{{ step.num }}/toggle" method="post" class="flex-shrink-0">
+                {% if step.enabled %}
+                <button type="submit" class="px-4 py-2 text-sm font-medium rounded-md bg-red-100 text-red-700 hover:bg-red-200 transition-colors">
+                    Disable
+                </button>
+                {% else %}
+                <button type="submit" class="px-4 py-2 text-sm font-medium rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors">
+                    Enable
+                </button>
+                {% endif %}
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Quick actions -->
+<div class="flex gap-3">
+    <a href="/tp/manage" class="px-4 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200">Back to TP Management</a>
+    <a href="/tp/{{ tp.id }}/submissions" class="px-4 py-2 text-sm font-medium rounded-md bg-brand-600 text-white hover:bg-brand-700">View Submissions</a>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Attendance - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Attendance</h1>
+    <a href="/attendance/session" class="bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700 text-sm font-medium">New Session</a>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    {% if sessions and students %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-500 border-b">
+                    <th class="pb-2 font-medium sticky left-0 bg-white">Name</th>
+                    <th class="pb-2 font-medium sticky left-0 bg-white">Group</th>
+                    {% for sess in sessions %}
+                    <th class="pb-2 font-medium text-center whitespace-nowrap px-2">
+                        <a href="/attendance/session?date={{ sess.date }}" class="hover:text-brand-600">
+                            {{ sess.label }}<br>
+                            <span class="text-xs text-gray-400 font-normal">{{ sess.date }}</span>
+                        </a>
+                    </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for s in students|sort(attribute='name') %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-2 font-medium text-gray-800 sticky left-0 bg-white">{{ s.name }}</td>
+                    <td class="py-2 text-gray-500">{{ s.group }}</td>
+                    {% for sess in sessions %}
+                    {% set status = matrix.get(s.matricule, {}).get(sess.date, '') %}
+                    {% set note = matrix.get(s.matricule, {}).get(sess.date ~ '_note', '') %}
+                    <td class="py-2 text-center px-2">
+                        {% if status == 'present' %}
+                        <span class="inline-block w-6 h-6 rounded-full bg-green-100 text-green-700 text-xs leading-6 font-bold" title="Present">P</span>
+                        {% if note %}<span class="text-xs text-gray-500 ml-0.5">{{ note }}</span>{% endif %}
+                        {% elif status == 'absent' %}
+                        <span class="inline-block w-6 h-6 rounded-full bg-red-100 text-red-700 text-xs leading-6 font-bold" title="Absent">A</span>
+                        {% elif status == 'late' %}
+                        <span class="inline-block w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 text-xs leading-6 font-bold" title="Late">L</span>
+                        {% if note %}<span class="text-xs text-gray-500 ml-0.5">{{ note }}</span>{% endif %}
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% elif not students %}
+    <p class="text-sm text-gray-500">No students registered. <a href="/students" class="text-brand-600 hover:text-brand-700 font-medium">Add students first</a>.</p>
+    {% else %}
+    <p class="text-sm text-gray-500">No attendance sessions recorded yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

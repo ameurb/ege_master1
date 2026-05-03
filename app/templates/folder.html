@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} - EGE Documents{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/" class="hover:text-gray-700">Home</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">{{ category }}</span>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Files -->
+    <div class="lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">{{ category }}</h2>
+                <span class="text-sm text-gray-500">{{ files|length }} file(s)</span>
+            </div>
+            {% if files %}
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left text-gray-500 border-b">
+                            <th class="pb-2 font-medium">Name</th>
+                            <th class="pb-2 font-medium">Size</th>
+                            <th class="pb-2 font-medium">Modified</th>
+                            <th class="pb-2 font-medium">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        {% for file in files %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2">
+                                <a href="/preview/{{ file.path }}" class="text-brand-600 hover:text-brand-700 font-medium">{{ file.filename }}</a>
+                                <span class="text-xs text-gray-400 ml-1">{{ file.extension }}</span>
+                            </td>
+                            <td class="py-2 text-gray-500">{{ file.size_display }}</td>
+                            <td class="py-2 text-gray-500">{{ file.modified_display }}</td>
+                            <td class="py-2 flex gap-2">
+                                <a href="/preview/{{ file.path }}" class="text-gray-500 hover:text-brand-600" title="Preview">
+                                    <svg class="inline w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </a>
+                                <a href="/download/{{ file.path }}" class="text-gray-500 hover:text-gray-700" title="Download">
+                                    <svg class="inline w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-sm text-gray-500">No files in this category yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Categories Sidebar -->
+    <div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 class="text-sm font-semibold text-gray-800 mb-3">All Categories</h3>
+            <div class="space-y-1">
+                {% for cat in categories %}
+                <a href="/folder/{{ cat.name }}"
+                   class="block px-3 py-2 rounded text-sm {{ 'bg-brand-50 text-brand-700 font-medium' if cat.name == category else 'text-gray-600 hover:bg-gray-50' }}">
+                    {{ cat.name }} <span class="text-xs text-gray-400">({{ cat.file_count }})</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

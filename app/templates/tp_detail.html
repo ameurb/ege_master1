@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}{{ tp.title }} - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/tp" class="hover:text-gray-700">TPs</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">{{ tp.title }}</span>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200">
+    <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">{{ tp.title }}</h1>
+                <p class="text-sm text-gray-500 mt-1">{{ tp.id }} &middot; Week {{ tp.week }} &middot; Due: {{ tp.due_date or 'TBD' }}</p>
+            </div>
+            {% if active_session %}
+            <a href="/tp/submit" class="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-sm font-medium">
+                Submit Work
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if tp.description %}
+    <div class="p-6 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">Description</h2>
+        <p class="text-gray-700 whitespace-pre-line">{{ tp.description }}</p>
+    </div>
+    {% endif %}
+
+    {% set enabled_steps = tp.steps|selectattr("enabled")|list if tp.steps else [] %}
+    {% if enabled_steps %}
+    <div class="p-6 border-b border-gray-200">
+        <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Steps ({{ enabled_steps|length }} available)</h2>
+        <div class="space-y-2">
+            {% for step in enabled_steps %}
+            <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center text-sm font-bold">
+                    {{ step.num }}
+                </div>
+                <div>
+                    <div class="font-medium text-gray-800">{{ step.title }}</div>
+                    <div class="text-sm text-gray-500">{{ step.description }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if files %}
+    <div class="p-6">
+        <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Attachments</h2>
+        <div class="space-y-2">
+            {% for f in files %}
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-700">{{ f.name }}</span>
+                    <span class="text-xs text-gray-400">{{ f.size_display }}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    {% set ext = f.name.rsplit('.', 1)[-1] if '.' in f.name else '' %}
+                    {% if ext in ('md', 'ipynb', 'py', 'pdf') %}
+                    <a href="/tp/{{ tp.id }}/view/{{ f.name }}" class="text-green-600 hover:text-green-700 text-sm font-medium">View</a>
+                    {% endif %}
+                    <a href="/tp/{{ tp.id }}/download/{{ f.name }}" class="text-brand-600 hover:text-brand-700 text-sm font-medium">Download</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% if active_session %}
+<div class="mt-4 bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+    <p class="text-green-800 font-medium">Submissions are open for this TP</p>
+    <a href="/tp/submit" class="mt-2 inline-block bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 font-medium text-sm">Go to Submission Form</a>
+</div>
+{% endif %}
+{% endblock %}

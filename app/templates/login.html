@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Login - EGE{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto mt-12">
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">EGE Platform</h1>
+            <p class="text-sm text-gray-500 mt-1">Enter your matricule or professor code</p>
+        </div>
+
+        {% if error %}
+        <div class="bg-red-50 border border-red-200 rounded-md p-3 mb-4 text-sm text-red-700">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="post" action="/login">
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="mb-4">
+                <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Matricule / Code</label>
+                <input type="text" id="code" name="code" required autofocus
+                    placeholder="e.g. 211234567"
+                    class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+            </div>
+            <button type="submit" class="w-full bg-brand-600 text-white py-2 px-4 rounded-md hover:bg-brand-700 font-medium">
+                Login
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

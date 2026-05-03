@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ filename }} - {{ tp.title }} - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/tp" class="hover:text-gray-700">TPs</a>
+    <span>/</span>
+    <a href="/tp/{{ tp.id }}" class="hover:text-gray-700">{{ tp.title }}</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">{{ filename }}</span>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200">
+    <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+        <h1 class="text-lg font-semibold text-gray-800">{{ filename }}</h1>
+        <a href="/tp/{{ tp.id }}/download/{{ filename }}" class="text-sm text-brand-600 hover:text-brand-700 font-medium">Download</a>
+    </div>
+    <div class="p-6">
+        {% if preview_type == "pdf" %}
+        <iframe src="/tp/{{ tp.id }}/download/{{ filename }}" class="w-full" style="height: 80vh;" frameborder="0"></iframe>
+        {% elif preview_type in ("markdown", "notebook", "code", "text") %}
+        <div class="prose max-w-none">{{ content|safe }}</div>
+        {% else %}
+        <p class="text-gray-500 text-sm">Preview not available for this file type.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

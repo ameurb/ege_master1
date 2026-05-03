@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EGE Documents{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="text-xl font-bold text-brand-700">EGE</a>
+            {% set user = request.session.get("user") if request.session is defined else None %}
+            <div class="flex items-center gap-4 text-sm">
+                {% if user and user.role == "professor" %}
+                <a href="/dashboard" class="text-gray-600 hover:text-brand-700 font-medium">Dashboard</a>
+                <a href="/" class="text-gray-600 hover:text-brand-700 font-medium">Documents</a>
+                <a href="/tp/manage" class="text-gray-600 hover:text-brand-700 font-medium">TPs</a>
+                <a href="/attendance" class="text-gray-600 hover:text-brand-700 font-medium">Attendance</a>
+                <a href="/evaluation" class="text-gray-600 hover:text-brand-700 font-medium">Evaluation</a>
+                <a href="/students" class="text-gray-600 hover:text-brand-700 font-medium">Students</a>
+                <a href="/logout" class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 font-medium">Logout</a>
+                {% elif user and user.role == "student" %}
+                <a href="/dashboard" class="text-gray-600 hover:text-brand-700 font-medium">Dashboard</a>
+                <a href="/tp" class="text-gray-600 hover:text-brand-700 font-medium">TPs</a>
+                <a href="/" class="text-gray-600 hover:text-brand-700 font-medium">Documents</a>
+                <a href="/logout" class="bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 font-medium">Logout</a>
+                {% else %}
+                <a href="/login" class="text-brand-600 hover:text-brand-700 font-medium">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-6xl mx-auto px-4 py-6">
+        {% block content %}{% endblock %}
+    </main>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

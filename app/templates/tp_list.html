@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}TPs - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">TP Assignments</h1>
+    {% if active_session %}
+    <a href="/tp/submit" class="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-sm font-medium">
+        Submit Work
+    </a>
+    {% endif %}
+</div>
+
+{% if active_session %}
+<div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+    <div class="flex items-center gap-2">
+        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-green-800 font-medium">Session Active</span>
+    </div>
+    <p class="text-sm text-green-700 mt-1">
+        {% set session_tp_title = namespace(val=None) %}
+        {% for week, tps in tps_by_week.items() %}{% for t in tps %}{% if t.id == active_session.tp_id %}{% set session_tp_title.val = t.title %}{% endif %}{% endfor %}{% endfor %}
+        Submissions open{% if session_tp_title.val %} for <strong>{{ session_tp_title.val }}</strong>{% else %} for all TPs{% endif %}.
+        <a href="/tp/submit" class="underline font-medium">Submit your work here</a>.
+    </p>
+</div>
+{% endif %}
+
+{% if tps_by_week %}
+{% for week, tps in tps_by_week.items() %}
+<div class="mb-6">
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Week {{ week }}</h2>
+    <div class="space-y-3">
+        {% for tp in tps %}
+        <a href="/tp/{{ tp.id }}" class="block bg-white rounded-lg shadow-sm border border-gray-200 p-5 hover:border-brand-300 transition-colors">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-semibold text-gray-800">{{ tp.title }}</h3>
+                    <p class="text-sm text-gray-500 mt-1">{{ tp.id }} &middot; Due: {{ tp.due_date or 'TBD' }}</p>
+                    {% if tp.description %}
+                    <p class="text-sm text-gray-600 mt-2">{{ tp.description[:150] }}{% if tp.description|length > 150 %}...{% endif %}</p>
+                    {% endif %}
+                </div>
+                <div class="flex items-center gap-2">
+                    {% if tp.steps %}
+                    {% set enabled = tp.steps|selectattr("enabled")|list|length %}
+                    <span class="text-xs bg-brand-100 text-brand-700 px-2 py-1 rounded-full">{{ enabled }} step{{ 's' if enabled != 1 }}</span>
+                    {% endif %}
+                    {% if tp.files %}
+                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{{ tp.files|length }} file{{ 's' if tp.files|length > 1 }}</span>
+                    {% endif %}
+                    {% if tp.id in submitted_ids %}
+                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">✓ Submitted</span>
+                    {% else %}
+                    <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Pending</span>
+                    {% endif %}
+                    {% if active_session and active_session.tp_id == tp.id %}
+                    <span class="text-xs bg-green-500 text-white px-2 py-1 rounded-full font-medium animate-pulse">Open</span>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+    <p class="text-gray-500">No TPs posted yet.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Evaluation - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Continuous Evaluation</h1>
+    <div class="flex gap-2">
+        <a href="/api/evaluation/export-xlsx" class="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 text-sm font-medium">Export Excel</a>
+        <a href="/api/evaluation/export" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 text-sm font-medium">Export CSV</a>
+    </div>
+</div>
+
+<!-- Grade Entry Links -->
+{% if tps %}
+<div class="flex flex-wrap gap-2 mb-6">
+    {% for tp in tps %}
+    <a href="/evaluation/grades/{{ tp.id }}" class="text-sm bg-brand-50 text-brand-700 px-3 py-1.5 rounded-md hover:bg-brand-100 font-medium">Grade {{ tp.id }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    {% if rows %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-500 border-b">
+                    <th class="pb-2 font-medium sticky left-0 bg-white">Name</th>
+                    <th class="pb-2 font-medium">Group</th>
+                    {% for tp in tps %}
+                    <th class="pb-2 font-medium text-center px-2">{{ tp.id }}</th>
+                    {% endfor %}
+                    <th class="pb-2 font-medium text-center px-2">Average</th>
+                    <th class="pb-2 font-medium text-center px-2">Participation</th>
+                    <th class="pb-2 font-medium text-center px-2">Attendance</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for row in rows|sort(attribute='name') %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-2 font-medium text-gray-800 sticky left-0 bg-white">
+                        {{ row.name }}
+                        <span class="text-xs text-gray-400 block">{{ row.matricule }}</span>
+                    </td>
+                    <td class="py-2 text-gray-500">{{ row.group }}</td>
+                    {% for tp in tps %}
+                    {% set g = row.tp_grades.get(tp.id) %}
+                    <td class="py-2 text-center px-2">
+                        {% if g %}
+                        <span class="font-medium {% if g.grade >= 10 %}text-green-700{% else %}text-red-600{% endif %}">{{ g.grade }}/{{ g.max_grade }}</span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td class="py-2 text-center px-2">
+                        {% if row.average is not none %}
+                        <span class="font-bold {% if row.average >= 10 %}text-green-700{% else %}text-red-600{% endif %}">{{ row.average }}</span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-2 text-center px-2">
+                        {% if row.participation_grade is not none %}
+                        <span class="font-medium {% if row.participation_grade >= 10 %}text-green-700{% else %}text-red-600{% endif %}">{{ row.participation_grade }}/20</span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-2 text-center px-2">
+                        <div class="flex items-center justify-center gap-1">
+                            <div class="w-16 bg-gray-200 rounded-full h-2">
+                                <div class="h-2 rounded-full {% if row.attendance_pct >= 75 %}bg-green-500{% elif row.attendance_pct >= 50 %}bg-yellow-500{% else %}bg-red-500{% endif %}" style="width: {{ row.attendance_pct }}%"></div>
+                            </div>
+                            <span class="text-xs text-gray-500">{{ row.attendance_pct }}%</span>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                {% set ns = namespace(avg_sum=0, avg_count=0, pass_count=0) %}
+                {% for row in rows %}
+                    {% if row.average is not none %}
+                        {% set ns.avg_sum = ns.avg_sum + row.average %}
+                        {% set ns.avg_count = ns.avg_count + 1 %}
+                        {% if row.average >= 10 %}{% set ns.pass_count = ns.pass_count + 1 %}{% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% set class_avg = (ns.avg_sum / ns.avg_count)|round(1) if ns.avg_count > 0 else none %}
+                {% set pass_rate = ((ns.pass_count / ns.avg_count) * 100)|round(0)|int if ns.avg_count > 0 else none %}
+                <tr class="border-t-2 border-gray-300 bg-gray-50 font-semibold text-gray-700">
+                    <td class="py-2 sticky left-0 bg-gray-50">Class Average</td>
+                    <td class="py-2 text-gray-400 text-xs">{{ ns.avg_count }} graded</td>
+                    {% for tp in tps %}
+                    {% set tp_ns = namespace(s=0, c=0) %}
+                    {% for row in rows %}
+                        {% set g = row.tp_grades.get(tp.id) %}
+                        {% if g %}{% set tp_ns.s = tp_ns.s + g.grade %}{% set tp_ns.c = tp_ns.c + 1 %}{% endif %}
+                    {% endfor %}
+                    <td class="py-2 text-center px-2 text-sm">
+                        {% if tp_ns.c > 0 %}
+                        <span class="{% if (tp_ns.s/tp_ns.c) >= 10 %}text-green-700{% else %}text-red-600{% endif %}">{{ (tp_ns.s/tp_ns.c)|round(1) }}</span>
+                        {% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    {% endfor %}
+                    <td class="py-2 text-center px-2">
+                        {% if class_avg is not none %}
+                        <span class="{% if class_avg >= 10 %}text-green-700{% else %}text-red-600{% endif %}">{{ class_avg }}</span>
+                        {% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <td class="py-2 text-center px-2 text-gray-400">—</td>
+                    <td class="py-2 text-center px-2">
+                        {% if pass_rate is not none %}
+                        <span class="text-xs px-2 py-0.5 rounded-full {% if pass_rate >= 50 %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">{{ pass_rate }}% pass</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-sm text-gray-500">No data yet. <a href="/students" class="text-brand-600 font-medium">Add students</a> and <a href="/tp/manage" class="text-brand-600 font-medium">create TPs</a> first.</p>
+    {% endif %}
+</div>
+{% endblock %}

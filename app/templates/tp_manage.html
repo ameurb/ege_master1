@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block title %}Manage TPs - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">TP Management</h1>
+    {% if active_session %}
+    <a href="/tp/session" class="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 text-sm font-medium">
+        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+        View Active Session
+    </a>
+    {% else %}
+    <form action="/api/tp/session/start" method="post" class="inline">
+        <input type="hidden" name="tp_id" value="all">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700 font-medium">Start Session</button>
+    </form>
+    {% endif %}
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Create TP Form -->
+    <div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Create New TP</h2>
+            <form action="/api/tp" method="post" enctype="multipart/form-data" class="space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">TP ID</label>
+                    <input type="text" name="tp_id" required placeholder="tp1" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <input type="text" name="title" required placeholder="Variables et Types" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea name="description" rows="3" placeholder="Instructions for this TP..." class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Week</label>
+                        <input type="number" name="week" value="1" min="1" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                        <input type="date" name="due_date" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Attachments</label>
+                    <input type="file" name="files" multiple class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                    <p class="text-xs text-gray-400 mt-1">PDF, notebooks, etc.</p>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 text-white py-2 px-4 rounded-md hover:bg-brand-700 font-medium text-sm">Create TP</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TP List -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">All TPs</h2>
+
+            {% if active_session %}
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                            <span class="text-green-800 font-medium">Session Active</span>
+                        </div>
+                        <p class="text-xs text-green-600 mt-1">Started: {{ active_session.started_at[:16] }} &middot; {{ active_session.pc_locks|length }} PC(s) connected</p>
+                    </div>
+                    <form action="/api/tp/session/stop" method="post">
+                        <button type="submit" class="bg-red-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-red-600 font-medium" onclick="return confirm('Close this session? Students will no longer be able to submit.')">Stop Session</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if tps %}
+            <div class="space-y-3">
+                {% for tp in tps %}
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">{{ tp.title }}</h3>
+                            <p class="text-sm text-gray-500">{{ tp.id }} &middot; Week {{ tp.week }} &middot; Due: {{ tp.due_date or 'TBD' }} &middot; <span class="text-brand-600 font-medium">{{ sub_counts[tp.id] }} submission{{ 's' if sub_counts[tp.id] != 1 }}</span></p>
+                            {% if tp.description %}
+                            <p class="text-xs text-gray-400 mt-0.5 truncate max-w-sm">{{ tp.description[:100] }}</p>
+                            {% endif %}
+                            {% if tp.files %}
+                            <div class="flex flex-wrap gap-1 mt-1">
+                                {% for fname in tp.files %}
+                                <span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                                    {{ fname }}
+                                    <form action="/api/tp/{{ tp.id }}/files/{{ fname }}/delete" method="post" class="inline" onsubmit="return confirm('Delete {{ fname }}?')">
+                                        <button type="submit" class="text-gray-400 hover:text-red-500 leading-none">&times;</button>
+                                    </form>
+                                </span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            {% if tp.steps %}
+                            <a href="/tp/{{ tp.id }}/steps" class="text-sm text-gray-600 hover:text-gray-800 font-medium">
+                                Steps ({{ tp.steps|selectattr("enabled")|list|length }}/{{ tp.steps|length }})
+                            </a>
+                            {% endif %}
+                            <a href="/tp/{{ tp.id }}/submissions" class="text-sm text-brand-600 hover:text-brand-700 font-medium">Submissions</a>
+                            <button type="button" onclick="toggleEdit('{{ tp.id }}')" class="text-sm text-gray-500 hover:text-gray-700 font-medium">Edit</button>
+                            <button type="button" onclick="toggleAddFiles('{{ tp.id }}')" class="text-sm text-gray-500 hover:text-gray-700 font-medium">+ Files</button>
+                            <form action="/api/tp/{{ tp.id }}/delete" method="post" class="inline" onsubmit="return confirm('Delete TP {{ tp.title }}? This will remove all submissions and grades.')">
+                                <button type="submit" class="text-sm text-red-500 hover:text-red-700 font-medium">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Edit form (hidden by default) -->
+                    <div id="edit-{{ tp.id }}" class="hidden mt-3 pt-3 border-t border-gray-100">
+                        <form action="/api/tp/{{ tp.id }}/edit" method="post" class="grid grid-cols-2 gap-3">
+                            <div class="col-span-2">
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Title</label>
+                                <input type="text" name="title" value="{{ tp.title }}" required class="w-full rounded border-gray-300 border px-3 py-1.5 text-sm">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Description</label>
+                                <textarea name="description" rows="2" class="w-full rounded border-gray-300 border px-3 py-1.5 text-sm">{{ tp.description }}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Week</label>
+                                <input type="number" name="week" value="{{ tp.week }}" min="1" class="w-full rounded border-gray-300 border px-3 py-1.5 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Due Date</label>
+                                <input type="date" name="due_date" value="{{ tp.due_date }}" class="w-full rounded border-gray-300 border px-3 py-1.5 text-sm">
+                            </div>
+                            <div class="col-span-2 flex gap-2">
+                                <button type="submit" class="px-4 py-1.5 text-sm bg-brand-600 text-white rounded-md hover:bg-brand-700 font-medium">Save</button>
+                                <button type="button" onclick="toggleEdit('{{ tp.id }}')" class="px-4 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Add files form (hidden by default) -->
+                    <div id="add-files-{{ tp.id }}" class="hidden mt-3 pt-3 border-t border-gray-100">
+                        <form action="/api/tp/{{ tp.id }}/files" method="post" enctype="multipart/form-data" class="flex items-center gap-2">
+                            <input type="file" name="files" multiple
+                                   accept=".pdf,.csv,.ipynb,.py,.md,.txt,.png,.jpg,.jpeg,.docx,.xlsx,.zip"
+                                   class="text-sm text-gray-500 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                            <button type="submit" class="px-3 py-1.5 text-sm bg-brand-600 text-white rounded-md hover:bg-brand-700 font-medium">Upload</button>
+                            <button type="button" onclick="toggleAddFiles('{{ tp.id }}')" class="px-3 py-1.5 text-sm bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-sm text-gray-500">No TPs created yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+function toggleAddFiles(tpId) {
+    document.getElementById('add-files-' + tpId).classList.toggle('hidden');
+    document.getElementById('edit-' + tpId).classList.add('hidden');
+}
+function toggleEdit(tpId) {
+    document.getElementById('edit-' + tpId).classList.toggle('hidden');
+    document.getElementById('add-files-' + tpId).classList.add('hidden');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block title %}Grade {{ tp.title }} - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/evaluation" class="hover:text-gray-700">Evaluation</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">Grade {{ tp.title }}</span>
+</div>
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">{{ tp.title }} - Grades</h1>
+    <a href="/tp/{{ tp.id }}/submissions" class="text-sm text-brand-600 hover:text-brand-700 font-medium">View Submissions</a>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    {% if submissions %}
+    <form action="/api/evaluation/grades/{{ tp.id }}" method="post">
+        <input type="hidden" name="attendance_date" value="{{ today }}">
+
+        <!-- Quick actions for attendance -->
+        <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
+            <span class="text-sm text-gray-500 font-medium">Attendance ({{ today }}):</span>
+            <button type="button" onclick="setAllAttendance('present')" class="text-xs bg-green-50 text-green-700 px-3 py-1.5 rounded-md hover:bg-green-100 font-medium">All Present</button>
+            <button type="button" onclick="setAllAttendance('absent')" class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-md hover:bg-red-100 font-medium">All Absent</button>
+            <button type="button" onclick="setAllNotes(2)" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-100 font-medium">All Notes 2</button>
+            <button type="button" onclick="setAllNotes(1)" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-md hover:bg-blue-100 font-medium">All Notes 1</button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-left text-gray-500 border-b">
+                        <th class="pb-2 font-medium">Students</th>
+                        <th class="pb-2 font-medium text-center w-20">Status</th>
+                        <th class="pb-2 font-medium text-center w-20">Note</th>
+                        <th class="pb-2 font-medium text-center w-28">Participation</th>
+                        <th class="pb-2 font-medium w-24">Grade</th>
+                        <th class="pb-2 font-medium w-20">Max</th>
+                        <th class="pb-2 font-medium">Comment</th>
+                        <th class="pb-2 font-medium w-16">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sub in submissions %}
+                    {% set gd = sub.grade_data %}
+                    {% set members = sub.team_members if sub.team_members else [] %}
+                    {% set row_bg = "bg-gray-50" if loop.index is odd else "bg-white" %}
+                    {# First member row #}
+                    <tr class="{{ row_bg }} {{ 'border-t border-gray-200' if not loop.first }}">
+                        <td class="py-2 px-2">
+                            {% if members %}
+                            <span class="font-medium text-gray-800">{{ members[0].name }}</span>
+                            <span class="text-xs text-gray-400 ml-1">{{ members[0].matricule }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            {% if members %}
+                            <div class="flex items-center justify-center gap-0.5">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ members[0].matricule }}" value="present"
+                                        class="hidden peer att-radio" data-matricule="{{ members[0].matricule }}"
+                                        {{ 'checked' if members[0].today_status == 'present' }}>
+                                    <span class="peer-checked:bg-green-600 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 rounded-l text-xs font-medium">P</span>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ members[0].matricule }}" value="late"
+                                        class="hidden peer att-radio" data-matricule="{{ members[0].matricule }}"
+                                        {{ 'checked' if members[0].today_status == 'late' }}>
+                                    <span class="peer-checked:bg-yellow-500 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 text-xs font-medium">L</span>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ members[0].matricule }}" value="absent"
+                                        class="hidden peer att-radio" data-matricule="{{ members[0].matricule }}"
+                                        {{ 'checked' if members[0].today_status == 'absent' }}>
+                                    <span class="peer-checked:bg-red-600 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 rounded-r text-xs font-medium">A</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            {% if members %}
+                            <input type="number" name="att_note_{{ members[0].matricule }}" min="0.25" max="2" step="0.25"
+                                value="{{ members[0].today_note if members[0].today_note else '' }}"
+                                class="att-note w-14 text-center rounded-md border-gray-300 border px-1 py-1 text-xs"
+                                data-matricule="{{ members[0].matricule }}" title="0.25 - 2">
+                            {% endif %}
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            {% if members and members[0].participation_grade is not none %}
+                            <span class="font-medium text-xs px-2 py-0.5 rounded-full {% if members[0].participation_grade >= 10 %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">{{ members[0].participation_grade }}/20</span>
+                            {% else %}
+                            <span class="text-gray-300 text-xs">-</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-2 px-1" rowspan="{{ members|length if members|length > 1 else 1 }}">
+                            <input type="number" name="grade_{{ sub.binome_key }}" step="0.5" min="0" max="20" value="{{ gd.grade if gd else '' }}" class="w-20 rounded-md border-gray-300 border px-2 py-1.5 text-sm">
+                        </td>
+                        <td class="py-2 px-1" rowspan="{{ members|length if members|length > 1 else 1 }}">
+                            <input type="number" name="max_{{ sub.binome_key }}" value="{{ gd.max_grade if gd else 20 }}" class="w-16 rounded-md border-gray-300 border px-2 py-1.5 text-sm">
+                        </td>
+                        <td class="py-2 px-1" rowspan="{{ members|length if members|length > 1 else 1 }}">
+                            <input type="text" name="comment_{{ sub.binome_key }}" value="{{ gd.comment if gd else '' }}" placeholder="Comment" class="w-full rounded-md border-gray-300 border px-2 py-1.5 text-sm">
+                        </td>
+                        <td class="py-2 px-1" rowspan="{{ members|length if members|length > 1 else 1 }}">
+                            <a href="/tp/{{ tp.id }}/submissions/{{ sub.binome_key }}" class="text-brand-600 hover:text-brand-700 text-xs font-medium">View</a>
+                        </td>
+                    </tr>
+                    {# Additional member rows #}
+                    {% for m in members[1:] %}
+                    <tr class="{{ row_bg }}">
+                        <td class="py-2 px-2">
+                            <span class="font-medium text-gray-800">{{ m.name }}</span>
+                            <span class="text-xs text-gray-400 ml-1">{{ m.matricule }}</span>
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            <div class="flex items-center justify-center gap-0.5">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ m.matricule }}" value="present"
+                                        class="hidden peer att-radio" data-matricule="{{ m.matricule }}"
+                                        {{ 'checked' if m.today_status == 'present' }}>
+                                    <span class="peer-checked:bg-green-600 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 rounded-l text-xs font-medium">P</span>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ m.matricule }}" value="late"
+                                        class="hidden peer att-radio" data-matricule="{{ m.matricule }}"
+                                        {{ 'checked' if m.today_status == 'late' }}>
+                                    <span class="peer-checked:bg-yellow-500 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 text-xs font-medium">L</span>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_status_{{ m.matricule }}" value="absent"
+                                        class="hidden peer att-radio" data-matricule="{{ m.matricule }}"
+                                        {{ 'checked' if m.today_status == 'absent' }}>
+                                    <span class="peer-checked:bg-red-600 peer-checked:text-white bg-gray-200 text-gray-600 px-2 py-1 rounded-r text-xs font-medium">A</span>
+                                </label>
+                            </div>
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            <input type="number" name="att_note_{{ m.matricule }}" min="0.25" max="2" step="0.25"
+                                value="{{ m.today_note if m.today_note else '' }}"
+                                class="att-note w-14 text-center rounded-md border-gray-300 border px-1 py-1 text-xs"
+                                data-matricule="{{ m.matricule }}" title="0.25 - 2">
+                        </td>
+                        <td class="py-2 px-1 text-center">
+                            {% if m.participation_grade is not none %}
+                            <span class="font-medium text-xs px-2 py-0.5 rounded-full {% if m.participation_grade >= 10 %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">{{ m.participation_grade }}/20</span>
+                            {% else %}
+                            <span class="text-gray-300 text-xs">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="mt-4 bg-brand-600 text-white py-2 px-6 rounded-md hover:bg-brand-700 font-medium text-sm">Save All Grades & Attendance</button>
+    </form>
+    {% else %}
+    <p class="text-sm text-gray-500">No submissions yet for this TP.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updateNoteState(matricule) {
+    const checked = document.querySelector(`input[name="att_status_${matricule}"]:checked`);
+    const noteInput = document.querySelector(`input[name="att_note_${matricule}"]`);
+    if (!noteInput) return;
+    if (checked && (checked.value === 'present' || checked.value === 'late')) {
+        noteInput.disabled = false;
+    } else {
+        noteInput.disabled = true;
+        noteInput.value = '';
+    }
+}
+
+// Bind change events
+document.querySelectorAll('.att-radio').forEach(radio => {
+    radio.addEventListener('change', () => updateNoteState(radio.dataset.matricule));
+});
+
+// Initialize note states on load
+document.querySelectorAll('.att-note').forEach(input => {
+    updateNoteState(input.dataset.matricule);
+});
+
+function setAllAttendance(status) {
+    document.querySelectorAll(`.att-radio[value="${status}"]`).forEach(radio => {
+        radio.checked = true;
+        updateNoteState(radio.dataset.matricule);
+    });
+}
+
+function setAllNotes(value) {
+    document.querySelectorAll('.att-note').forEach(input => {
+        if (!input.disabled) {
+            input.value = value;
+        }
+    });
+}
+</script>
+{% endblock %}

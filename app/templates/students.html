@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Students - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Student Registry</h1>
+    <span class="text-sm text-gray-500">{{ students|length }} students</span>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Add Student Form -->
+    <div>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Add Student</h2>
+            <form action="/api/students" method="post" class="space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Matricule</label>
+                    <input type="text" name="matricule" required placeholder="211234567" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" name="name" required placeholder="Benali Ahmed" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Group</label>
+                    <input type="text" name="group" value="G1" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Binome Matricule</label>
+                    <input type="text" name="binome_matricule" placeholder="211234568" class="w-full rounded-md border-gray-300 border px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
+                </div>
+                <button type="submit" class="w-full bg-brand-600 text-white py-2 px-4 rounded-md hover:bg-brand-700 font-medium text-sm">Add Student</button>
+            </form>
+        </div>
+
+        <!-- Import CSV -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-4">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Import CSV</h2>
+            <form action="/api/students/import" method="post" enctype="multipart/form-data">
+                <p class="text-xs text-gray-500 mb-3">Format: matricule,name,group,binome_matricule</p>
+                <input type="file" name="file" accept=".csv,.txt" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                <button type="submit" class="mt-3 w-full bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 font-medium text-sm">Import</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student List -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">All Students</h2>
+            {% if students %}
+            {% for group_name, group_students in groups.items()|sort %}
+            <div class="mb-6">
+                <h3 class="text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wide">{{ group_name }} ({{ group_students|length }})</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-gray-500 border-b">
+                                <th class="pb-2 font-medium">Matricule</th>
+                                <th class="pb-2 font-medium">Name</th>
+                                <th class="pb-2 font-medium">Binome</th>
+                                <th class="pb-2 font-medium w-16">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            {% for s in group_students|sort(attribute='name') %}
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-2 font-mono text-xs">{{ s.matricule }}</td>
+                                <td class="py-2 font-medium text-gray-800">{{ s.name }}</td>
+                                <td class="py-2 text-gray-500 font-mono text-xs">{{ s.binome_matricule or '-' }}</td>
+                                <td class="py-2">
+                                    <form action="/api/students/{{ s.matricule }}/delete" method="post" class="inline" onsubmit="return confirm('Delete this student?')">
+                                        <button type="submit" class="text-red-400 hover:text-red-600 text-xs">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-sm text-gray-500">No students registered yet. Add students above or import a CSV file.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

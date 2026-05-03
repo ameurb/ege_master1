@@ -1,0 +1,53 @@
+.drop-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.drop-zone:hover {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+.drop-zone.drag-over {
+    border-color: #2563eb;
+    background-color: #dbeafe;
+}
+
+/* Code preview */
+.code-preview {
+    background: #1e1e2e;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+.code-preview pre {
+    padding: 1rem;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Notebook preview */
+.notebook-preview {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.notebook-preview .jp-Cell {
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+}
+
+.notebook-preview .jp-InputArea {
+    background: #f9fafb;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.notebook-preview .jp-OutputArea {
+    padding: 0.75rem;
+}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Active Session - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/tp/manage" class="hover:text-gray-700">TP Management</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">Active Session</span>
+</div>
+
+{% if session %}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <div class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                <h1 class="text-2xl font-bold text-gray-800">Session Active</h1>
+            </div>
+            <p class="text-sm text-gray-500 mt-1">Started at {{ session.started_at[:16] }}</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-lg font-bold text-brand-700">{{ submission_count }} submission{{ 's' if submission_count != 1 }}</span>
+            <form action="/api/tp/session/stop" method="post">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md text-sm hover:bg-red-600 font-medium" onclick="return confirm('Close this session?')">Stop Session</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Submissions Table -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-800">Submissions</h2>
+        <button onclick="window.location.reload()" class="text-sm text-brand-600 hover:text-brand-700 font-medium flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Refresh <span id="refresh-countdown" class="text-gray-400">(10s)</span>
+        </button>
+    </div>
+
+    {% if submissions %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-500 border-b">
+                    <th class="pb-2 font-medium">#</th>
+                    <th class="pb-2 font-medium">Team</th>
+                    <th class="pb-2 font-medium">TP</th>
+                    <th class="pb-2 font-medium">Files</th>
+                    <th class="pb-2 font-medium">Time</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for sub in submissions %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 text-gray-400 font-medium">{{ loop.index }}</td>
+                    <td class="py-3">
+                        {% if sub.team_members %}
+                            {% for m in sub.team_members %}
+                            <span class="font-medium text-gray-800">{{ m.name }}</span>
+                            <span class="text-xs text-gray-400">({{ m.matricule }})</span>
+                            {% if not loop.last %}<span class="text-gray-300 mx-1">&</span>{% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="font-medium text-gray-800">{{ sub.binome_key }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3">
+                        <a href="/tp/{{ sub.tp_id }}/submissions/{{ sub.binome_key }}" class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-medium hover:bg-blue-100">{{ sub.tp_title|default(sub.tp_id) }}</a>
+                    </td>
+                    <td class="py-3 text-gray-600">
+                        {% for f in sub.files %}
+                        <span class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">{{ f }}</span>
+                        {% endfor %}
+                    </td>
+                    <td class="py-3 text-gray-500 text-xs">{{ sub.submitted_at[11:16] if sub.submitted_at else "" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center py-8">
+        <svg class="mx-auto h-10 w-10 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <p class="text-sm text-gray-500">No submissions yet. Waiting for students...</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- PC Locks -->
+{% if pc_locks %}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Locked PCs</h2>
+    <p class="text-xs text-gray-500 mb-3">Each PC (browser) is locked to one team per session. Different teams cannot submit from the same computer.</p>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-500 border-b">
+                    <th class="pb-2 font-medium">PC</th>
+                    <th class="pb-2 font-medium">Team</th>
+                    <th class="pb-2 font-medium">Locked At</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for lock in pc_locks %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-2 font-mono text-xs text-gray-500">{{ lock.pc_id }}...</td>
+                    <td class="py-2 font-medium text-gray-800">{{ lock.names }}</td>
+                    <td class="py-2 text-gray-500 text-xs">{{ lock.locked_at[11:16] if lock.locked_at else "" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+    <p class="text-gray-500">No active session. Start one from <a href="/tp/manage" class="text-brand-600 hover:text-brand-700 font-medium">TP Management</a>.</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if session %}
+<script>
+let countdown = 10;
+const countdownEl = document.getElementById('refresh-countdown');
+const interval = setInterval(() => {
+    countdown--;
+    if (countdownEl) countdownEl.textContent = '(' + countdown + 's)';
+    if (countdown <= 0) {
+        clearInterval(interval);
+        window.location.reload();
+    }
+}, 1000);
+</script>
+{% endif %}
+{% endblock %}

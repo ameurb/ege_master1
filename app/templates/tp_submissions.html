@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Submissions: {{ tp.title }} - EGE{% endblock %}
+{% block content %}
+<div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+    <a href="/tp/manage" class="hover:text-gray-700">TP Management</a>
+    <span>/</span>
+    <span class="text-gray-800 font-medium">{{ tp.title }} - Submissions</span>
+</div>
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">{{ tp.title }} - Submissions</h1>
+    <span class="text-sm text-gray-500">{{ submissions|length }} submission{{ 's' if submissions|length != 1 }}</span>
+</div>
+
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    {% if submissions %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-500 border-b">
+                    <th class="pb-2 font-medium">#</th>
+                    <th class="pb-2 font-medium">Team</th>
+                    <th class="pb-2 font-medium">Files</th>
+                    <th class="pb-2 font-medium">Submitted</th>
+                    <th class="pb-2 font-medium">Grade</th>
+                    <th class="pb-2 font-medium">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for sub in submissions %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 text-gray-400 font-medium">{{ loop.index }}</td>
+                    <td class="py-3">
+                        {% if sub.team_members %}
+                            {% for m in sub.team_members %}
+                            <div class="{% if not loop.first %}mt-1{% endif %}">
+                                <span class="font-medium text-gray-800">{{ m.name }}</span>
+                                <span class="text-xs text-gray-400 ml-1">{{ m.matricule }}</span>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <span class="font-medium text-gray-800">{{ sub.student1_name }}{% if sub.student2_name %} & {{ sub.student2_name }}{% endif %}</span>
+                            <span class="text-xs text-gray-400 block">{{ sub.binome_key }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 text-gray-600">
+                        {% for f in sub.files %}
+                        <span class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">{{ f }}</span>
+                        {% endfor %}
+                    </td>
+                    <td class="py-3 text-gray-500 text-xs">{{ sub.submitted_at[:16] }}</td>
+                    <td class="py-3">
+                        {% set g = grades.get(sub.binome_key) %}
+                        {% if g %}
+                        <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700">{{ g.grade }}/{{ g.max_grade }}</span>
+                        {% else %}
+                        <span class="text-xs text-gray-400">Not graded</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3">
+                        <a href="/tp/{{ tp.id }}/submissions/{{ sub.binome_key }}" class="text-brand-600 hover:text-brand-700 font-medium text-sm">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-sm text-gray-500">No submissions yet for this TP.</p>
+    {% endif %}
+</div>
+{% endblock %}
