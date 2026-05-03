@@ -117,6 +117,44 @@ for country, growth in countries.items():
     else:
         status = "Weak / ضعيف"
     print(f"{country:10} {growth:+.1f}%  →  {status}")</pre>
+
+  <h2>6. Functions / الدوال</h2>
+  <p>A function is a reusable block of code. Define it once with <code>def</code>, call it many times. Functions make your notebooks cleaner and avoid repeating code.</p>
+  <div class="ar">الدالة هي كتلة كود قابلة لإعادة الاستخدام. عرّفها مرة واحدة بـ def، ثم استدعها عدة مرات. الدوال تجعل الكود أنظف وتتجنب التكرار.</div>
+  <pre># Basic function / دالة أساسية
+def gdp_growth(gdp_old, gdp_new):
+    """Calculate GDP growth rate / حساب معدل نمو الناتج"""
+    return ((gdp_new - gdp_old) / gdp_old) * 100
+
+# Call the function / استدعاء الدالة
+print(gdp_growth(24500, 25100))  # → 2.2449...
+print(gdp_growth(13200, 13600))  # → 3.0303...
+
+# Function with default parameter / دالة بمعامل افتراضي
+def classify_growth(rate, strong=5.0, moderate=2.0):
+    if rate >= strong:
+        return "Strong / قوي"
+    elif rate >= moderate:
+        return "Moderate / معتدل"
+    elif rate > 0:
+        return "Slow / بطيء"
+    else:
+        return "Recession / ركود"
+
+print(classify_growth(2.4))   # → Moderate
+print(classify_growth(6.1))   # → Strong
+print(classify_growth(-1.2))  # → Recession
+
+# Lambda (short one-line function) / دالة لامدا (سطر واحد)
+inflation_real = lambda nominal, inflation: nominal - inflation
+print(inflation_real(5.0, 2.4))  # → 2.6 (real rate)</pre>
+  <table>
+    <tr><th>Concept</th><th>Syntax</th><th>Use / الاستخدام</th></tr>
+    <tr><td>Define function / تعريف دالة</td><td><code>def name(params): return value</code></td><td>Reusable calculation / حساب قابل للتكرار</td></tr>
+    <tr><td>Default parameter / معامل افتراضي</td><td><code>def f(x, n=10):</code></td><td>Optional argument / وسيط اختياري</td></tr>
+    <tr><td>Lambda</td><td><code>f = lambda x: x * 2</code></td><td>Short one-line function / دالة قصيرة في سطر واحد</td></tr>
+    <tr><td>Docstring</td><td><code>"""Description"""</code></td><td>Document your function / توثيق الدالة</td></tr>
+  </table>
 </div>
 
 <div class="section">

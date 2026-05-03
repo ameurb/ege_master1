@@ -97,6 +97,34 @@ print(model.summary())</text></answer>
   </question>
 
   <question type="multichoice">
+    <name><text>W5-Q9 OLS coefficient interpretation</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>OLS result: <code>GDP_Growth coef = -0.42</code> on Unemployment. Correct interpretation?<br>
+      <span dir="rtl">نتيجة OLS: معامل نمو الناتج = -0.42 على البطالة. ما التفسير الصحيح؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>A 1% increase in GDP growth is associated with a 0.42% decrease in unemployment — consistent with Okun's Law / زيادة 1% في نمو الناتج ترتبط بانخفاض 0.42% في البطالة، يتوافق مع قانون أوكن</text><feedback><text>Correct! Okun's Law predicts a negative relationship between growth and unemployment.</text></feedback></answer>
+    <answer fraction="0"><text>A 1% increase in unemployment causes a 0.42% increase in GDP growth</text><feedback><text>Incorrect — the coefficient direction is negative, and correlation ≠ causation.</text></feedback></answer>
+    <answer fraction="0"><text>GDP growth explains 42% of unemployment variance</text><feedback><text>That would be R², not a coefficient.</text></feedback></answer>
+    <answer fraction="0"><text>The coefficient is not meaningful because it is less than 1</text><feedback><text>Coefficient size has no threshold at 1 — significance is determined by the p-value.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
+    <name><text>W5-Q10 skewness computation</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<p>How do you compute skewness for a DataFrame column <code>df['Inflation']</code>?<br>
+      <span dir="rtl">كيف تحسب الالتواء لعمود Inflation في DataFrame؟</span></p>]]></text>
+    </questiontext>
+    <answer fraction="100"><text>df['Inflation'].skew()</text><feedback><text>Correct!</text></feedback></answer>
+    <answer fraction="0"><text>df['Inflation'].skewness()</text><feedback><text>The method is .skew(), not .skewness().</text></feedback></answer>
+    <answer fraction="0"><text>np.skew(df['Inflation'])</text><feedback><text>No np.skew() function — use .skew() from pandas or scipy.stats.skew().</text></feedback></answer>
+    <answer fraction="0"><text>df['Inflation'].describe()['skew']</text><feedback><text>describe() does not include skewness — use .skew() separately.</text></feedback></answer>
+    <shuffleanswers>1</shuffleanswers>
+    <single>1</single>
+  </question>
+
+  <question type="multichoice">
     <name><text>W5-Q8 Durbin-Watson</text></name>
     <questiontext format="html">
       <text><![CDATA[<p>A Durbin-Watson statistic of <strong>1.95</strong> suggests:<br>

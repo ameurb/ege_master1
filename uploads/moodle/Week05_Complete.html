@@ -87,17 +87,18 @@ plt.show()</pre>
   <div class="ar">قيمة الارتباط بين -1 و+1. القيم القريبة من +1 تعني علاقة موجبة قوية، القريبة من -1 تعني علاقة سالبة قوية، القريبة من 0 تعني ضعف العلاقة.</div>
 
   <h2>3. OLS Regression with statsmodels / الانحدار الخطي البسيط</h2>
-  <div class="formula">Y = β₀ + β₁X₁ + β₂X₂ + ε</div>
+  <div class="formula">Unemployment = β₀ + β₁·GDP_Growth + β₂·Inflation + ε</div>
+  <div class="ar">نموذج الانحدار: نستخدم معدل البطالة كمتغير تابع ونمو الناتج والتضخم كمتغيرَين مستقلَّين — وهذا يتوافق مع قانون أوكن (Okun's Law).</div>
   <pre>import statsmodels.api as sm
 
-# Dependent variable / المتغير التابع
-Y = df['GDP_Growth_Percent'].dropna()
+# Dependent variable (Y) / المتغير التابع
+Y = df['Unemployment_Rate'].dropna()
 
-# Independent variables / المتغيرات المستقلة
-X = df.loc[Y.index, ['Inflation_Percent', 'Oil_Revenue_Percent']].dropna()
-Y = Y.loc[X.index]   # align after dropna
+# Independent variables (X) / المتغيرات المستقلة
+X = df.loc[Y.index, ['GDP_Growth_Percent', 'Inflation_Percent']].dropna()
+Y = Y.loc[X.index]   # align after dropna / محاذاة بعد حذف القيم المفقودة
 
-# Add constant (intercept) / إضافة الثابت
+# Add constant (intercept β₀) / إضافة الثابت
 X = sm.add_constant(X)
 
 # Fit model / تطبيق النموذج
@@ -140,11 +141,13 @@ print(f"Durbin-Watson: {durbin_watson(residuals):.3f}")</pre>
 
   <h2>6. Interpretation Template / نموذج التفسير</h2>
   <pre># After running model.summary(), write:
-print(f"R² = {model.rsquared:.3f} → the model explains {model.rsquared*100:.1f}% of GDP growth variance.")
-print(f"Inflation coefficient = {model.params['Inflation_Percent']:.3f}")
-print(f"  → A 1% increase in inflation is associated with a {model.params['Inflation_Percent']:.3f}% change in GDP growth.")
-if model.pvalues['Inflation_Percent'] &lt; 0.05:
-    print("  → Statistically significant (p &lt; 0.05)")
+# بعد تشغيل model.summary()، اكتب التفسير:
+print(f"R² = {model.rsquared:.3f} → the model explains {model.rsquared*100:.1f}% of unemployment variance.")
+print(f"GDP_Growth coefficient = {model.params['GDP_Growth_Percent']:.3f}")
+print(f"  → A 1% increase in GDP growth is associated with a {model.params['GDP_Growth_Percent']:.3f}% change in unemployment.")
+print(f"  → This {'confirms' if model.params['GDP_Growth_Percent'] &lt; 0 else 'contradicts'} Okun's Law (negative relation expected).")
+if model.pvalues['GDP_Growth_Percent'] &lt; 0.05:
+    print("  → Statistically significant at 5% level (p &lt; 0.05)")
 else:
     print("  → Not statistically significant (p ≥ 0.05)")</pre>
 </div>

@@ -79,15 +79,22 @@ y = df[target]
 
 print(f"Dataset: {X.shape[0]} rows, {X.shape[1]} features")</pre>
 
-  <h2>3. Train / Test Split / تقسيم البيانات</h2>
+  <h2>3. Feature Scaling with StandardScaler / تحجيم المتغيرات</h2>
+  <div class="ar">قبل تدريب النموذج، يُفضَّل تحجيم المتغيرات حتى لا يهيمن متغير بوحدات كبيرة على النموذج. StandardScaler يحوّل كل عمود ليكون متوسطه 0 وانحرافه المعياري 1.</div>
+  <pre>from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)   # fit on training data only in practice</pre>
+
+  <h2>4. Train / Test Split / تقسيم البيانات</h2>
   <pre># 80% train, 20% test — random_state for reproducibility
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X_scaled, y, test_size=0.2, random_state=42
 )
 print(f"Train size: {len(X_train)}  |  Test size: {len(X_test)}")</pre>
-  <div class="ar">نقسّم البيانات: 80% للتدريب، 20% للاختبار. random_state=42 يضمن إعادة إنتاج نفس النتائج.</div>
+  <div class="ar">نقسّم البيانات: 80% للتدريب، 20% للاختبار. random_state=42 يضمن إعادة إنتاج نفس النتائج. مهم: نطبّق fit_transform على بيانات التدريب فقط، ثم transform فقط على بيانات الاختبار.</div>
 
-  <h2>4. Linear Regression / الانحدار الخطي</h2>
+  <h2>5. Linear Regression (Core) / الانحدار الخطي — الأساسي</h2>
   <pre>lr = LinearRegression()
 lr.fit(X_train, y_train)
 y_pred_lr = lr.predict(X_test)
@@ -102,7 +109,8 @@ print(f"  R²   = {r2_lr:.3f}")
 print(f"  MAE  = {mae_lr:.3f}")
 print(f"  RMSE = {rmse_lr:.3f}")</pre>
 
-  <h2>5. Random Forest / الغابة العشوائية</h2>
+  <h2>6. Random Forest (Advanced / Optional) / الغابة العشوائية — متقدم</h2>
+  <div class="ar">الغابة العشوائية نموذج متقدم — تعلّمه بعد إتقان الانحدار الخطي. يبني مئات الأشجار ثم يعدّل نتائجها، مما يجعله أقوى لكن أصعب في التفسير الاقتصادي.</div>
   <pre>rf = RandomForestRegressor(n_estimators=100, random_state=42)
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
@@ -120,7 +128,7 @@ print(f"  RMSE = {rmse_rf:.3f}")
 importance = pd.Series(rf.feature_importances_, index=features).sort_values(ascending=True)
 importance.plot(kind='barh', title='Feature Importance / أهمية المتغيرات')</pre>
 
-  <h2>6. Metrics Reference / مرجع المقاييس</h2>
+  <h2>7. Metrics Reference / مرجع المقاييس</h2>
   <table>
     <tr><th>Metric</th><th>Formula</th><th>Interpretation / التفسير</th></tr>
     <tr><td><code>R²</code></td><td>1 − SS_res/SS_tot</td><td>0–1; closer to 1 is better / كلما اقترب من 1 كان أفضل</td></tr>
@@ -128,7 +136,7 @@ importance.plot(kind='barh', title='Feature Importance / أهمية المتغي
     <tr><td><code>RMSE</code></td><td>√mean((y − ŷ)²)</td><td>Penalizes large errors / يعاقب الأخطاء الكبيرة</td></tr>
   </table>
 
-  <h2>7. Actual vs Predicted Plot / مخطط الفعلي مقابل المتوقع</h2>
+  <h2>8. Actual vs Predicted Plot / مخطط الفعلي مقابل المتوقع</h2>
   <pre>fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 for ax, y_pred, name, color in zip(

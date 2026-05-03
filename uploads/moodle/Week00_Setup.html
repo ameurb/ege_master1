@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 0 — Setup Guide</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#263238);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #eceff1}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-colab{background:#fff3e0;color:#e65100}.tag-local{background:#e8f4fd;color:#1565c0}.tag-tip{background:#e8f5e9;color:#2e7d32}
+h2{font-size:15px;color:#263238;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #263238;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#b0bec5;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.step{counter-increment:step-counter;background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:14px 14px 14px 52px;margin:10px 0;position:relative}
+.step::before{content:counter(step-counter);position:absolute;left:14px;top:50%;transform:translateY(-50%);background:#1a1a2e;color:white;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.steps{counter-reset:step-counter}
+.option-card{border:2px solid #e0e0e0;border-radius:10px;padding:16px;margin:12px 0}
+.option-card.recommended{border-color:#2e7d32;background:#f1f8e9}
+.option-card h3{margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.badge-rec{background:#2e7d32;color:white;font-size:10px;padding:2px 8px;border-radius:10px}
+.error-box{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
+.fix-box{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;border-radius:0 6px 6px 0;margin:4px 0;font-size:13px}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 0 — Environment Setup / إعداد بيئة العمل</h1>
+  <p>Read before Week 1 &nbsp;|&nbsp; Master 1 — Python &amp; Data Analysis for Economics</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-tip">Overview / نظرة عامة</span></div>
+  <p>This guide helps you set up your Python environment before Week 1. You have two options: Google Colab (recommended, no installation needed) or a local Jupyter installation via Anaconda.</p>
+  <div class="ar">هذا الدليل يساعدك على إعداد بيئة Python قبل الأسبوع الأول. لديك خياران: Google Colab (موصى به، لا يحتاج تثبيتاً) أو تثبيت Jupyter محلياً عبر Anaconda.</div>
+
+  <table>
+    <tr><th>Option</th><th>Pros / المزايا</th><th>Cons / العيوب</th></tr>
+    <tr><td><strong>Google Colab</strong></td><td>No install, free GPU, always up to date, runs in browser</td><td>Needs internet, files reset after session</td></tr>
+    <tr><td><strong>Local Jupyter</strong></td><td>Works offline, files persist, full control</td><td>Requires installation (~3 GB), version management</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-colab">Option A</span> Google Colab (Recommended / موصى به)</div>
+
+  <div class="option-card recommended">
+    <h3>Google Colab <span class="badge-rec">Recommended</span></h3>
+    <p>Free, runs in your browser, no installation. All required libraries (pandas, matplotlib, seaborn, statsmodels, scikit-learn) are pre-installed.</p>
+    <div class="ar">مجاني، يعمل في المتصفح، بدون تثبيت. جميع المكتبات المطلوبة مثبّتة مسبقاً.</div>
+  </div>
+
+  <div class="steps">
+    <div class="step">Go to <strong>colab.research.google.com</strong> — sign in with your Google account / اذهب إلى colab.research.google.com وسجّل الدخول بحسابك على Google</div>
+    <div class="step">Click <strong>File → Upload notebook</strong> and select the <code>.ipynb</code> file downloaded from Moodle / انقر File ثم Upload notebook واختر ملف .ipynb المحمّل من Moodle</div>
+    <div class="step">Upload the CSV dataset: click the folder icon in the left sidebar → Upload → select <code>algeria_economic_combined.csv</code> / ارفع ملف CSV: انقر أيقونة المجلد في الشريط الجانبي ← Upload</div>
+    <div class="step">Run cells with <strong>Ctrl+Enter</strong> (current cell) or <strong>Shift+Enter</strong> (run and move to next) / شغّل الخلايا بـ Ctrl+Enter أو Shift+Enter</div>
+    <div class="step">Save your work: <strong>File → Save a copy in Drive</strong> to keep your changes / احفظ عملك: File ← Save a copy in Drive</div>
+  </div>
+
+  <h2>Upload Dataset in Colab / رفع ملف البيانات في Colab</h2>
+  <pre># Method 1: Upload from local computer
+from google.colab import files
+uploaded = files.upload()   # opens file picker
+
+# Method 2: If file is already in the session folder
+import pandas as pd
+df = pd.read_csv('algeria_economic_combined.csv')
+df.head()</pre>
+  <div class="ar">مهم: الملفات المرفوعة تُحذف عند انتهاء الجلسة. يجب رفعها في كل جلسة جديدة، أو حفظها في Google Drive.</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-local">Option B</span> Local Installation via Anaconda</div>
+
+  <div class="steps">
+    <div class="step">Download <strong>Anaconda</strong> from <code>anaconda.com/download</code> — choose Python 3.11, your OS (Windows/Mac/Linux) / حمّل Anaconda واختر Python 3.11 ونظام تشغيلك</div>
+    <div class="step">Install Anaconda (keep all default options) / ثبّت Anaconda مع الإعدادات الافتراضية</div>
+    <div class="step">Open <strong>Anaconda Navigator</strong> → click <strong>Launch</strong> under Jupyter Notebook / افتح Anaconda Navigator ثم انقر Launch تحت Jupyter Notebook</div>
+    <div class="step">Navigate to your project folder and open the <code>.ipynb</code> file / انتقل إلى مجلد مشروعك وافتح ملف .ipynb</div>
+    <div class="step">Place the CSV files in the <strong>same folder</strong> as the notebook / ضع ملفات CSV في <strong>نفس المجلد</strong> مع الدفتر</div>
+  </div>
+
+  <h2>Install Missing Libraries / تثبيت المكتبات المفقودة</h2>
+  <p>Anaconda includes most libraries. If any are missing, open the Anaconda Prompt (Windows) or Terminal (Mac/Linux) and run:</p>
+  <pre>pip install statsmodels scikit-learn seaborn</pre>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-tip">Libraries</span> Required Libraries / المكتبات المطلوبة</div>
+  <table>
+    <tr><th>Library</th><th>Used in / تُستخدم في</th><th>Install check</th></tr>
+    <tr><td><code>pandas</code></td><td>W3 — data loading, filtering</td><td><code>import pandas as pd</code></td></tr>
+    <tr><td><code>numpy</code></td><td>W3, W5, W6 — math operations</td><td><code>import numpy as np</code></td></tr>
+    <tr><td><code>matplotlib</code></td><td>W4 — all charts</td><td><code>import matplotlib.pyplot as plt</code></td></tr>
+    <tr><td><code>seaborn</code></td><td>W5 — heatmap</td><td><code>import seaborn as sns</code></td></tr>
+    <tr><td><code>statsmodels</code></td><td>W5 — OLS regression</td><td><code>import statsmodels.api as sm</code></td></tr>
+    <tr><td><code>scikit-learn</code></td><td>W6 — ML models</td><td><code>from sklearn.linear_model import LinearRegression</code></td></tr>
+    <tr><td><code>scipy</code></td><td>W5 — statistical tests</td><td><code>from scipy import stats</code></td></tr>
+  </table>
+
+  <h2>Quick Install Test / اختبار سريع للتثبيت</h2>
+  <p>Run this cell in any notebook to verify all libraries are available:</p>
+  <pre>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+from sklearn.linear_model import LinearRegression
+from scipy import stats
+
+print("pandas:      ", pd.__version__)
+print("numpy:       ", np.__version__)
+print("matplotlib:  ", plt.matplotlib.__version__)
+print("seaborn:     ", sns.__version__)
+print("statsmodels: ", sm.__version__)
+print("sklearn:     ", __import__('sklearn').__version__)
+print("\nAll libraries ready / كل المكتبات جاهزة")</pre>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-tip">Datasets / ملفات البيانات</span></div>
+  <p>Two CSV files are used throughout the course. Download them from Moodle and place them in the same folder as your notebooks.</p>
+  <div class="ar">يستخدم المقياس ملفَي CSV. حمّلهما من Moodle وضعهما في نفس مجلد دفاترك.</div>
+  <table>
+    <tr><th>File</th><th>Used in / يُستخدم في</th><th>Rows / الصفوف</th><th>Key Columns / الأعمدة الرئيسية</th></tr>
+    <tr><td><code>algeria_economic_combined.csv</code></td><td>TP1–TP4</td><td>24 (2000–2023)</td><td>Year, GDP_Growth_Percent, Inflation_Percent, Unemployment_Rate</td></tr>
+    <tr><td><code>world_bank_economic_indicators.csv</code></td><td>TP5–TP6</td><td>~112 (6 countries, 2010–2023)</td><td>Country, Year, GDP_Growth, Inflation, Unemployment_Rate, Oil_Revenue_Percent</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-tip">Common Errors / أخطاء شائعة</span></div>
+
+  <div class="error-box">FileNotFoundError: algeria_economic_combined.csv</div>
+  <div class="fix-box">The CSV file is not in the same folder as your notebook. In Colab: upload it. Locally: copy it to the notebook directory. / ملف CSV ليس في نفس مجلد الدفتر.</div>
+
+  <div class="error-box">ModuleNotFoundError: No module named 'statsmodels'</div>
+  <div class="fix-box">Run in a cell: <code>!pip install statsmodels</code></div>
+
+  <div class="error-box">NameError: name 'df' is not defined</div>
+  <div class="fix-box">You skipped a cell. Run all cells from top to bottom: Menu → Runtime → Run all / تخطّيت خلية. شغّل كل الخلايا من البداية: Runtime → Run all</div>
+
+  <div class="error-box">ValueError: could not convert string to float</div>
+  <div class="fix-box">A column contains text mixed with numbers. Check with <code>df.dtypes</code> and clean with <code>pd.to_numeric(df['col'], errors='coerce')</code></div>
+
+  <div class="error-box">KeyError: 'GDP_Growth'</div>
+  <div class="fix-box">Column name mismatch. Check exact column names with <code>df.columns.tolist()</code> — they are case-sensitive. / اسم العمود غير مطابق. تحقق بـ df.columns.tolist()</div>
+</div>
+
+</body></html>
