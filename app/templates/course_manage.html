@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Course Management — EGE{% endblock %}
+{% block content %}
+
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Course Management</h1>
+        <p class="text-sm text-gray-500 mt-1">Python for Economics — Master 1</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <span class="text-sm font-medium text-gray-600 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">
+            {{ published }}/{{ total }} weeks published
+        </span>
+    </div>
+</div>
+
+<!-- Stats -->
+<div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="text-sm text-gray-500">Total Weeks</div>
+        <div class="text-3xl font-bold text-gray-800 mt-1">{{ total }}</div>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="text-sm text-gray-500">Published</div>
+        <div class="text-3xl font-bold text-green-600 mt-1">{{ published }}</div>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+        <div class="text-sm text-gray-500">Files Location</div>
+        <div class="text-sm font-mono text-gray-600 mt-2 break-all">uploads/moodle/</div>
+    </div>
+</div>
+
+<!-- Weeks table -->
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <table class="w-full text-sm">
+        <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Week</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Topic</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">HTML File</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Notebooks</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Datasets</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Status</th>
+                <th class="px-5 py-3 text-left font-semibold text-gray-600">Preview</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for w in weeks %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-5 py-3">
+                    <span class="text-lg mr-1">{{ w.icon }}</span>
+                    <span class="font-medium text-gray-700">{% if w.week == 0 %}Setup{% else %}W{{ w.week }}{% endif %}</span>
+                </td>
+                <td class="px-5 py-3">
+                    <div class="font-medium text-gray-800">{{ w.title }}</div>
+                    <div class="text-xs text-gray-400 mt-0.5">{{ w.subtitle[:60] }}{% if w.subtitle|length > 60 %}...{% endif %}</div>
+                </td>
+                <td class="px-5 py-3 font-mono text-xs text-gray-600">{{ w.html_file }}</td>
+                <td class="px-5 py-3">
+                    {% if w.notebooks %}
+                    <div class="space-y-0.5">
+                        {% for nb in w.notebooks %}
+                        <div class="flex items-center gap-1 text-xs">
+                            {% if nb in w.notebooks_available %}
+                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                            {% else %}
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            {% endif %}
+                            <span class="text-gray-600">{{ nb|replace('_Starter.ipynb','') }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <span class="text-gray-300 text-xs">—</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-3">
+                    {% if w.datasets %}
+                    <div class="space-y-0.5">
+                        {% for ds in w.datasets %}
+                        <div class="flex items-center gap-1 text-xs">
+                            {% if ds in w.datasets_available %}
+                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                            {% else %}
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            {% endif %}
+                            <span class="text-gray-600">{{ ds|replace('.csv','') }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <span class="text-gray-300 text-xs">—</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-3">
+                    {% if w.available %}
+                    <span class="inline-flex items-center gap-1 text-xs font-semibold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Live
+                    </span>
+                    {% else %}
+                    <span class="inline-flex items-center gap-1 text-xs font-semibold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
+                        <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span> Missing
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-3">
+                    {% if w.available %}
+                    <a href="/course/week/{{ w.week }}" target="_blank"
+                       class="text-xs text-brand-600 hover:text-brand-700 font-medium">Preview</a>
+                    {% else %}
+                    <span class="text-xs text-gray-300">—</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+    <strong>To add or update course content:</strong> place files in <code class="bg-blue-100 px-1 rounded">uploads/moodle/</code> on the server with the exact filenames shown above. They appear live immediately — no restart needed.
+</div>
+
+{% endblock %}

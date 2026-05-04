@@ -7,7 +7,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from app.config import UPLOAD_DIR, SECRET_KEY
 from app.auth import AuthRedirectException
-from app.routers import upload, files, students, tp, attendance, evaluation
+from app.routers import upload, files, students, tp, attendance, evaluation, course
 from app.routers import auth as auth_router
 
 app = FastAPI(title="EGE Document Sharing")
@@ -44,3 +44,4 @@ app.include_router(students.router)
 app.include_router(tp.router)
 app.include_router(attendance.router)
 app.include_router(evaluation.router)
+app.include_router(course.router)

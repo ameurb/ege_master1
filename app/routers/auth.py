@@ -121,6 +121,17 @@ def _student_dashboard(request: Request, user: dict):
         })
     att_pct = round(present_count / total_sessions * 100) if total_sessions > 0 else 0
 
+    # Course progress
+    from app.routers.course import get_progress, COURSE_WEEKS
+    completed_weeks = get_progress(matricule)
+    total_weeks = len(COURSE_WEEKS)
+    next_week = next((w for w in COURSE_WEEKS if w["week"] not in completed_weeks), None)
+    course_progress = {
+        "completed": len(completed_weeks),
+        "total": total_weeks,
+        "next_week": next_week,
+    }
+
     return templates.TemplateResponse("dashboard_student.html", {
         "request": request,
         "student": student,
@@ -132,6 +143,7 @@ def _student_dashboard(request: Request, user: dict):
         "total_sessions": total_sessions,
         "att_pct": att_pct,
         "max_team_size": get_max_team_size(),
+        "course_progress": course_progress,
     })
 
 

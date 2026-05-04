@@ -54,6 +54,39 @@
 </div>
 {% endif %}
 
+<!-- Course Progress Card -->
+<div class="bg-gradient-to-r from-brand-600 to-indigo-600 rounded-xl p-5 mb-6 text-white shadow-sm">
+    <div class="flex items-center justify-between mb-3">
+        <div>
+            <div class="text-xs font-semibold uppercase tracking-wider opacity-75">Python for Economics</div>
+            <div class="text-lg font-bold mt-0.5">Course Progress</div>
+        </div>
+        <a href="/course" class="text-xs font-semibold bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-1.5 rounded-lg transition-colors">
+            Continue →
+        </a>
+    </div>
+    {% if course_progress is defined and course_progress %}
+    {% set pct = ((course_progress.completed / course_progress.total) * 100)|round|int %}
+    <div class="w-full bg-white bg-opacity-20 rounded-full h-2.5 mb-2">
+        <div class="bg-white rounded-full h-2.5 transition-all" style="width: {{ pct }}%"></div>
+    </div>
+    <div class="flex justify-between text-xs opacity-80">
+        <span>{{ course_progress.completed }}/{{ course_progress.total }} weeks completed</span>
+        <span>{{ pct }}%</span>
+    </div>
+    {% if course_progress.next_week %}
+    <div class="mt-3 text-xs opacity-90">
+        Next: <strong>{{ course_progress.next_week.icon }} {{ course_progress.next_week.title }}</strong>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="w-full bg-white bg-opacity-20 rounded-full h-2.5 mb-2">
+        <div class="bg-white rounded-full h-2.5" style="width: 0%"></div>
+    </div>
+    <div class="text-xs opacity-80">Start with Week 0 — Setup Guide</div>
+    {% endif %}
+</div>
+
 <!-- Stats Cards -->
 {% set graded_items = tp_info|selectattr("grade")|list %}
 {% set avg_grade = (graded_items|map(attribute='grade')|map(attribute='grade')|list|sum / graded_items|length)|round(1) if graded_items else none %}
