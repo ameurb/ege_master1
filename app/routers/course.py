@@ -3,7 +3,7 @@ from fastapi import APIRouter, Request, Depends
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from app.auth import require_student, require_professor
+from app.auth import require_student, require_professor, require_any_user
 
 router = APIRouter(prefix="/course", tags=["course"])
 templates = Jinja2Templates(directory=Path(__file__).parent.parent / "templates")
@@ -141,7 +141,9 @@ def save_progress(matricule: str, week: int) -> None:
 # ---------------------------------------------------------------------------
 
 @router.get("")
-async def course_index(request: Request, user: dict = Depends(require_student)):
+async def course_index(request: Request, user: dict = Depends(require_any_user)):
+    if user.get("role") == "professor":
+        return RedirectResponse("/course/manage", status_code=303)
     completed = get_progress(user["matricule"])
     weeks_with_status = []
     for w in COURSE_WEEKS:

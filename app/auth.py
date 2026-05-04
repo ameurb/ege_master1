@@ -26,3 +26,11 @@ def require_professor(request: Request) -> dict:
     if not user or user.get("role") != "professor":
         raise AuthRedirectException(f"/login?next={request.url.path}")
     return user
+
+
+def require_any_user(request: Request) -> dict:
+    """Dependency: require any logged-in user (student or professor)."""
+    user = request.session.get("user")
+    if not user:
+        raise AuthRedirectException(f"/login?next={request.url.path}")
+    return user
