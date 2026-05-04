@@ -26,14 +26,14 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
 </style></head><body>
 
 <div class="week-banner">
-  <h1>Week 0 — Environment Setup / إعداد بيئة العمل</h1>
-  <p>Read before Week 1 &nbsp;|&nbsp; Master 1 — Python &amp; Data Analysis for Economics</p>
+  <h1>Week 0 — Environment Setup / إعداد بيئة العمل البرمجية</h1>
+  <p>اقرأ قبل الأسبوع الأول &nbsp;|&nbsp; ماستر 1 — بايثون وتحليل البيانات للاقتصاد</p>
 </div>
 
 <div class="section">
   <div class="section-title"><span class="tag tag-tip">Overview / نظرة عامة</span></div>
   <p>This guide helps you set up your Python environment before Week 1. You have two options: Google Colab (recommended, no installation needed) or a local Jupyter installation via Anaconda.</p>
-  <div class="ar">هذا الدليل يساعدك على إعداد بيئة Python قبل الأسبوع الأول. لديك خياران: Google Colab (موصى به، لا يحتاج تثبيتاً) أو تثبيت Jupyter محلياً عبر Anaconda.</div>
+  <div class="ar">يهدف هذا الدليل إلى مساعدتك على تهيئة بيئة العمل البرمجية قبل انطلاق الأسبوع الأول. لديك خياران: Google Colab (الخيار الموصى به، لا يستلزم تثبيتاً مسبقاً) أو تثبيت بيئة Jupyter محلياً عبر منصة Anaconda.</div>
 
   <table>
     <tr><th>Option</th><th>Pros / المزايا</th><th>Cons / العيوب</th></tr>
@@ -48,18 +48,18 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
   <div class="option-card recommended">
     <h3>Google Colab <span class="badge-rec">Recommended</span></h3>
     <p>Free, runs in your browser, no installation. All required libraries (pandas, matplotlib, seaborn, statsmodels, scikit-learn) are pre-installed.</p>
-    <div class="ar">مجاني، يعمل في المتصفح، بدون تثبيت. جميع المكتبات المطلوبة مثبّتة مسبقاً.</div>
+    <div class="ar">مجاني ومتاح عبر المتصفح دون أي تثبيت مسبق. جميع المكتبات البرمجية المطلوبة (pandas, matplotlib, seaborn, statsmodels, scikit-learn) مُثبَّتة بشكل افتراضي في البيئة.</div>
   </div>
 
   <div class="steps">
-    <div class="step">Go to <strong>colab.research.google.com</strong> — sign in with your Google account / اذهب إلى colab.research.google.com وسجّل الدخول بحسابك على Google</div>
-    <div class="step">Click <strong>File → Upload notebook</strong> and select the <code>.ipynb</code> file downloaded from Moodle / انقر File ثم Upload notebook واختر ملف .ipynb المحمّل من Moodle</div>
-    <div class="step">Upload the CSV dataset: click the folder icon in the left sidebar → Upload → select <code>algeria_economic_combined.csv</code> / ارفع ملف CSV: انقر أيقونة المجلد في الشريط الجانبي ← Upload</div>
-    <div class="step">Run cells with <strong>Ctrl+Enter</strong> (current cell) or <strong>Shift+Enter</strong> (run and move to next) / شغّل الخلايا بـ Ctrl+Enter أو Shift+Enter</div>
-    <div class="step">Save your work: <strong>File → Save a copy in Drive</strong> to keep your changes / احفظ عملك: File ← Save a copy in Drive</div>
+    <div class="step">انتقل إلى <strong>colab.research.google.com</strong> وسجّل الدخول بحسابك على Google / Go to <strong>colab.research.google.com</strong> and sign in</div>
+    <div class="step">انقر <strong>File → Upload notebook</strong> واختر ملف دفتر جوبيتر <code>.ipynb</code> الذي نزّلته من المنصة / Click <strong>File → Upload notebook</strong> and select the <code>.ipynb</code> file</div>
+    <div class="step">ارفع ملف البيانات: انقر أيقونة المجلد في الشريط الجانبي → Upload → اختر <code>algeria_economic_combined.csv</code> / Upload the dataset via the folder icon in the sidebar</div>
+    <div class="step">نفِّذ الخلايا البرمجية بـ <strong>Ctrl+Enter</strong> (الخلية الحالية) أو <strong>Shift+Enter</strong> (تنفيذ والانتقال للتالية) / Run cells with <strong>Ctrl+Enter</strong> or <strong>Shift+Enter</strong></div>
+    <div class="step">احفظ عملك: <strong>File → Save a copy in Drive</strong> للاحتفاظ بالتعديلات في Google Drive / Save your work via <strong>File → Save a copy in Drive</strong></div>
   </div>
 
-  <h2>Upload Dataset in Colab / رفع ملف البيانات في Colab</h2>
+  <h2>Upload Dataset in Colab / رفع ملف البيانات في بيئة Colab</h2>
   <pre># Method 1: Upload from local computer
 from google.colab import files
 uploaded = files.upload()   # opens file picker
@@ -68,40 +68,40 @@ uploaded = files.upload()   # opens file picker
 import pandas as pd
 df = pd.read_csv('algeria_economic_combined.csv')
 df.head()</pre>
-  <div class="ar">مهم: الملفات المرفوعة تُحذف عند انتهاء الجلسة. يجب رفعها في كل جلسة جديدة، أو حفظها في Google Drive.</div>
+  <div class="ar">ملاحظة مهمة: الملفات المرفوعة تُحذف تلقائياً عند انتهاء جلسة العمل. يجب إعادة رفعها في كل جلسة جديدة، أو حفظها في Google Drive لضمان الاستمرارية.</div>
 </div>
 
 <div class="section">
   <div class="section-title"><span class="tag tag-local">Option B</span> Local Installation via Anaconda</div>
 
   <div class="steps">
-    <div class="step">Download <strong>Anaconda</strong> from <code>anaconda.com/download</code> — choose Python 3.11, your OS (Windows/Mac/Linux) / حمّل Anaconda واختر Python 3.11 ونظام تشغيلك</div>
-    <div class="step">Install Anaconda (keep all default options) / ثبّت Anaconda مع الإعدادات الافتراضية</div>
-    <div class="step">Open <strong>Anaconda Navigator</strong> → click <strong>Launch</strong> under Jupyter Notebook / افتح Anaconda Navigator ثم انقر Launch تحت Jupyter Notebook</div>
-    <div class="step">Navigate to your project folder and open the <code>.ipynb</code> file / انتقل إلى مجلد مشروعك وافتح ملف .ipynb</div>
-    <div class="step">Place the CSV files in the <strong>same folder</strong> as the notebook / ضع ملفات CSV في <strong>نفس المجلد</strong> مع الدفتر</div>
+    <div class="step">نزّل <strong>Anaconda</strong> من <code>anaconda.com/download</code> — اختر Python 3.11 ونظام التشغيل المناسب (Windows/Mac/Linux) / Download <strong>Anaconda</strong> from <code>anaconda.com/download</code></div>
+    <div class="step">ثبّت Anaconda مع الإعدادات الافتراضية (لا تغيّر أي خيار) / Install Anaconda keeping all default options</div>
+    <div class="step">افتح <strong>Anaconda Navigator</strong> ثم انقر <strong>Launch</strong> أسفل Jupyter Notebook / Open <strong>Anaconda Navigator</strong> → click <strong>Launch</strong> under Jupyter Notebook</div>
+    <div class="step">انتقل إلى مجلد مشروعك وافتح ملف دفتر جوبيتر <code>.ipynb</code> / Navigate to your project folder and open the <code>.ipynb</code> file</div>
+    <div class="step">ضع ملفات البيانات بصيغة CSV في <strong>نفس مجلد</strong> دفتر جوبيتر / Place the CSV dataset files in the <strong>same folder</strong> as the notebook</div>
   </div>
 
-  <h2>Install Missing Libraries / تثبيت المكتبات المفقودة</h2>
-  <p>Anaconda includes most libraries. If any are missing, open the Anaconda Prompt (Windows) or Terminal (Mac/Linux) and run:</p>
+  <h2>Install Missing Libraries / تثبيت المكتبات البرمجية الناقصة</h2>
+  <p>Anaconda includes most libraries. If any are missing, open the Anaconda Prompt (Windows) or Terminal (Mac/Linux) and run: / تتضمن Anaconda معظم المكتبات. إذا كانت أي منها غير متاحة، افتح Anaconda Prompt (Windows) أو Terminal (Mac/Linux) ونفِّذ:</p>
   <pre>pip install statsmodels scikit-learn seaborn</pre>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-tip">Libraries</span> Required Libraries / المكتبات المطلوبة</div>
+  <div class="section-title"><span class="tag tag-tip">Libraries</span> المكتبات البرمجية المطلوبة / Required Libraries</div>
   <table>
-    <tr><th>Library</th><th>Used in / تُستخدم في</th><th>Install check</th></tr>
-    <tr><td><code>pandas</code></td><td>W3 — data loading, filtering</td><td><code>import pandas as pd</code></td></tr>
-    <tr><td><code>numpy</code></td><td>W3, W5, W6 — math operations</td><td><code>import numpy as np</code></td></tr>
-    <tr><td><code>matplotlib</code></td><td>W4 — all charts</td><td><code>import matplotlib.pyplot as plt</code></td></tr>
-    <tr><td><code>seaborn</code></td><td>W5 — heatmap</td><td><code>import seaborn as sns</code></td></tr>
-    <tr><td><code>statsmodels</code></td><td>W5 — OLS regression</td><td><code>import statsmodels.api as sm</code></td></tr>
-    <tr><td><code>scikit-learn</code></td><td>W6 — ML models</td><td><code>from sklearn.linear_model import LinearRegression</code></td></tr>
-    <tr><td><code>scipy</code></td><td>W5 — statistical tests</td><td><code>from scipy import stats</code></td></tr>
+    <tr><th>المكتبة / Library</th><th>تُستخدم في / Used in</th><th>أمر الاستدعاء / Import</th></tr>
+    <tr><td><code>pandas</code></td><td>أ3 — تحميل البيانات وتصفيتها / W3 — data loading, filtering</td><td><code>import pandas as pd</code></td></tr>
+    <tr><td><code>numpy</code></td><td>أ3، أ5، أ6 — الحوسبة العددية / W3, W5, W6 — numerical computing</td><td><code>import numpy as np</code></td></tr>
+    <tr><td><code>matplotlib</code></td><td>أ4 — جميع الأشكال البيانية / W4 — all charts</td><td><code>import matplotlib.pyplot as plt</code></td></tr>
+    <tr><td><code>seaborn</code></td><td>أ5 — مصفوفة الارتباط الحرارية / W5 — correlation heatmap</td><td><code>import seaborn as sns</code></td></tr>
+    <tr><td><code>statsmodels</code></td><td>أ5 — انحدار OLS / W5 — OLS regression</td><td><code>import statsmodels.api as sm</code></td></tr>
+    <tr><td><code>scikit-learn</code></td><td>أ6 — نماذج التعلم الآلي / W6 — ML models</td><td><code>from sklearn.linear_model import LinearRegression</code></td></tr>
+    <tr><td><code>scipy</code></td><td>أ5 — الاختبارات الإحصائية / W5 — statistical tests</td><td><code>from scipy import stats</code></td></tr>
   </table>
 
-  <h2>Quick Install Test / اختبار سريع للتثبيت</h2>
-  <p>Run this cell in any notebook to verify all libraries are available:</p>
+  <h2>Quick Install Test / اختبار التثبيت السريع</h2>
+  <p>نفِّذ هذه الخلية في أي دفتر للتحقق من توفر جميع المكتبات البرمجية / Run this cell in any notebook to verify all libraries are available:</p>
   <pre>import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -120,33 +120,33 @@ print("\nAll libraries ready / كل المكتبات جاهزة")</pre>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-tip">Datasets / ملفات البيانات</span></div>
-  <p>Two CSV files are used throughout the course. Download them from Moodle and place them in the same folder as your notebooks.</p>
-  <div class="ar">يستخدم المقياس ملفَي CSV. حمّلهما من Moodle وضعهما في نفس مجلد دفاترك.</div>
+  <div class="section-title"><span class="tag tag-tip">Datasets / مجموعات البيانات</span></div>
+  <p>Two CSV files are used throughout the course. Download them from the platform and place them in the same folder as your notebooks.</p>
+  <div class="ar">يستخدم هذا المقياس مجموعتَي بيانات بصيغة CSV. نزّلهما من المنصة وضعهما في نفس مجلد دفاتر جوبيتر الخاصة بك.</div>
   <table>
-    <tr><th>File</th><th>Used in / يُستخدم في</th><th>Rows / الصفوف</th><th>Key Columns / الأعمدة الرئيسية</th></tr>
+    <tr><th>ملف البيانات / File</th><th>يُستخدم في / Used in</th><th>عدد الصفوف / Rows</th><th>المتغيرات الرئيسية / Key Columns</th></tr>
     <tr><td><code>algeria_economic_combined.csv</code></td><td>TP1–TP4</td><td>24 (2000–2023)</td><td>Year, GDP_Growth_Percent, Inflation_Percent, Unemployment_Rate</td></tr>
-    <tr><td><code>world_bank_economic_indicators.csv</code></td><td>TP5–TP6</td><td>~112 (6 countries, 2010–2023)</td><td>Country, Year, GDP_Growth, Inflation, Unemployment_Rate, Oil_Revenue_Percent</td></tr>
+    <tr><td><code>world_bank_economic_indicators.csv</code></td><td>TP5–TP6</td><td>~112 (6 دول، 2010–2023)</td><td>Country, Year, GDP_Growth, Inflation, Unemployment_Rate, Oil_Revenue_Percent</td></tr>
   </table>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-tip">Common Errors / أخطاء شائعة</span></div>
+  <div class="section-title"><span class="tag tag-tip">Common Errors / الأخطاء البرمجية الشائعة</span></div>
 
-  <div class="error-box">FileNotFoundError: algeria_economic_combined.csv</div>
-  <div class="fix-box">The CSV file is not in the same folder as your notebook. In Colab: upload it. Locally: copy it to the notebook directory. / ملف CSV ليس في نفس مجلد الدفتر.</div>
+  <div class="error-box"><strong>FileNotFoundError:</strong> algeria_economic_combined.csv</div>
+  <div class="fix-box">ملف البيانات بصيغة CSV غير موجود في نفس مجلد دفتر جوبيتر. في Colab: أعد رفع الملف. محلياً: انسخ الملف إلى مجلد الدفتر. / The dataset file is not in the same folder as your notebook.</div>
 
-  <div class="error-box">ModuleNotFoundError: No module named 'statsmodels'</div>
-  <div class="fix-box">Run in a cell: <code>!pip install statsmodels</code></div>
+  <div class="error-box"><strong>ModuleNotFoundError:</strong> No module named 'statsmodels'</div>
+  <div class="fix-box">المكتبة البرمجية غير مثبَّتة. نفِّذ في خلية جديدة: <code>!pip install statsmodels</code> / The library is not installed. Run in a new cell: <code>!pip install statsmodels</code></div>
 
-  <div class="error-box">NameError: name 'df' is not defined</div>
-  <div class="fix-box">You skipped a cell. Run all cells from top to bottom: Menu → Runtime → Run all / تخطّيت خلية. شغّل كل الخلايا من البداية: Runtime → Run all</div>
+  <div class="error-box"><strong>NameError:</strong> name 'df' is not defined</div>
+  <div class="fix-box">تجاوزت خلية برمجية سابقة. نفِّذ جميع الخلايا من البداية: القائمة → Runtime → Run all / You skipped a cell. Run all cells from top to bottom: Menu → Runtime → Run all</div>
 
-  <div class="error-box">ValueError: could not convert string to float</div>
-  <div class="fix-box">A column contains text mixed with numbers. Check with <code>df.dtypes</code> and clean with <code>pd.to_numeric(df['col'], errors='coerce')</code></div>
+  <div class="error-box"><strong>ValueError:</strong> could not convert string to float</div>
+  <div class="fix-box">أحد الأعمدة يحتوي على نصوص مختلطة بأرقام. تحقق بـ <code>df.dtypes</code> وعالج بـ <code>pd.to_numeric(df['col'], errors='coerce')</code> / A column contains text mixed with numbers.</div>
 
-  <div class="error-box">KeyError: 'GDP_Growth'</div>
-  <div class="fix-box">Column name mismatch. Check exact column names with <code>df.columns.tolist()</code> — they are case-sensitive. / اسم العمود غير مطابق. تحقق بـ df.columns.tolist()</div>
+  <div class="error-box"><strong>KeyError:</strong> 'GDP_Growth'</div>
+  <div class="fix-box">اسم العمود غير مطابق تماماً (الأسماء حساسة لحالة الأحرف). تحقق من الأسماء الدقيقة بـ <code>df.columns.tolist()</code> / Column name mismatch — names are case-sensitive. Check with <code>df.columns.tolist()</code></div>
 </div>
 
 </body></html>
