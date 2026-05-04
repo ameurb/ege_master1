@@ -53,10 +53,10 @@ td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
   </ul>
   <div class="ar">
     <ul class="obj-list" style="padding-right:20px">
-      <li style="padding-right:20px">كتابة وتشغيل كود بايثون في Google Colab أو Jupyter</li>
+      <li style="padding-right:20px">كتابة وتنفيذ شيفرة بايثون في بيئة Google Colab أو Jupyter</li>
       <li style="padding-right:20px">استخدام المتغيرات مع أنواع البيانات الصحيحة (int, float, str, bool)</li>
-      <li style="padding-right:20px">تطبيق العمليات الحسابية والصيغ الاقتصادية</li>
-      <li style="padding-right:20px">تنسيق المخرجات باستخدام f-strings</li>
+      <li style="padding-right:20px">تطبيق المعاملات الحسابية والصيغ الاقتصادية</li>
+      <li style="padding-right:20px">تنسيق المخرجات باستخدام السلاسل النصية المنسّقة (f-strings)</li>
     </ul>
   </div>
 </div>
@@ -67,7 +67,7 @@ td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
 
   <h2>1. Variables / المتغيرات</h2>
   <p>A variable is a named container that stores a value. Variable names must start with a letter or underscore, contain no spaces, and cannot be a reserved keyword.</p>
-  <div class="ar">المتغير هو حاوية مُسمَّاة تخزن قيمة. يجب أن يبدأ اسم المتغير بحرف أو شرطة سفلية، لا يحتوي مسافات، ولا يكون كلمة محجوزة.</div>
+  <div class="ar">المتغير هو خانة تخزين مُسمَّاة تحمل قيمة في الذاكرة. يجب أن يبدأ اسم المتغير بحرف أو شرطة سفلية، لا يحتوي مسافات، ولا يكون كلمة محجوزة في بناء الجملة البرمجية.</div>
   <pre>gdp_2024 = 25100        # int  — whole number / عدد صحيح
 inflation_rate = 2.49   # float — decimal / عدد عشري
 country = "Algeria"     # str  — text / نص
@@ -82,7 +82,7 @@ is_growing = True       # bool — True/False / قيمة منطقية</pre>
     <tr><td><code>bool</code></td><td><code>True</code></td><td>Conditions, flags / شروط، علامات</td></tr>
   </table>
 
-  <h2>3. Arithmetic Operators / العمليات الحسابية</h2>
+  <h2>3. Arithmetic Operators / المعاملات الحسابية</h2>
   <table>
     <tr><th>Operator</th><th>Symbol</th><th>Example</th><th>Result</th></tr>
     <tr><td>Addition / الجمع</td><td><code>+</code></td><td><code>100 + 50</code></td><td>150</td></tr>
@@ -115,7 +115,7 @@ print(f"Inflation: {inflation:.2f}%")  # → Inflation: 2.49%</pre>
 amount = principal * (1 + rate) ** years
 print(f"Final: {amount:,.2f} DZD")    # → Final: 127,628.16 DZD</pre>
 
-  <h2>5. F-Strings / تنسيق النصوص</h2>
+  <h2>5. F-Strings / السلاسل النصية المنسّقة</h2>
   <pre>name = "Algeria"
 gdp = 25100.5
 pop = 46000000

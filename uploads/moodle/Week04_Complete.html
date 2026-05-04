@@ -37,20 +37,20 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
     <li>Build a 2×2 multi-panel dashboard</li>
     <li>Save figures as PNG and interpret charts economically</li>
   </ul>
-  <div class="ar">إنشاء مخططات خطية وعمودية وتشتتية وهستوغرام مع matplotlib — إضافة العناوين والتسميات والألوان — بناء لوحة 2×2 — حفظ الأشكال كـ PNG وتفسيرها اقتصادياً</div>
+  <div class="ar">إنشاء المخطط الخطي والمخطط العمودي ومخطط الانتشار والمدرّج التكراري باستخدام مكتبة matplotlib — إضافة العناوين وتسميات المحاور والمفتاح البياني وأنماط الألوان — بناء لوحة مؤشرات 2×2 متعددة الأشكال — تصدير الأشكال بصيغة PNG وتفسيرها اقتصادياً</div>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 4 — matplotlib &amp; Chart Types</div>
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 4 — مكتبة matplotlib وأنواع المخططات البيانية</div>
 
-  <h2>1. Setup / الإعداد</h2>
+  <h2>1. Setup / الإعداد الأوّلي</h2>
   <pre>import matplotlib.pyplot as plt
 import pandas as pd
 
 plt.style.use('seaborn-v0_8-whitegrid')  # clean style
 df = pd.read_csv('algeria_economic_combined.csv').sort_values('Year')</pre>
 
-  <h2>2. Chart Types / أنواع المخططات</h2>
+  <h2>2. Chart Types / أنواع المخططات البيانية</h2>
   <div class="chart-grid">
     <div class="chart-card"><div class="type">Line Chart / مخطط خطي</div><p>Time series — trends over years / السلاسل الزمنية</p>
       <code>ax.plot(df['Year'], df['GDP_Growth'], color='blue', linewidth=2)</code>
@@ -87,7 +87,7 @@ plt.tight_layout()
 plt.savefig('gdp_growth.png', dpi=150, bbox_inches='tight')
 plt.show()</pre>
 
-  <h2>4. 2×2 Dashboard / لوحة 2×2</h2>
+  <h2>4. 2×2 Dashboard / لوحة المؤشرات 2×2</h2>
   <pre>fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 fig.suptitle('Economic Dashboard / لوحة البيانات', fontsize=14, fontweight='bold')
 
@@ -130,7 +130,7 @@ plt.show()</pre>
   <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP4 — Economic Dashboard (4 panels)</div>
   <div class="activity-box">
     <p><strong>EN:</strong> Build a 4-panel dashboard: line (GDP growth over time), horizontal bar (top 10 inflation years), scatter (GDP vs inflation), histogram (unemployment distribution). Each panel needs title, labels, interpretation paragraph. Export as PNG.</p>
-    <div class="ar">أنشئ لوحة من 4 مخططات: خطي (نمو الناتج عبر الزمن)، أعمدة أفقية (أعلى 10 سنوات تضخماً)، تشتت (الناتج مقابل التضخم)، هستوغرام (توزيع البطالة). كل مخطط يحتاج عنواناً وتسميات وفقرة تفسيرية. صدّر كـ PNG.</div>
+    <div class="ar">أنشئ لوحة مؤشرات من 4 أشكال بيانية: مخطط خطي (نمو الناتج المحلي عبر الزمن)، مخطط أعمدة أفقي (أعلى 10 سنوات تضخماً)، مخطط انتشار (الناتج مقابل التضخم)، مدرّج تكراري (توزيع معدل البطالة). يجب أن يتضمن كل مخطط عنواناً وتسميات للمحاور وفقرة تفسيرية اقتصادية. صدّر لوحة المؤشرات بصيغة PNG.</div>
     <div class="file">📓 TP4_Visualization_Starter.ipynb &nbsp;&nbsp; 📊 algeria_economic_combined.csv</div>
     <p style="margin-top:10px"><strong>Grade / التقييم:</strong> /20 — 4 charts × 4pts + 4pts interpretations</p>
   </div>

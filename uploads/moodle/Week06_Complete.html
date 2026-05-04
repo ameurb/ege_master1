@@ -45,21 +45,21 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
 
   <h2>1. The ML Pipeline / مسار التعلم الآلي</h2>
   <div class="pipeline">
-    <div class="step">Load &amp;<br>Clean Data</div>
+    <div class="step">Load &amp; Clean<br><small>تحميل البيانات وتنظيفها</small></div>
     <div class="arrow">→</div>
-    <div class="step">Select<br>Features</div>
+    <div class="step">Select Features<br><small>اختيار المتغيرات</small></div>
     <div class="arrow">→</div>
-    <div class="step">Train /Test<br>Split</div>
+    <div class="step">Train/Test Split<br><small>تقسيم مجموعتَي التدريب والاختبار</small></div>
     <div class="arrow">→</div>
-    <div class="step">Train<br>Model</div>
+    <div class="step">Train Model<br><small>تدريب النموذج</small></div>
     <div class="arrow">→</div>
-    <div class="step">Evaluate<br>Metrics</div>
+    <div class="step">Evaluate Metrics<br><small>حساب مقاييس التقييم</small></div>
     <div class="arrow">→</div>
-    <div class="step">Interpret<br>Results</div>
+    <div class="step">Interpret Results<br><small>تفسير النتائج</small></div>
   </div>
-  <div class="ar">مسار نموذجي: تحميل البيانات وتنظيفها ← اختيار المتغيرات ← تقسيم التدريب/الاختبار ← تدريب النموذج ← حساب المقاييس ← التفسير</div>
+  <div class="ar">مسار التعلم الآلي: تحميل البيانات وتنظيفها ← اختيار المتغيرات المفسِّرة ← تقسيم البيانات إلى مجموعة تدريب ومجموعة اختبار ← تدريب النموذج على مجموعة التدريب ← تقييم الأداء بمقاييس R² وMAE وRMSE على مجموعة الاختبار ← تفسير النتائج اقتصادياً</div>
 
-  <h2>2. Setup &amp; Feature Selection / الإعداد واختيار المتغيرات</h2>
+  <h2>2. Setup &amp; Feature Selection / الإعداد الأوّلي واختيار المتغيرات المفسِّرة</h2>
   <pre>import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -79,20 +79,20 @@ y = df[target]
 
 print(f"Dataset: {X.shape[0]} rows, {X.shape[1]} features")</pre>
 
-  <h2>3. Feature Scaling with StandardScaler / تحجيم المتغيرات</h2>
-  <div class="ar">قبل تدريب النموذج، يُفضَّل تحجيم المتغيرات حتى لا يهيمن متغير بوحدات كبيرة على النموذج. StandardScaler يحوّل كل عمود ليكون متوسطه 0 وانحرافه المعياري 1.</div>
+  <h2>3. Feature Scaling with StandardScaler / توحيد مقياس المتغيرات المفسِّرة</h2>
+  <div class="ar">قبل تدريب النموذج، يُوصى بتوحيد مقياس المتغيرات المفسِّرة (Feature Scaling) حتى لا يهيمن متغير ذو وحدات كبيرة على النموذج. يقوم StandardScaler بتحويل كل عمود ليكون وسطه الحسابي يساوي صفراً وانحرافه المعياري يساوي واحداً — وهو ما يُعرف بالتوحيد القياسي (Standardization).</div>
   <pre>from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)   # fit on training data only in practice</pre>
 
-  <h2>4. Train / Test Split / تقسيم البيانات</h2>
+  <h2>4. Train / Test Split / تقسيم البيانات إلى مجموعتَي التدريب والاختبار</h2>
   <pre># 80% train, 20% test — random_state for reproducibility
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=42
 )
 print(f"Train size: {len(X_train)}  |  Test size: {len(X_test)}")</pre>
-  <div class="ar">نقسّم البيانات: 80% للتدريب، 20% للاختبار. random_state=42 يضمن إعادة إنتاج نفس النتائج. مهم: نطبّق fit_transform على بيانات التدريب فقط، ثم transform فقط على بيانات الاختبار.</div>
+  <div class="ar">نقسّم مجموعة البيانات: 80% لمجموعة التدريب و20% لمجموعة الاختبار. المعامل random_state=42 يضمن قابلية استنساخ النتائج. ملاحظة أساسية: نطبّق fit_transform على مجموعة التدريب فقط، ثم transform فقط على مجموعة الاختبار — لمنع تسرب المعلومات (Data Leakage).</div>
 
   <h2>5. Linear Regression (Core) / الانحدار الخطي — الأساسي</h2>
   <pre>lr = LinearRegression()
@@ -109,8 +109,8 @@ print(f"  R²   = {r2_lr:.3f}")
 print(f"  MAE  = {mae_lr:.3f}")
 print(f"  RMSE = {rmse_lr:.3f}")</pre>
 
-  <h2>6. Random Forest (Advanced / Optional) / الغابة العشوائية — متقدم</h2>
-  <div class="ar">الغابة العشوائية نموذج متقدم — تعلّمه بعد إتقان الانحدار الخطي. يبني مئات الأشجار ثم يعدّل نتائجها، مما يجعله أقوى لكن أصعب في التفسير الاقتصادي.</div>
+  <h2>6. Random Forest (Advanced / Optional) / الغابة العشوائية — نموذج متقدم (اختياري)</h2>
+  <div class="ar">الغابة العشوائية نموذج تعلم آلي متقدم — يُنصح بتعلّمه بعد إتقان الانحدار الخطي. يعتمد على بناء مئات من أشجار القرار ثم تجميع تنبؤاتها، مما يجعله أكثر دقة لكن أصعب في التفسير الاقتصادي المباشر مقارنة بالانحدار الخطي.</div>
   <pre>rf = RandomForestRegressor(n_estimators=100, random_state=42)
 rf.fit(X_train, y_train)
 y_pred_rf = rf.predict(X_test)
@@ -136,7 +136,7 @@ importance.plot(kind='barh', title='Feature Importance / أهمية المتغي
     <tr><td><code>RMSE</code></td><td>√mean((y − ŷ)²)</td><td>Penalizes large errors / يعاقب الأخطاء الكبيرة</td></tr>
   </table>
 
-  <h2>8. Actual vs Predicted Plot / مخطط الفعلي مقابل المتوقع</h2>
+  <h2>8. Actual vs Predicted Plot / مخطط القيم الفعلية مقابل القيم المتنبَّأ بها</h2>
   <pre>fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 for ax, y_pred, name, color in zip(
@@ -156,7 +156,7 @@ for ax, y_pred, name, color in zip(
 plt.tight_layout()
 plt.savefig('actual_vs_predicted.png', dpi=150)
 plt.show()</pre>
-  <div class="ar">النقاط القريبة من الخط الأحمر تعني تنبؤات دقيقة. الانتشار الواسع يدل على ضعف النموذج.</div>
+  <div class="ar">النقاط القريبة من الخط الأحمر المنقط (خط التطابق التام) تعني أن القيم المتنبَّأ بها قريبة من القيم الفعلية — أي أن النموذج دقيق. الانتشار الواسع للنقاط حول الخط يدل على ضعف القدرة التنبؤية للنموذج.</div>
 </div>
 
 <div class="section">

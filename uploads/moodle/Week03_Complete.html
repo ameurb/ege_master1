@@ -34,13 +34,13 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
     <li>Select, filter, and aggregate data</li>
     <li>Compute descriptive statistics and correlations</li>
   </ul>
-  <div class="ar">تحميل ملفات CSV واستكشاف DataFrames — معالجة القيم المفقودة — اختيار البيانات وتصفيتها وتجميعها — حساب الإحصاء الوصفي والارتباطات</div>
+  <div class="ar">تحميل ملفات CSV واستكشاف إطارات البيانات (DataFrames) — معالجة القيم المفقودة — انتقاء الأعمدة وتصفية الصفوف والتجميع الإحصائي — حساب مقاييس الإحصاء الوصفي ومعاملات الارتباط</div>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 3 — Pandas Essentials</div>
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 3 — أساسيات مكتبة Pandas</div>
 
-  <h2>1. Import &amp; Load / الاستيراد والتحميل</h2>
+  <h2>1. Import &amp; Load / استدعاء المكتبة وتحميل البيانات</h2>
   <pre>import pandas as pd
 
 df = pd.read_csv('algeria_economic_combined.csv')
@@ -49,7 +49,7 @@ print(df.columns.tolist())
 df.head(5)               # first 5 rows
 df.info()                # dtypes + non-null counts</pre>
 
-  <h2>2. Explore / الاستكشاف</h2>
+  <h2>2. Explore / استكشاف إطار البيانات</h2>
   <table>
     <tr><th>Command</th><th>What it does / ما تفعله</th></tr>
     <tr><td><code>df.shape</code></td><td>Rows × Columns / الصفوف × الأعمدة</td></tr>
@@ -60,7 +60,7 @@ df.info()                # dtypes + non-null counts</pre>
     <tr><td><code>df.isnull().sum()</code></td><td>Count missing per column / القيم المفقودة</td></tr>
   </table>
 
-  <h2>3. Select &amp; Filter / الاختيار والتصفية</h2>
+  <h2>3. Select &amp; Filter / انتقاء الأعمدة وتصفية الصفوف</h2>
   <pre># Select column / اختيار عمود
 df['GDP_Growth_Percent']
 df[['Year', 'GDP_Growth_Percent', 'Inflation_Percent']]
@@ -70,7 +70,7 @@ df[df['GDP_Growth_Percent'] > 3]           # growth above 3%
 df[df['Year'] >= 2010]                      # since 2010
 df[(df['GDP_Growth_Percent'] > 2) &amp; (df['Inflation_Percent'] &lt; 5)]</pre>
 
-  <h2>4. Aggregation / التجميع</h2>
+  <h2>4. Aggregation / التجميع الإحصائي</h2>
   <pre>df['GDP_Growth_Percent'].mean()     # average
 df['Inflation_Percent'].max()       # maximum
 df['Unemployment_Rate'].median()    # median
@@ -92,8 +92,8 @@ df.ffill()                  # forward fill (pandas 2.x+)</pre>
 # Interpretation: 1=perfect positive, -1=perfect negative, 0=no relation
 # التفسير: 1=ارتباط موجب تام، -1=ارتباط سالب تام، 0=لا ارتباط</pre>
 
-  <h2>7. NumPy Essentials / أساسيات NumPy</h2>
-  <div class="ar">NumPy هي مكتبة الحساب الرقمي في Python. تستخدمها pandas وmatplotlib وscikit-learn داخلياً — معرفتها ضرورية لأي تحليل بيانات.</div>
+  <h2>7. NumPy Essentials / أساسيات مكتبة NumPy</h2>
+  <div class="ar">NumPy هي مكتبة الحوسبة العددية في بايثون. تعتمد عليها مكتبات pandas وmatplotlib وscikit-learn داخلياً — إتقانها ضروري لأي تحليل كمي للبيانات الاقتصادية.</div>
   <pre>import numpy as np
 
 # Arrays / المصفوفات

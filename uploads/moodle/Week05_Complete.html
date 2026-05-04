@@ -36,13 +36,13 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
     <li>Run OLS regression with statsmodels and interpret R², coefficients, p-values</li>
     <li>Test for heteroscedasticity and write an econometric interpretation</li>
   </ul>
-  <div class="ar">حساب وتفسير الإحصاء الوصفي — بناء خريطة الحرارة للارتباط — تشغيل انحدار OLS وتفسير R² والمعاملات وقيم p — اختبار تجانس التباين وكتابة تفسير اقتصادي قياسي</div>
+  <div class="ar">حساب مقاييس الإحصاء الوصفي وتفسيرها (الوسط الحسابي، الانحراف المعياري، الالتواء، التفرطح) — بناء مصفوفة الارتباط الحرارية — تطبيق الانحدار الخطي بطريقة المربعات الصغرى العادية (OLS) وتفسير معامل التحديد R² والمعاملات ومستويات الدلالة الإحصائية — كتابة تفسير اقتصادي قياسي للنتائج</div>
 </div>
 
 <div class="section">
-  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 5 — Statistical Analysis &amp; OLS Regression</div>
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 5 — التحليل الإحصائي والانحدار بطريقة المربعات الصغرى (OLS)</div>
 
-  <h2>1. Descriptive Statistics Beyond describe() / الإحصاء الوصفي المتقدم</h2>
+  <h2>1. Descriptive Statistics Beyond describe() / مقاييس الإحصاء الوصفي المتقدمة</h2>
   <pre>import pandas as pd
 import numpy as np
 from scipy import stats
@@ -68,7 +68,7 @@ print(df[['GDP_Growth_Percent','Inflation_Percent']].kurtosis())</pre>
     <tr><td>kurtosis ≈ 3</td><td>Normal distribution / توزيع طبيعي</td></tr>
   </table>
 
-  <h2>2. Correlation Matrix &amp; Heatmap / مصفوفة الارتباط وخريطة الحرارة</h2>
+  <h2>2. Correlation Matrix &amp; Heatmap / مصفوفة الارتباط والخريطة الحرارية</h2>
   <pre>import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -86,9 +86,9 @@ plt.show()</pre>
 
   <div class="ar">قيمة الارتباط بين -1 و+1. القيم القريبة من +1 تعني علاقة موجبة قوية، القريبة من -1 تعني علاقة سالبة قوية، القريبة من 0 تعني ضعف العلاقة.</div>
 
-  <h2>3. OLS Regression with statsmodels / الانحدار الخطي البسيط</h2>
+  <h2>3. OLS Regression with statsmodels / الانحدار الخطي بطريقة المربعات الصغرى العادية</h2>
   <div class="formula">Unemployment = β₀ + β₁·GDP_Growth + β₂·Inflation + ε</div>
-  <div class="ar">نموذج الانحدار: نستخدم معدل البطالة كمتغير تابع ونمو الناتج والتضخم كمتغيرَين مستقلَّين — وهذا يتوافق مع قانون أوكن (Okun's Law).</div>
+  <div class="ar">نموذج الانحدار الخطي المتعدد: نستخدم معدل البطالة كمتغير تابع (Y)، ومعدل نمو الناتج المحلي ومعدل التضخم كمتغيرَين مستقلَّين (X) — يتوافق هذا النموذج مع قانون أوكن (Okun's Law) الذي يُفيد بوجود علاقة عكسية بين نمو الناتج والبطالة. β₀ هو الثابت وε هو حد الخطأ العشوائي.</div>
   <pre>import statsmodels.api as sm
 
 # Dependent variable (Y) / المتغير التابع
@@ -105,7 +105,7 @@ X = sm.add_constant(X)
 model = sm.OLS(Y, X).fit()
 print(model.summary())</pre>
 
-  <h2>4. Reading the OLS Summary / قراءة نتائج الانحدار</h2>
+  <h2>4. Reading the OLS Summary / قراءة وتفسير مخرجات الانحدار</h2>
   <table>
     <tr><th>Output</th><th>Meaning / المعنى</th></tr>
     <tr><td><code>R-squared</code></td><td>% of Y variance explained by the model / نسبة تباين Y التي يفسرها النموذج</td></tr>
@@ -115,7 +115,7 @@ print(model.summary())</pre>
     <tr><td><code>AIC / BIC</code></td><td>Model fit criteria (lower = better) / معايير جودة النموذج (أقل = أفضل)</td></tr>
   </table>
 
-  <h2>5. Residuals &amp; Diagnostics / التحقق من افتراضات النموذج</h2>
+  <h2>5. Residuals &amp; Diagnostics / تشخيص البواقي والتحقق من افتراضات النموذج</h2>
   <pre>residuals = model.resid
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))

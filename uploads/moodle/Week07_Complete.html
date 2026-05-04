@@ -39,7 +39,7 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
 <div class="section">
   <div class="section-title"><span class="tag tag-project">Project / المشروع</span> Description &amp; Objectives</div>
   <p><strong>EN:</strong> Working in pairs (binomes), students will perform a complete economic data analysis using Python. The project integrates all course skills: data loading, cleaning, descriptive statistics, visualization, OLS regression, and (optionally) a machine learning model.</p>
-  <div class="ar">يعمل الطلاب في ثنائيات لإجراء تحليل اقتصادي متكامل باستخدام Python. يدمج المشروع جميع مهارات المقياس: تحميل البيانات، التنظيف، الإحصاء الوصفي، التمثيل البياني، انحدار OLS، ونموذج تعلم آلي اختياري.</div>
+  <div class="ar">يعمل الطلاب في مجموعات ثنائية لإجراء تحليل اقتصادي كمّي متكامل باستخدام بايثون. يوظِّف المشروع جميع الكفاءات المكتسبة خلال المقياس: تحميل البيانات وتنظيفها، الإحصاء الوصفي، التمثيل البياني، الانحدار بطريقة المربعات الصغرى العادية (OLS)، ونموذج التعلم الآلي بصفة اختيارية.</div>
 
   <table>
     <tr><th>Item</th><th>Detail / التفاصيل</th></tr>
@@ -55,19 +55,19 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
 <div class="section">
   <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Project Structure Guide</div>
 
-  <h2>Required Notebook Structure / هيكل الدفتر المطلوب</h2>
+  <h2>Required Notebook Structure / هيكل دفتر جوبيتر المطلوب</h2>
   <div class="structure-box">
     <ol>
-      <li><strong>Introduction</strong> — Team names, dataset description, research question (English + Arabic)</li>
-      <li><strong>Data Loading &amp; Cleaning</strong> — read_csv, shape, dtypes, missing values (isnull, fillna or dropna)</li>
-      <li><strong>Descriptive Statistics</strong> — describe(), mean/std/median for key variables, skewness</li>
-      <li><strong>Visualizations</strong> — minimum 4 charts: line, bar, scatter, histogram (or heatmap). Each chart has title, labels, and 2–3 sentence interpretation.</li>
-      <li><strong>Statistical Analysis</strong> — Correlation matrix + heatmap. OLS regression: state hypothesis, run model, interpret R², 2+ significant coefficients, residuals.</li>
-      <li><strong>Conclusion</strong> — 3 economic insights drawn from the analysis, limitations, possible extensions.</li>
-      <li><strong>[Bonus] ML Model</strong> — Train/test split, LinearRegression or RandomForest, report R²/MAE/RMSE, plot actual vs predicted.</li>
+      <li><strong>Introduction / المقدمة</strong> — أسماء أعضاء المجموعة، وصف مجموعة البيانات، إشكالية البحث (بالعربية والإنجليزية)</li>
+      <li><strong>Data Loading &amp; Cleaning / تحميل البيانات وتنظيفها</strong> — read_csv، shape، dtypes، معالجة القيم المفقودة (isnull، fillna أو dropna)</li>
+      <li><strong>Descriptive Statistics / الإحصاء الوصفي</strong> — describe()، الوسط الحسابي والانحراف المعياري والوسيط للمتغيرات الرئيسية، معامل الالتواء</li>
+      <li><strong>Visualizations / التمثيل البياني</strong> — 4 أشكال بيانية كحد أدنى: مخطط خطي، عمودي، انتشار، مدرّج تكراري (أو خريطة حرارية). يجب أن يتضمن كل شكل عنواناً وتسميات للمحاور وفقرة تفسيرية اقتصادية.</li>
+      <li><strong>Statistical Analysis / التحليل الإحصائي</strong> — مصفوفة الارتباط والخريطة الحرارية. انحدار OLS: صياغة الفرضية، تشغيل النموذج، تفسير معامل التحديد R² ومعاملَين ذوَي دلالة إحصائية، تشخيص البواقي.</li>
+      <li><strong>Conclusion / الخلاصة والاستنتاجات</strong> — 3 استنتاجات اقتصادية مستخلَصة من التحليل، حدود الدراسة، التوسعات الممكنة.</li>
+      <li><strong>[Bonus] ML Model / [اختياري] نموذج التعلم الآلي</strong> — تقسيم مجموعتَي التدريب والاختبار، انحدار خطي أو غابة عشوائية، الإبلاغ عن R²/MAE/RMSE، مخطط القيم الفعلية مقابل المتنبَّأ بها.</li>
     </ol>
   </div>
-  <div class="ar">هيكل الدفتر: 1-المقدمة وسؤال البحث  2-تحميل البيانات وتنظيفها  3-الإحصاء الوصفي  4-التمثيل البياني (4 مخططات)  5-التحليل الإحصائي (مصفوفة الارتباط + OLS)  6-الخلاصة والاستنتاجات  7-[اختياري] نموذج التعلم الآلي</div>
+  <div class="ar">هيكل دفتر جوبيتر: 1-المقدمة وإشكالية البحث  2-تحميل البيانات وتنظيفها  3-مقاييس الإحصاء الوصفي  4-الأشكال البيانية (4 كحد أدنى)  5-التحليل الإحصائي (مصفوفة الارتباط + انحدار OLS)  6-الخلاصة والاستنتاجات الاقتصادية  7-[اختياري] نموذج التعلم الآلي</div>
 
   <h2>Grading Summary / ملخص التقييم</h2>
   <div class="rubric-summary">
@@ -105,7 +105,7 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
       <li>Correlation matrix computed</li>
     </ul>
   </div>
-  <div class="ar">للحصة 7: أظهر تحميل البيانات وتنظيفها، سؤال البحث، مخطط أو اثنين، ومصفوفة الارتباط — يُسجّل كتقدّم أوّلي.</div>
+  <div class="ar">للحصة السابعة: أظهر تحميل البيانات وتنظيفها، صياغة إشكالية البحث، شكل بياني أو اثنين، ومصفوفة الارتباط — يُسجَّل كتقدّم أوّلي في المشروع.</div>
 
   <h2>Presentation Tips / نصائح العرض الشفهي</h2>
   <ul style="font-size:13px;line-height:1.8">
