@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 8 — Exam Prep &amp; Review</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#37474f);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #eceff1}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#37474f;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #37474f;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#b0bec5;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.week-card{border:1px solid #e0e0e0;border-radius:8px;padding:14px;margin:8px 0;background:#fafafa}
+.week-card h3{color:#1a1a2e;margin:0 0 6px;font-size:13px;font-weight:700}
+.week-card .keywords{font-size:12px;color:#555;margin-bottom:6px}
+.week-card .keywords code{background:#e8f4fd;color:#1565c0}
+.week-card .formula{background:#1a1a2e;color:#a8ff78;padding:8px 12px;border-radius:6px;font-family:monospace;font-size:11px;margin:6px 0;line-height:1.8;white-space:pre-wrap}
+.cheatsheet{background:#1a1a2e;color:#a8ff78;padding:16px;border-radius:8px;font-family:monospace;font-size:12px;line-height:2;margin:10px 0;white-space:pre-wrap}
+.cheatsheet .comment{color:#546e7a}
+.cheatsheet .section-label{color:#ffcc02;font-weight:700}
+.tip{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
+.warn{background:#fff3e0;border-left:3px solid #ff8f00;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:5px 0 5px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.two-col{grid-template-columns:1fr}}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 8 — Exam Preparation &amp; Course Review / مراجعة المقياس وتحضير الامتحان</h1>
+  <p>Révision complète + Aide-mémoire + Quiz de préparation &nbsp;|&nbsp; Master 1 — Python &amp; Data Analysis for Economics</p>
+</div>
+
+<!-- OBJECTIVES -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Consolidate all 7 weeks of Python/data analysis knowledge into a structured review</li>
+    <li>Master the complete cheat sheet: syntax, functions, and economic formulas</li>
+    <li>Identify common exam question patterns and know how to answer them</li>
+    <li>Prepare final project presentations with clear code explanations</li>
+  </ul>
+  <div class="ar">تعزيز المعرفة المكتسبة خلال 7 أسابيع في مراجعة منظَّمة — إتقان ورقة المراجع الشاملة: البنى الصياغية والدوال والصيغ الاقتصادية — تمييز الأنماط الشائعة لأسئلة الامتحان وإجادة الإجابة عليها — تحضير عروض المشاريع النهائية مع قدرة على شرح الشيفرة البرمجية والنتائج الاقتصادية</div>
+</div>
+
+<!-- WEEK-BY-WEEK REVIEW -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Review / المراجعة</span> Course Summary — Weeks 1–7 / ملخص المقياس</div>
+
+  <div class="week-card">
+    <h3>Week 1 — Python Fundamentals / أساسيات بايثون</h3>
+    <div class="keywords">Key: <code>int</code> <code>float</code> <code>str</code> <code>bool</code> <code>f-string</code> <code>**</code> <code>//</code> <code>%</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">أنواع البيانات الأساسية، المعاملات الحسابية، السلاسل النصية المنسّقة (f-strings)، بناء الجملة البرمجية في بايثون</p>
+    <div class="formula">gdp_growth = ((gdp_new - gdp_old) / gdp_old) * 100
+inflation  = ((cpi_new - cpi_old) / cpi_old) * 100
+compound   = principal * (1 + rate) ** years
+print(f"Value: {val:,.2f}")</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 2 — Data Structures &amp; Functions / هياكل البيانات والدوال</h3>
+    <div class="keywords">Key: <code>list</code> <code>dict</code> <code>for</code> <code>while</code> <code>if/elif/else</code> <code>def</code> <code>lambda</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">تخزين السلاسل الاقتصادية في القوائم، التكرار على قواميس الدول، البنى الشرطية لتصنيف معدلات النمو، تعريف الدوال القابلة لإعادة الاستخدام</p>
+    <div class="formula">lst = [2.4, 3.1]; lst.append(4.0); sum(lst); sorted(lst)
+d = {"Algeria": 2.4}; d["Morocco"] = 3.1
+for k, v in d.items(): print(k, v)
+def classify(r): return "Strong" if r > 5 else "Moderate" if r > 2 else "Slow"</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 3 — Pandas &amp; Data Exploration / مكتبة Pandas واستكشاف البيانات</h3>
+    <div class="keywords">Key: <code>read_csv</code> <code>head()</code> <code>describe()</code> <code>isnull()</code> <code>fillna</code> <code>groupby</code> <code>corr()</code> <code>loc/iloc</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">تحميل مجموعة البيانات الجزائرية، تصفية الصفوف وانتقاء الأعمدة، التجميع الإحصائي، معالجة القيم المفقودة، حساب معاملات الارتباط</p>
+    <div class="formula">df = pd.read_csv('data.csv')
+df[df['GDP_Growth'] > 3]              # تصفية الصفوف
+df.groupby('Country')['GDP'].mean()   # التجميع الإحصائي
+df['col'].fillna(df['col'].mean())    # معالجة القيم المفقودة</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 4 — Data Visualization / التمثيل البياني للبيانات</h3>
+    <div class="keywords">Key: <code>plt.subplots</code> <code>ax.plot</code> <code>ax.bar</code> <code>ax.scatter</code> <code>ax.hist</code> <code>set_title</code> <code>savefig</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">المخطط الخطي (الاتجاهات الزمنية)، العمودي (المقارنات)، مخطط الانتشار (العلاقات)، المدرّج التكراري (التوزيعات)؛ لوحة المؤشرات 2×2؛ التصدير بصيغة PNG</p>
+    <div class="formula">fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+ax.plot(x, y, color='blue', linewidth=2, label='GDP')
+ax.set_title('..'); ax.set_xlabel('..'); ax.legend()
+plt.tight_layout(); plt.savefig('chart.png', dpi=150)</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 5 — Statistics &amp; Econometrics / الإحصاء والاقتصاد القياسي</h3>
+    <div class="keywords">Key: <code>skew()</code> <code>kurtosis()</code> <code>sns.heatmap</code> <code>sm.OLS</code> <code>add_constant</code> <code>model.summary()</code> <code>R²</code> <code>p-value</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">مقاييس الإحصاء الوصفي (الالتواء والتفرطح)، مصفوفة الارتباط الحرارية، الانحدار بطريقة المربعات الصغرى العادية (OLS)، معامل التحديد R²، مستوى الدلالة الإحصائية p، تشخيص البواقي</p>
+    <div class="formula">X = sm.add_constant(df[['Inflation', 'Unemployment']])
+model = sm.OLS(df['GDP_Growth'], X).fit()
+print(model.summary())   # R², coef, p-values, F-stat</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 6 — Machine Learning / التعلم الآلي التنبؤي</h3>
+    <div class="keywords">Key: <code>train_test_split</code> <code>LinearRegression</code> <code>RandomForestRegressor</code> <code>r2_score</code> <code>MAE</code> <code>RMSE</code> <code>feature_importances_</code></div>
+    <p style="font-size:12px;margin:4px 0 4px">مسار التعلم الآلي، تقسيم مجموعتَي التدريب والاختبار (80/20)، تدريب النموذج، تقييم الأداء بمقاييس R²/MAE/RMSE، أهمية المتغيرات المفسِّرة (Random Forest)</p>
+    <div class="formula">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model.fit(X_train, y_train); y_pred = model.predict(X_test)
+r2_score(y_test, y_pred); np.sqrt(mean_squared_error(y_test, y_pred))  # RMSE</div>
+  </div>
+
+  <div class="week-card">
+    <h3>Week 7 — Final Project / المشروع النهائي</h3>
+    <div class="keywords">Key: إشكالية البحث، تنظيف البيانات، 4+ أشكال بيانية، انحدار OLS، نموذج تعلم آلي، الاستنتاجات الاقتصادية، العرض الشفهي</div>
+    <p style="font-size:12px;margin:4px 0 4px">توظيف جميع الكفاءات المكتسبة من الأسبوع 1 إلى 6 — مجموعات ثنائية — تسليم: دفتر جوبيتر (.ipynb) + تقرير PDF — عرض شفهي 10 دقائق — 40 نقطة → /20</p>
+  </div>
+</div>
+
+<!-- CHEAT SHEET -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Cheat Sheet / ورقة المراجع</span> Complete Python Reference / المرجع الشامل لبايثون</div>
+
+  <div class="cheatsheet">
+<span class="section-label"># ══ WEEK 1 — FUNDAMENTALS / الأساسيات ══</span>
+gdp_growth = ((gdp_new - gdp_old) / gdp_old) * 100   <span class="comment"># معدل نمو الناتج المحلي</span>
+inflation  = ((cpi_new - cpi_old) / cpi_old) * 100   <span class="comment"># معدل التضخم</span>
+compound   = principal * (1 + rate) ** years           <span class="comment"># الفائدة المركبة</span>
+real_rate  = nominal_rate - inflation_rate             <span class="comment"># سعر الفائدة الحقيقي</span>
+print(f"GDP: {value:,.2f}%   Inf: {inf:.1f}%")        <span class="comment"># السلاسل النصية المنسّقة</span>
+
+<span class="section-label"># ══ WEEK 2 — DATA STRUCTURES / هياكل البيانات ══</span>
+lst = [2.4, 3.1, 1.8]; lst.append(4.0)
+sum(lst); max(lst); min(lst); len(lst); sorted(lst)
+d = {"Algeria": 25100, "Morocco": 13200}
+d["Egypt"] = 38000                                     <span class="comment"># إضافة زوج</span>
+for country, gdp in d.items(): print(country, gdp)
+def classify(r, s=5, m=2): return "Strong" if r>=s else "Moderate" if r>=m else "Slow"
+f = lambda x, y: x - y                                <span class="comment"># دالة لامدا</span>
+
+<span class="section-label"># ══ WEEK 3 — PANDAS / إطارات البيانات ══</span>
+import pandas as pd
+df = pd.read_csv('algeria_economic_combined.csv')
+df.head(); df.shape; df.dtypes; df.describe()
+df.isnull().sum()                                      <span class="comment"># القيم المفقودة</span>
+df[df['GDP_Growth_Percent'] > 3]                       <span class="comment"># تصفية الصفوف</span>
+df[['Year', 'GDP_Growth_Percent']]                     <span class="comment"># انتقاء الأعمدة</span>
+df.groupby('Country')['GDP_Growth'].mean()             <span class="comment"># التجميع الإحصائي</span>
+df['col'].fillna(df['col'].mean())                     <span class="comment"># معالجة القيم المفقودة بالمتوسط</span>
+df.corr()                                              <span class="comment"># مصفوفة الارتباط</span>
+
+<span class="section-label"># ══ WEEK 4 — VISUALIZATION / التمثيل البياني ══</span>
+import matplotlib.pyplot as plt
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+axes[0,0].plot(x, y, color='steelblue', linewidth=2)  <span class="comment"># مخطط خطي</span>
+axes[0,1].bar(cats, vals, color='coral')               <span class="comment"># مخطط عمودي</span>
+axes[1,0].scatter(x, y, alpha=0.7)                    <span class="comment"># مخطط انتشار</span>
+axes[1,1].hist(data, bins=10, edgecolor='white')       <span class="comment"># مدرّج تكراري</span>
+ax.set_title('..'); ax.set_xlabel('..'); ax.legend()
+plt.tight_layout(); plt.savefig('dashboard.png', dpi=150, bbox_inches='tight')
+
+<span class="section-label"># ══ WEEK 5 — STATISTICS & OLS / الإحصاء والانحدار OLS ══</span>
+import statsmodels.api as sm; import seaborn as sns
+df[cols].skew(); df[cols].kurtosis()
+corr = df[cols].corr()
+sns.heatmap(corr, annot=True, cmap='RdYlGn', center=0, fmt='.2f')
+X = sm.add_constant(df[['Inflation_Percent', 'Unemployment_Rate']])
+Y = df['GDP_Growth_Percent']
+model = sm.OLS(Y, X).fit()
+print(model.summary())                                 <span class="comment"># R², معاملات الانحدار، p-values</span>
+
+<span class="section-label"># ══ WEEK 6 — MACHINE LEARNING / التعلم الآلي ══</span>
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+import numpy as np
+X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_train, y_train); y_pred = model.predict(X_test)
+print(f"R²={r2_score(y_test,y_pred):.3f}  MAE={mean_absolute_error(y_test,y_pred):.3f}  RMSE={np.sqrt(mean_squared_error(y_test,y_pred)):.3f}")
+  </div>
+</div>
+
+<!-- EXAM TIPS -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Exam Strategy / استراتيجية الامتحان</span></div>
+
+  <h2>Common Exam Question Patterns / أنماط أسئلة الامتحان الشائعة</h2>
+  <table>
+    <tr><th>Topic / الموضوع</th><th>What you must know / ما يجب معرفته</th></tr>
+    <tr><td>Variables &amp; Types</td><td>Identify <code>int/float/str/bool</code>; spot invalid variable names (start with digit/space); <code>type()</code> output</td></tr>
+    <tr><td>Operators</td><td><code>//</code> integer division, <code>%</code> modulo, <code>**</code> power; f-string format <code>:.2f</code>, <code>:,</code></td></tr>
+    <tr><td>Lists &amp; Dicts</td><td>Zero-based indexing <code>[0]</code>, <code>[-1]</code>; <code>append()</code>; <code>len()</code>; <code>.items()</code> for dict loops; nested access</td></tr>
+    <tr><td>Functions</td><td>Syntax: <code>def name(params): return val</code>; default params; lambda one-liners; scope</td></tr>
+    <tr><td>Pandas</td><td><code>read_csv</code>, <code>head</code>, <code>describe</code>, <code>isnull</code>, <code>fillna</code>, boolean filter, <code>groupby</code></td></tr>
+    <tr><td>Matplotlib</td><td>Correct chart type for each data type; <code>plt.subplots</code> syntax; <code>savefig</code> with <code>dpi</code></td></tr>
+    <tr><td>OLS Regression</td><td>Interpret R² (0–1 scale); read coefficient sign &amp; magnitude; state significance from p-value (&lt;0.05)</td></tr>
+    <tr><td>ML Metrics</td><td>R² range; MAE = mean absolute error; RMSE penalizes large errors more; lower MAE/RMSE = better</td></tr>
+  </table>
+
+  <h2>Chart Type Selection / اختيار نوع المخطط المناسب</h2>
+  <table>
+    <tr><th>Goal / الهدف</th><th>Chart Type / نوع المخطط</th><th>Function / الدالة</th></tr>
+    <tr><td>Show trend over time / الاتجاه الزمني</td><td>Line / مخطط خطي</td><td><code>ax.plot(x, y)</code></td></tr>
+    <tr><td>Compare categories / مقارنة الفئات</td><td>Bar / مخطط عمودي</td><td><code>ax.bar(cats, vals)</code></td></tr>
+    <tr><td>Show relationship between 2 variables / العلاقة بين متغيرَين</td><td>Scatter / مخطط الانتشار</td><td><code>ax.scatter(x, y)</code></td></tr>
+    <tr><td>Show distribution / التوزيع الإحصائي</td><td>Histogram / المدرّج التكراري</td><td><code>ax.hist(data, bins=10)</code></td></tr>
+    <tr><td>Correlation matrix / مصفوفة الارتباط</td><td>Heatmap / مصفوفة حرارية</td><td><code>sns.heatmap(corr, annot=True)</code></td></tr>
+  </table>
+
+  <div class="tip">
+    <strong>OLS Interpretation Guide / دليل تفسير نتائج OLS:</strong><br>
+    — <strong>R² = 0.78</strong> → the model explains 78% of the variance in GDP growth / النموذج يفسّر 78% من التباين في معدل النمو الاقتصادي<br>
+    — <strong>coef = -0.45</strong> for Inflation → a 1% increase in inflation is associated with a 0.45% decrease in GDP growth / ارتفاع معدل التضخم بنسبة 1% يرتبط بانخفاض معدل النمو بمقدار 0.45%<br>
+    — <strong>p &lt; 0.05</strong> → statistically significant at the 5% level / دالٌّ إحصائيًا عند مستوى معنوية 5%<br>
+    — <strong>p &gt; 0.05</strong> → not statistically significant / غير دالٍّ إحصائيًا
+  </div>
+
+  <div class="warn">
+    <strong>Common Mistakes / الأخطاء الشائعة في الامتحان:</strong><br>
+    — Confusing <code>df['col']</code> (Series) with <code>df[['col']]</code> (DataFrame)<br>
+    — Using <code>model.predict(X_test)</code> before <code>model.fit(X_train, y_train)</code><br>
+    — Forgetting <code>sm.add_constant(X)</code> in OLS — always required for the intercept<br>
+    — Column names are case-sensitive: <code>GDP_Growth</code> ≠ <code>gdp_growth</code><br>
+    — <code>random_state=42</code> must be set for reproducibility — not optional in exams
+  </div>
+</div>
+
+<!-- ACTIVITY -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> Session 8 — Final Project Presentations / عروض المشاريع النهائية</div>
+
+  <div class="tip">Each pair presents their project (10 minutes). The professor will ask at least 2 questions after each presentation. Be ready to explain: (1) your research question, (2) key charts, (3) OLS results, (4) economic conclusions.</div>
+  <div class="ar">تُقدِّم كل مجموعة ثنائية مشروعها في مدة لا تتجاوز 10 دقائق. سيطرح الأستاذ سؤالَين على الأقل بعد كل عرض. كونوا مستعدّين لشرح: (1) إشكالية البحث، (2) الأشكال البيانية الرئيسية، (3) نتائج الانحدار OLS، (4) الاستنتاجات الاقتصادية.</div>
+
+  <h2>Presentation Checklist / قائمة التحقق للعرض</h2>
+  <div class="two-col">
+    <div>
+      <strong>Notebook must contain / يجب أن يتضمن الدفتر:</strong>
+      <ul style="font-size:13px;padding-left:18px;margin:6px 0">
+        <li>Clear markdown title + research question / عنوان وإشكالية البحث</li>
+        <li>Data loading + descriptive statistics / تحميل البيانات + إحصاء وصفي</li>
+        <li>At least 4 charts saved as PNG / 4 أشكال بيانية على الأقل</li>
+        <li>OLS regression + interpretation / انحدار OLS + تفسير النتائج</li>
+        <li>ML model + metrics / نموذج تعلم آلي + مقاييس الأداء</li>
+        <li>Economic conclusions in text / الاستنتاجات الاقتصادية بالنص</li>
+      </ul>
+    </div>
+    <div>
+      <strong>Files to submit / الملفات المطلوبة:</strong>
+      <ul style="font-size:13px;padding-left:18px;margin:6px 0">
+        <li><code>name_project.ipynb</code> — all cells run</li>
+        <li><code>name_project.pdf</code> — 3–5 pages</li>
+        <li>PNG dashboard exported at <code>dpi=150</code></li>
+      </ul>
+      <strong>Grading / التقييم:</strong>
+      <ul style="font-size:13px;padding-left:18px;margin:6px 0">
+        <li>Total: 40 points → converted to /20</li>
+        <li>Notebook code: 20 pts / الشيفرة البرمجية</li>
+        <li>Visualizations: 10 pts / الأشكال البيانية</li>
+        <li>Presentation: 10 pts / العرض الشفهي</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 8 — 10 Review Questions / أسئلة المراجعة (Import: Quiz_W8_Review.xml)</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> What is the output of <code>type(3.14)</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما ناتج type(3.14)؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> What does <code>len([10, 20, 30, 40])</code> return? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما الناتج؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> Which method adds an element to a list? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي دالة تُضيف عنصراً إلى قائمة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> Which keyword defines a function in Python? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي كلمة مفتاحية تُعرِّف الدالة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> Which Pandas function loads a CSV file? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي دالة في Pandas تُحمِّل ملف CSV؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> What does <code>df.isnull().sum()</code> count? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تحسب هذه الشيفرة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> Which chart is best for showing a trend over time? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي مخطط يُظهر الاتجاه الزمني؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> R² = 0.85 — what does this mean? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يعني R² = 0.85؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q9.</span> <code>train_test_split(X, y, test_size=0.2)</code> — what percentage goes to training? <span class="ar" style="display:inline;border:none;background:none;padding:0">ما النسبة المخصصة للتدريب؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q10.</span> Which metric penalizes large errors more: MAE or RMSE? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي مقياس يُعاقب الأخطاء الكبيرة أكثر؟</span><br></div>
+</div>
+
+</body></html>

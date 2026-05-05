@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 4 — Visualization</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#d35400);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #fbe9e7}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#d35400;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #d35400;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#ffd700;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:4px 0 4px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.activity-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px}
+.activity-box .file{background:white;border:1px solid #c8e6c9;border-radius:6px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:13px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.chart-card{border:1px solid #eee;border-radius:6px;padding:12px;background:#fafafa}
+.chart-card .type{font-weight:700;color:#d35400;font-size:12px}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 4 — Data Visualization / التمثيل البياني للبيانات</h1>
+  <p>Course + Activity + Quiz &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Create line, bar, scatter, and histogram charts with matplotlib</li>
+    <li>Add titles, axis labels, legends, and color styling</li>
+    <li>Build a 2×2 multi-panel dashboard</li>
+    <li>Save figures as PNG and interpret charts economically</li>
+  </ul>
+  <div class="ar">إنشاء المخطط الخطي والمخطط العمودي ومخطط الانتشار والمدرّج التكراري باستخدام مكتبة matplotlib — إضافة العناوين وتسميات المحاور والمفتاح البياني وأنماط الألوان — بناء لوحة مؤشرات 2×2 متعددة الأشكال — تصدير الأشكال بصيغة PNG وتفسيرها اقتصادياً</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 4 — مكتبة matplotlib وأنواع المخططات البيانية</div>
+
+  <h2>1. Setup / الإعداد الأوّلي</h2>
+  <pre>import matplotlib.pyplot as plt
+import pandas as pd
+
+plt.style.use('seaborn-v0_8-whitegrid')  # clean style
+df = pd.read_csv('algeria_economic_combined.csv').sort_values('Year')</pre>
+
+  <h2>2. Chart Types / أنواع المخططات البيانية</h2>
+  <div class="chart-grid">
+    <div class="chart-card"><div class="type">Line Chart / مخطط خطي</div><p>Time series — trends over years / السلاسل الزمنية</p>
+      <code>ax.plot(df['Year'], df['GDP_Growth'], color='blue', linewidth=2)</code>
+    </div>
+    <div class="chart-card"><div class="type">Bar Chart / مخطط الأعمدة</div><p>Compare categories / مقارنة فئات</p>
+      <code>ax.bar(countries, values, color='steelblue')</code>
+    </div>
+    <div class="chart-card"><div class="type">Scatter Plot / مخطط التشتت</div><p>Relationship between 2 variables / العلاقة بين متغيرين</p>
+      <code>ax.scatter(df['GDP'], df['Inflation'], alpha=0.6)</code>
+    </div>
+    <div class="chart-card"><div class="type">Histogram / المدرّج التكراري</div><p>Distribution of values / توزيع القيم</p>
+      <code>ax.hist(df['Unemployment'], bins=10)</code>
+    </div>
+  </div>
+
+  <h2>3. Complete Line Chart Example</h2>
+  <pre>fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(df['Year'], df['GDP_Growth_Percent'],
+        color='#2E86AB', linewidth=2, marker='o', markersize=4,
+        label='GDP Growth')
+
+ax.axhline(0, color='red', linestyle='--', linewidth=0.8, alpha=0.7)
+ax.fill_between(df['Year'], df['GDP_Growth_Percent'], 0,
+                where=(df['GDP_Growth_Percent'] &lt; 0),
+                alpha=0.2, color='red', label='Recession')
+
+ax.set_title('Algeria GDP Growth Rate (%) 2000–2023', fontsize=14, fontweight='bold')
+ax.set_xlabel('Year / السنة')
+ax.set_ylabel('Growth Rate (%) / معدل النمو')
+ax.legend()
+
+plt.tight_layout()
+plt.savefig('gdp_growth.png', dpi=150, bbox_inches='tight')
+plt.show()</pre>
+
+  <h2>4. 2×2 Dashboard / لوحة المؤشرات 2×2</h2>
+  <pre>fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+fig.suptitle('Economic Dashboard / لوحة البيانات', fontsize=14, fontweight='bold')
+
+ax1, ax2, ax3, ax4 = axes[0,0], axes[0,1], axes[1,0], axes[1,1]
+
+# Panel 1: Line
+ax1.plot(df['Year'], df['GDP_Growth_Percent'])
+ax1.set_title('GDP Growth')
+
+# Panel 2: Bar (top 10 inflation)
+top10 = df.nlargest(10,'Inflation_Percent').sort_values('Inflation_Percent')
+ax2.barh(top10['Year'].astype(str), top10['Inflation_Percent'], color='salmon')
+ax2.set_title('Top 10 Inflation Years')
+
+# Panel 3: Scatter
+ax3.scatter(df['GDP_Growth_Percent'], df['Inflation_Percent'], alpha=0.6)
+ax3.set_title('Growth vs Inflation')
+
+# Panel 4: Histogram
+ax4.hist(df['Unemployment_Rate'].dropna(), bins=10, color='steelblue')
+ax4.set_title('Unemployment Distribution')
+
+plt.tight_layout()
+plt.savefig('dashboard.png', dpi=150)
+plt.show()</pre>
+
+  <h2>5. Key Formatting Commands / أوامر التنسيق</h2>
+  <table>
+    <tr><th>Command</th><th>Effect / الأثر</th></tr>
+    <tr><td><code>ax.set_title('...')</code></td><td>Chart title / عنوان المخطط</td></tr>
+    <tr><td><code>ax.set_xlabel('...')</code></td><td>X axis label / تسمية المحور x</td></tr>
+    <tr><td><code>ax.set_ylabel('...')</code></td><td>Y axis label / تسمية المحور y</td></tr>
+    <tr><td><code>ax.legend()</code></td><td>Show legend / عرض المفتاح</td></tr>
+    <tr><td><code>plt.savefig('name.png', dpi=150)</code></td><td>Save figure / حفظ الشكل</td></tr>
+    <tr><td><code>plt.tight_layout()</code></td><td>Prevent overlap / منع التداخل</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP4 — Economic Dashboard (4 panels)</div>
+  <div class="activity-box">
+    <p><strong>EN:</strong> Build a 4-panel dashboard: line (GDP growth over time), horizontal bar (top 10 inflation years), scatter (GDP vs inflation), histogram (unemployment distribution). Each panel needs title, labels, interpretation paragraph. Export as PNG.</p>
+    <div class="ar">أنشئ لوحة مؤشرات من 4 أشكال بيانية: مخطط خطي (نمو الناتج المحلي عبر الزمن)، مخطط أعمدة أفقي (أعلى 10 سنوات تضخماً)، مخطط انتشار (الناتج مقابل التضخم)، مدرّج تكراري (توزيع معدل البطالة). يجب أن يتضمن كل مخطط عنواناً وتسميات للمحاور وفقرة تفسيرية اقتصادية. صدّر لوحة المؤشرات بصيغة PNG.</div>
+    <div class="file">📓 TP4_Visualization_Starter.ipynb &nbsp;&nbsp; 📊 algeria_economic_combined.csv</div>
+    <p style="margin-top:10px"><strong>Grade / التقييم:</strong> /20 — 4 charts × 4pts + 4pts interpretations</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 4 — 8 Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> How to import matplotlib.pyplot? </div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> Function to display the plot? <span class="ar" style="display:inline;border:none;background:none;padding:0">الدالة لعرض المخطط؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> Best chart type for a trend over time? <span class="ar" style="display:inline;border:none;background:none;padding:0">أفضل نوع مخطط للاتجاه عبر الزمن؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> Best chart type for distribution of values? <span class="ar" style="display:inline;border:none;background:none;padding:0">أفضل نوع لتوزيع القيم؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> How to add a title to a chart? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تضيف عنواناً للمخطط؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> How to change line color to red? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تغيّر لون الخط إلى الأحمر؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> How to create a 2×2 grid of subplots? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تنشئ شبكة 2×2؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> How to save a figure as PNG with high resolution? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحفظ الشكل بدقة عالية؟</span><br></div>
+</div>
+</body></html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<title>Week 2 — Data Structures & Control Flow</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#16a085);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #e8f4fd}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#1565c0;margin:16px 0 8px}h3{font-size:13px;color:#333;margin:10px 0 5px}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #16a085;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#a8ff78;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:10px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:5px 0 5px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.activity-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px}
+.activity-box .file{background:white;border:1px solid #c8e6c9;border-radius:6px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:13px}
+</style>
+</head><body>
+
+<div class="week-banner">
+  <h1>Week 2 — Data Structures &amp; Functions / هياكل البيانات والدوال</h1>
+  <p>Course + Activity + Quiz &nbsp;|&nbsp; Master 1 — Python &amp; Data Analysis for Economics</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Use lists and dictionaries to store economic datasets</li>
+    <li>Apply for/while loops to process multiple data points</li>
+    <li>Write if/elif/else conditions to classify economic indicators</li>
+    <li>Use built-in functions: sum(), min(), max(), len(), sorted()</li>
+  </ul>
+  <div class="ar">استخدام القوائم والقواميس لتخزين البيانات الاقتصادية — تطبيق حلقات التكرار for/while — كتابة البنى الشرطية if/elif/else لتصنيف المؤشرات الاقتصادية — استخدام الدوال الجاهزة المُضمَّنة: sum(), min(), max(), len(), sorted() — تعريف الدوال الخاصة باستخدام def والدوال المجهولة lambda</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 2 — القوائم، القواميس، حلقات التكرار، البنى الشرطية، الدوال</div>
+
+  <h2>1. Lists / القوائم</h2>
+  <p>An ordered, mutable collection of values. Use for sequences of data (inflation series, GDP over years).</p>
+  <div class="ar">بنية بيانات مرتَّبة وقابلة للتعديل. تُستخدم لتخزين متتاليات البيانات الاقتصادية كسلاسل معدلات التضخم أو الناتج المحلي عبر السنوات.</div>
+  <pre>inflation = [4.8, 6.4, 5.6, 4.3, 2.0, 9.2]   # list of floats
+
+# Access / الوصول
+print(inflation[0])      # → 4.8  (first / أول)
+print(inflation[-1])     # → 9.2  (last / آخر)
+
+# Operations / العمليات
+inflation.append(5.5)    # add element / إضافة
+len(inflation)           # → 7
+sum(inflation)           # → 41.3
+max(inflation)           # → 9.2
+min(inflation)           # → 2.0
+sorted(inflation)        # → [2.0, 4.3, 4.8, 5.5, 5.6, 6.4, 9.2]</pre>
+
+  <h2>2. Dictionaries / القواميس</h2>
+  <p>Key-value pairs. Use for labeled data (country → GDP, indicator → value).</p>
+  <div class="ar">بنية بيانات تعتمد على أزواج مفتاح-قيمة. تُستخدم للبيانات المُصنَّفة كربط اسم الدولة بقيمة ناتجها المحلي أو المؤشر الاقتصادي بقيمته.</div>
+  <pre>gdp = {"Algeria": 25100, "Morocco": 13200, "Tunisia": 4800}
+
+# Access / الوصول
+gdp["Algeria"]        # → 25100
+gdp.keys()            # → dict_keys(['Algeria', 'Morocco', 'Tunisia'])
+gdp.values()          # → dict_values([25100, 13200, 4800])
+gdp.items()           # → pairs of (key, value)
+
+# Add / إضافة
+gdp["Egypt"] = 38000
+
+# Loop / حلقة
+for country, value in gdp.items():
+    print(f"{country}: {value:,} B DZD")</pre>
+
+  <h2>3. For Loops / حلقات التكرار</h2>
+  <div class="ar">تُستخدم حلقات التكرار لتطبيق عملية حسابية أو منطقية على كل عنصر في قائمة أو قاموس أو نطاق عددي.</div>
+  <pre># Loop over list
+years = [2020, 2021, 2022, 2023, 2024]
+for year in years:
+    print(f"Year: {year}")
+
+# Loop with range
+for i in range(5):       # 0, 1, 2, 3, 4
+    print(i)
+
+# Loop over dict
+for country, gdp_val in gdp.items():
+    print(f"{country}: {gdp_val}")</pre>
+
+  <h2>4. Conditions / البنى الشرطية</h2>
+  <div class="ar">تُستخدم البنى الشرطية لاتخاذ قرارات برمجية بناءً على قيمة متغير أو نتيجة تعبير منطقي.</div>
+  <pre>growth_rate = 2.27   # Algeria 2024
+
+if growth_rate > 5:
+    print("Strong growth / نمو قوي")
+elif growth_rate > 2:
+    print("Moderate growth / نمو معتدل")
+elif growth_rate > 0:
+    print("Slow growth / نمو بطيء")
+else:
+    print("Recession / ركود")</pre>
+
+  <h2>5. Combining: Loop + Condition / دمج حلقة التكرار مع البنية الشرطية</h2>
+  <pre>countries = {"Algeria": 2.4, "Morocco": 3.1, "Tunisia": 0.4, "Egypt": 4.2}
+
+for country, growth in countries.items():
+    if growth > 3:
+        status = "Strong / قوي"
+    elif growth > 1:
+        status = "Moderate / معتدل"
+    else:
+        status = "Weak / ضعيف"
+    print(f"{country:10} {growth:+.1f}%  →  {status}")</pre>
+
+  <h2>6. Functions / الدوال</h2>
+  <p>A function is a reusable block of code. Define it once with <code>def</code>, call it many times. Functions make your notebooks cleaner and avoid repeating code.</p>
+  <div class="ar">الدالة هي وحدة شيفرة برمجية قابلة لإعادة الاستخدام. تُعرَّف مرة واحدة بالكلمة المفتاحية <code>def</code>، ثم يمكن استدعاؤها عدة مرات. استخدام الدوال يجعل الشيفرة أكثر تنظيماً ويتجنب تكرار المنطق البرمجي.</div>
+  <pre># Basic function / دالة أساسية
+def gdp_growth(gdp_old, gdp_new):
+    """Calculate GDP growth rate / حساب معدل نمو الناتج"""
+    return ((gdp_new - gdp_old) / gdp_old) * 100
+
+# Call the function / استدعاء الدالة
+print(gdp_growth(24500, 25100))  # → 2.2449...
+print(gdp_growth(13200, 13600))  # → 3.0303...
+
+# Function with default parameter / دالة بمعامل افتراضي
+def classify_growth(rate, strong=5.0, moderate=2.0):
+    if rate >= strong:
+        return "Strong / قوي"
+    elif rate >= moderate:
+        return "Moderate / معتدل"
+    elif rate > 0:
+        return "Slow / بطيء"
+    else:
+        return "Recession / ركود"
+
+print(classify_growth(2.4))   # → Moderate
+print(classify_growth(6.1))   # → Strong
+print(classify_growth(-1.2))  # → Recession
+
+# Lambda (short one-line function) / دالة لامدا (سطر واحد)
+inflation_real = lambda nominal, inflation: nominal - inflation
+print(inflation_real(5.0, 2.4))  # → 2.6 (real rate)</pre>
+  <table>
+    <tr><th>Concept</th><th>Syntax</th><th>Use / الاستخدام</th></tr>
+    <tr><td>Define function / تعريف دالة</td><td><code>def name(params): return value</code></td><td>Reusable calculation / حساب قابل للتكرار</td></tr>
+    <tr><td>Default parameter / معامل افتراضي</td><td><code>def f(x, n=10):</code></td><td>Optional argument / وسيط اختياري</td></tr>
+    <tr><td>Lambda</td><td><code>f = lambda x: x * 2</code></td><td>Short one-line function / دالة قصيرة في سطر واحد</td></tr>
+    <tr><td>Docstring</td><td><code>"""Description"""</code></td><td>Document your function / توثيق الدالة</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP2 — North Africa Country Comparison</div>
+  <div class="activity-box">
+    <p><strong>EN:</strong> Build a GDP/growth dictionary for 5 North African countries. Use loops and conditions to find richest/poorest, classify growth, and analyze an inflation list.</p>
+    <div class="ar">أنشئ قاموساً للناتج المحلي لـ5 دول شمال أفريقية. استخدم الحلقات والشروط لإيجاد الأغنى والأفقر وتصنيف النمو وتحليل قائمة التضخم.</div>
+    <div class="file">📓 File: TP2_Country_Comparison_Starter.ipynb</div>
+    <p style="margin-top:10px"><strong>Submit / التسليم:</strong> EGE platform — <code>.ipynb</code> &nbsp;|&nbsp; <strong>Grade / التقييم:</strong> /20</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 2 — 10 Questions (Import: Quiz_W2_Lists_Dicts_Loops.xml)</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> <code>gdp = [1000,1100,1200,1350]</code> — access 3rd element? <span class="ar" style="display:inline;border:none;background:none;padding:0">الوصول للعنصر الثالث؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> <code>len([2, 4, 6, 8])</code> = ? </div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> Add 3.1 to <code>rates = [2.1, 2.5, 1.8]</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">إضافة 3.1 إلى القائمة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> <code>sum([100, 200, 300])</code> = ? </div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> True or False: <code>5 &gt; 3 and 2 &lt; 1</code> evaluates to True? <span class="ar" style="display:inline;border:none;background:none;padding:0">صح أم خطأ؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> Keyword to exit a loop early? <span class="ar" style="display:inline;border:none;background:none;padding:0">الكلمة المفتاحية للخروج المبكر؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> <code>for i in range(4):</code> runs how many times? </div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> Access "Algeria" from <code>{"country":"Algeria","gdp":25100}</code>? </div>
+
+  <div class="quiz-q"><span class="num">Q9.</span> Correct syntax to check gdp &gt; 1000 AND inflation &lt; 5? </div>
+
+  <div class="quiz-q"><span class="num">Q10.</span> <code>sorted([3.2, 1.1, 2.5])</code> = ? </div>
+</div>
+</body></html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 3 — Pandas</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#8e44ad);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #e8f4fd}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#1565c0;margin:16px 0 8px}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #8e44ad;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#a8ff78;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:4px 0 4px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.activity-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px}
+.activity-box .file{background:white;border:1px solid #c8e6c9;border-radius:6px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:13px}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 3 — Data Analysis with Pandas / تحليل البيانات مع Pandas</h1>
+  <p>Course + Activity + Quiz &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Load CSV files and explore DataFrames (shape, columns, head)</li>
+    <li>Handle missing values (isnull, dropna, fillna)</li>
+    <li>Select, filter, and aggregate data</li>
+    <li>Compute descriptive statistics and correlations</li>
+  </ul>
+  <div class="ar">تحميل ملفات CSV واستكشاف إطارات البيانات (DataFrames) — معالجة القيم المفقودة — انتقاء الأعمدة وتصفية الصفوف والتجميع الإحصائي — حساب مقاييس الإحصاء الوصفي ومعاملات الارتباط</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 3 — أساسيات مكتبة Pandas</div>
+
+  <h2>1. Import &amp; Load / استدعاء المكتبة وتحميل البيانات</h2>
+  <pre>import pandas as pd
+
+df = pd.read_csv('algeria_economic_combined.csv')
+print(df.shape)          # → (rows, columns)
+print(df.columns.tolist())
+df.head(5)               # first 5 rows
+df.info()                # dtypes + non-null counts</pre>
+
+  <h2>2. Explore / استكشاف إطار البيانات</h2>
+  <table>
+    <tr><th>Command</th><th>What it does / ما تفعله</th></tr>
+    <tr><td><code>df.shape</code></td><td>Rows × Columns / الصفوف × الأعمدة</td></tr>
+    <tr><td><code>df.head(n)</code></td><td>First n rows / أول n صفوف</td></tr>
+    <tr><td><code>df.tail(n)</code></td><td>Last n rows / آخر n صفوف</td></tr>
+    <tr><td><code>df.dtypes</code></td><td>Type of each column / نوع كل عمود</td></tr>
+    <tr><td><code>df.describe()</code></td><td>Count, mean, std, min, max / الإحصاء الوصفي</td></tr>
+    <tr><td><code>df.isnull().sum()</code></td><td>Count missing per column / القيم المفقودة</td></tr>
+  </table>
+
+  <h2>3. Select &amp; Filter / انتقاء الأعمدة وتصفية الصفوف</h2>
+  <pre># Select column / اختيار عمود
+df['GDP_Growth_Percent']
+df[['Year', 'GDP_Growth_Percent', 'Inflation_Percent']]
+
+# Filter rows / تصفية الصفوف
+df[df['GDP_Growth_Percent'] > 3]           # growth above 3%
+df[df['Year'] >= 2010]                      # since 2010
+df[(df['GDP_Growth_Percent'] > 2) &amp; (df['Inflation_Percent'] &lt; 5)]</pre>
+
+  <h2>4. Aggregation / التجميع الإحصائي</h2>
+  <pre>df['GDP_Growth_Percent'].mean()     # average
+df['Inflation_Percent'].max()       # maximum
+df['Unemployment_Rate'].median()    # median
+
+# Group by country
+df.groupby('Country')['GDP_Growth'].mean()
+
+# Year with max inflation
+df.loc[df['Inflation_Percent'].idxmax(), 'Year']</pre>
+
+  <h2>5. Missing Values / القيم المفقودة</h2>
+  <pre>df.isnull().sum()           # count missing
+df.dropna()                 # drop rows with any missing
+df.fillna(df.mean())        # fill with column mean
+df.ffill()                  # forward fill (pandas 2.x+)</pre>
+
+  <h2>6. Correlation / الارتباط</h2>
+  <pre>df[['GDP_Growth_Percent','Inflation_Percent','Unemployment_Rate']].corr()
+# Interpretation: 1=perfect positive, -1=perfect negative, 0=no relation
+# التفسير: 1=ارتباط موجب تام، -1=ارتباط سالب تام، 0=لا ارتباط</pre>
+
+  <h2>7. NumPy Essentials / أساسيات مكتبة NumPy</h2>
+  <div class="ar">NumPy هي مكتبة الحوسبة العددية في بايثون. تعتمد عليها مكتبات pandas وmatplotlib وscikit-learn داخلياً — إتقانها ضروري لأي تحليل كمي للبيانات الاقتصادية.</div>
+  <pre>import numpy as np
+
+# Arrays / المصفوفات
+gdp_values = np.array([24500, 25100, 26800, 27400])
+print(gdp_values.mean())    # → average
+print(gdp_values.std())     # → standard deviation / الانحراف المعياري
+print(gdp_values.min(), gdp_values.max())
+
+# Math operations (applied element-wise) / عمليات رياضية على كل عنصر
+rates = np.array([0.024, 0.032, 0.028, 0.041])
+growth_index = (1 + rates).cumprod()    # cumulative growth / النمو التراكمي
+print(growth_index.round(4))
+
+# Useful functions / دوال مفيدة
+np.sqrt(49)         # → 7.0   (square root / الجذر التربيعي)
+np.log(100)         # → 4.605 (natural log / اللوغاريتم الطبيعي)
+np.abs(-3.5)        # → 3.5   (absolute value / القيمة المطلقة)
+
+# From pandas column to numpy array
+arr = df['GDP_Growth_Percent'].to_numpy()
+print(np.percentile(arr, [25, 50, 75]))  # quartiles / الربيعيات</pre>
+  <table>
+    <tr><th>Function</th><th>Purpose / الغرض</th></tr>
+    <tr><td><code>np.array([...])</code></td><td>Create array / إنشاء مصفوفة</td></tr>
+    <tr><td><code>np.sqrt(x)</code></td><td>Square root / الجذر التربيعي</td></tr>
+    <tr><td><code>np.log(x)</code></td><td>Natural logarithm / اللوغاريتم الطبيعي</td></tr>
+    <tr><td><code>np.abs(x)</code></td><td>Absolute value / القيمة المطلقة</td></tr>
+    <tr><td><code>np.mean(arr)</code></td><td>Mean / المتوسط</td></tr>
+    <tr><td><code>np.std(arr)</code></td><td>Standard deviation / الانحراف المعياري</td></tr>
+    <tr><td><code>np.percentile(arr, q)</code></td><td>Percentile / الشريحة المئوية</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP3 — Algeria Economic Dataset Analysis</div>
+  <div class="activity-box">
+    <p><strong>EN:</strong> Load <code>algeria_economic_combined.csv</code>, handle missing values, compute average GDP growth, find the highest inflation year, calculate correlation between growth and unemployment, show describe() table, and write 3 economic insights.</p>
+    <div class="ar">حمّل ملف البيانات الجزائرية، عالج القيم المفقودة، احسب متوسط نمو الناتج المحلي، ابحث عن سنة أعلى تضخم، احسب الارتباط بين النمو والبطالة، اعرض جدول describe()، واكتب 3 استنتاجات اقتصادية.</div>
+    <div class="file">📓 TP3_Pandas_Analysis_Starter.ipynb &nbsp;&nbsp; 📊 algeria_economic_combined.csv</div>
+    <p style="margin-top:10px"><strong>Grade / التقييم:</strong> /20 — Ex1:4 · Ex2:3 · Ex3:6 · Ex4:3 · Ex5:4</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 3 — 8 Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> How do you import pandas with alias pd? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تستورد pandas باسم pd؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> Load a CSV file named <code>data.csv</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحمّل ملف CSV؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> Show first 5 rows of DataFrame <code>df</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">أول 5 صفوف؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> Select column <code>"GDP_Growth"</code> from <code>df</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">اختيار عمود؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> Filter rows where GDP_Growth &gt; 3? <span class="ar" style="display:inline;border:none;background:none;padding:0">تصفية الصفوف؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> What does <code>df.describe()</code> return? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا تُرجع؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> Count missing values per column? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحسب القيم المفقودة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> Correlation between <code>GDP_Growth</code> and <code>Unemployment</code>? <span class="ar" style="display:inline;border:none;background:none;padding:0">الارتباط بين عمودين؟</span><br></div>
+</div>
+</body></html>

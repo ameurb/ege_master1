@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Week 5 — Statistics &amp; Econometrics</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#1a1a2e;max-width:900px;margin:0 auto;padding:24px;background:#f8f9fa}
+.week-banner{background:linear-gradient(135deg,#1a1a2e,#00695c);color:white;border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.week-banner h1{font-size:22px;margin:0 0 4px}.week-banner p{margin:0;opacity:.85;font-size:13px}
+.section{background:white;border-radius:8px;border:1px solid #e0e0e0;padding:20px;margin-bottom:16px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #e0f2f1}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-course{background:#e8f4fd;color:#1565c0}.tag-activity{background:#e8f5e9;color:#2e7d32}.tag-quiz{background:#fce4ec;color:#c62828}.tag-objective{background:#fff3e0;color:#e65100}
+h2{font-size:15px;color:#00695c;margin:16px 0 8px}h3{font-size:13px;font-weight:700;margin:10px 0 4px;color:#555}
+p{margin:0 0 10px;line-height:1.6}
+.ar{direction:rtl;text-align:right;color:#444;font-size:13px;background:#fafafa;padding:8px 12px;border-right:3px solid #00695c;margin:4px 0 12px;border-radius:0 4px 4px 0}
+code{background:#f0f4ff;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:13px;color:#c0392b}
+pre{background:#1a1a2e;color:#80cbc4;padding:16px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.6;margin:10px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;color:white;padding:8px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #eee;font-size:13px}
+.quiz-q{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;margin:8px 0;border-radius:0 6px 6px 0}
+.quiz-q .num{font-weight:700;color:#c62828}.answer{color:#2e7d32;font-weight:600}
+.obj-list{list-style:none;padding:0}.obj-list li{padding:4px 0 4px 20px;position:relative;font-size:13px}.obj-list li::before{content:"✓";position:absolute;left:0;color:#2e7d32;font-weight:700}
+.activity-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px}
+.activity-box .file{background:white;border:1px solid #c8e6c9;border-radius:6px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:13px}
+.formula{background:#f0f4ff;border:1px solid #bbdefb;border-radius:6px;padding:10px 14px;font-family:monospace;font-size:13px;margin:8px 0}
+.output-box{background:#f9fbe7;border:1px solid #c5e1a5;border-radius:6px;padding:10px 14px;font-family:monospace;font-size:12px;margin:8px 0;color:#33691e}
+</style></head><body>
+
+<div class="week-banner">
+  <h1>Week 5 — Statistics &amp; Econometrics / الإحصاء والاقتصاد القياسي</h1>
+  <p>Course + Activity + Quiz &nbsp;|&nbsp; Master 1</p>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-objective">Objectives / الأهداف</span></div>
+  <ul class="obj-list">
+    <li>Compute and interpret descriptive statistics (mean, std, skewness, kurtosis)</li>
+    <li>Build and interpret a correlation heatmap with seaborn</li>
+    <li>Run OLS regression with statsmodels and interpret R², coefficients, p-values</li>
+    <li>Test for heteroscedasticity and write an econometric interpretation</li>
+  </ul>
+  <div class="ar">حساب مقاييس الإحصاء الوصفي وتفسيرها (الوسط الحسابي، الانحراف المعياري، الالتواء، التفرطح) — بناء مصفوفة الارتباط الحرارية — تطبيق الانحدار الخطي بطريقة المربعات الصغرى العادية (OLS) وتفسير معامل التحديد R² والمعاملات ومستويات الدلالة الإحصائية — كتابة تفسير اقتصادي قياسي للنتائج</div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-course">Course / الدرس</span> Week 5 — التحليل الإحصائي والانحدار بطريقة المربعات الصغرى (OLS)</div>
+
+  <h2>1. Descriptive Statistics Beyond describe() / مقاييس الإحصاء الوصفي المتقدمة</h2>
+  <pre>import pandas as pd
+import numpy as np
+from scipy import stats
+
+df = pd.read_csv('algeria_economic_combined.csv').sort_values('Year')
+
+# Basic describe
+df[['GDP_Growth_Percent','Inflation_Percent','Unemployment_Rate']].describe()
+
+# Additional measures
+print("Skewness / الالتواء:")
+print(df[['GDP_Growth_Percent','Inflation_Percent']].skew())
+
+print("\nKurtosis / التفرطح:")
+print(df[['GDP_Growth_Percent','Inflation_Percent']].kurtosis())</pre>
+
+  <table>
+    <tr><th>Statistic</th><th>Interpretation / التفسير</th></tr>
+    <tr><td>skewness &gt; 0</td><td>Right-skewed — tail to the right / التوزيع ملتوٍ يميناً</td></tr>
+    <tr><td>skewness &lt; 0</td><td>Left-skewed — tail to the left / التوزيع ملتوٍ يساراً</td></tr>
+    <tr><td>skewness ≈ 0</td><td>Symmetric / متماثل</td></tr>
+    <tr><td>kurtosis &gt; 3</td><td>Heavy tails / ذيول ثقيلة</td></tr>
+    <tr><td>kurtosis ≈ 3</td><td>Normal distribution / توزيع طبيعي</td></tr>
+  </table>
+
+  <h2>2. Correlation Matrix &amp; Heatmap / مصفوفة الارتباط والخريطة الحرارية</h2>
+  <pre>import seaborn as sns
+import matplotlib.pyplot as plt
+
+cols = ['GDP_Growth_Percent', 'Inflation_Percent', 'Unemployment_Rate', 'Oil_Revenue_Percent']
+corr = df[cols].corr()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.heatmap(corr, annot=True, fmt='.2f', cmap='RdYlGn',
+            center=0, vmin=-1, vmax=1, ax=ax,
+            linewidths=0.5)
+ax.set_title('Correlation Matrix — Algeria Economic Indicators', fontsize=13, fontweight='bold')
+plt.tight_layout()
+plt.savefig('correlation_heatmap.png', dpi=150)
+plt.show()</pre>
+
+  <div class="ar">قيمة الارتباط بين -1 و+1. القيم القريبة من +1 تعني علاقة موجبة قوية، القريبة من -1 تعني علاقة سالبة قوية، القريبة من 0 تعني ضعف العلاقة.</div>
+
+  <h2>3. OLS Regression with statsmodels / الانحدار الخطي بطريقة المربعات الصغرى العادية</h2>
+  <div class="formula">Unemployment = β₀ + β₁·GDP_Growth + β₂·Inflation + ε</div>
+  <div class="ar">نموذج الانحدار الخطي المتعدد: نستخدم معدل البطالة كمتغير تابع (Y)، ومعدل نمو الناتج المحلي ومعدل التضخم كمتغيرَين مستقلَّين (X) — يتوافق هذا النموذج مع قانون أوكن (Okun's Law) الذي يُفيد بوجود علاقة عكسية بين نمو الناتج والبطالة. β₀ هو الثابت وε هو حد الخطأ العشوائي.</div>
+  <pre>import statsmodels.api as sm
+
+# Dependent variable (Y) / المتغير التابع
+Y = df['Unemployment_Rate'].dropna()
+
+# Independent variables (X) / المتغيرات المستقلة
+X = df.loc[Y.index, ['GDP_Growth_Percent', 'Inflation_Percent']].dropna()
+Y = Y.loc[X.index]   # align after dropna / محاذاة بعد حذف القيم المفقودة
+
+# Add constant (intercept β₀) / إضافة الثابت
+X = sm.add_constant(X)
+
+# Fit model / تطبيق النموذج
+model = sm.OLS(Y, X).fit()
+print(model.summary())</pre>
+
+  <h2>4. Reading the OLS Summary / قراءة وتفسير مخرجات الانحدار</h2>
+  <table>
+    <tr><th>Output</th><th>Meaning / المعنى</th></tr>
+    <tr><td><code>R-squared</code></td><td>% of Y variance explained by the model / نسبة تباين Y التي يفسرها النموذج</td></tr>
+    <tr><td><code>coef</code></td><td>Effect of 1-unit increase in X on Y / أثر زيادة X بوحدة على Y</td></tr>
+    <tr><td><code>P&gt;|t|</code></td><td>p-value: &lt; 0.05 = statistically significant / قيمة p: أقل من 0.05 = ذو دلالة إحصائية</td></tr>
+    <tr><td><code>Prob (F-statistic)</code></td><td>Overall model significance / دلالة النموذج الكلية</td></tr>
+    <tr><td><code>AIC / BIC</code></td><td>Model fit criteria (lower = better) / معايير جودة النموذج (أقل = أفضل)</td></tr>
+  </table>
+
+  <h2>5. Residuals &amp; Diagnostics / تشخيص البواقي والتحقق من افتراضات النموذج</h2>
+  <pre>residuals = model.resid
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+# Residual plot / مخطط البواقي
+axes[0].scatter(model.fittedvalues, residuals, alpha=0.6)
+axes[0].axhline(0, color='red', linestyle='--')
+axes[0].set_title('Residuals vs Fitted / البواقي مقابل القيم المقدّرة')
+axes[0].set_xlabel('Fitted values')
+axes[0].set_ylabel('Residuals')
+
+# Q-Q plot
+sm.qqplot(residuals, line='s', ax=axes[1])
+axes[1].set_title('Q-Q Plot — Normality of Residuals / اختبار الطبيعية')
+
+plt.tight_layout()
+plt.savefig('residual_diagnostics.png', dpi=150)
+plt.show()
+
+# Durbin-Watson: test for autocorrelation (value near 2 = no autocorrelation)
+from statsmodels.stats.stattools import durbin_watson
+print(f"Durbin-Watson: {durbin_watson(residuals):.3f}")</pre>
+
+  <h2>6. Interpretation Template / نموذج التفسير</h2>
+  <pre># After running model.summary(), write:
+# بعد تشغيل model.summary()، اكتب التفسير:
+print(f"R² = {model.rsquared:.3f} → the model explains {model.rsquared*100:.1f}% of unemployment variance.")
+print(f"GDP_Growth coefficient = {model.params['GDP_Growth_Percent']:.3f}")
+print(f"  → A 1% increase in GDP growth is associated with a {model.params['GDP_Growth_Percent']:.3f}% change in unemployment.")
+print(f"  → This {'confirms' if model.params['GDP_Growth_Percent'] &lt; 0 else 'contradicts'} Okun's Law (negative relation expected).")
+if model.pvalues['GDP_Growth_Percent'] &lt; 0.05:
+    print("  → Statistically significant at 5% level (p &lt; 0.05)")
+else:
+    print("  → Not statistically significant (p ≥ 0.05)")</pre>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-activity">Activity / النشاط</span> TP5 — Econometric Analysis of Algeria</div>
+  <div class="activity-box">
+    <p><strong>EN:</strong> Load <code>world_bank_economic_indicators.csv</code>. Compute descriptive stats + skewness. Build a correlation heatmap. Run OLS regression with unemployment rate as dependent variable (Okun's Law). Interpret R², 2 significant coefficients, and residual diagnostics. Write a 200-word economic conclusion.</p>
+    <div class="ar">حمّل ملف مؤشرات البنك الدولي. احسب مقاييس الإحصاء الوصفي ومعامل الالتواء. أنشئ مصفوفة الارتباط الحرارية. طبّق الانحدار بطريقة المربعات الصغرى العادية (OLS) متّخذاً معدل البطالة متغيراً تابعاً (وفق قانون أوكن). فسّر معامل التحديد R² ومعاملَين ذوَي دلالة إحصائية وتشخيص البواقي. اكتب خلاصة اقتصادية قياسية بـ200 كلمة.</div>
+    <div class="file">📓 TP5_Statistics_Starter.ipynb &nbsp;&nbsp; 📊 world_bank_economic_indicators.csv</div>
+    <p style="margin-top:10px"><strong>Grade / التقييم:</strong> /20 — Ex1:4 · Ex2:4 · Ex3:6 · Ex4:6</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title"><span class="tag tag-quiz">Quiz / الاختبار</span> Week 5 — 8 Questions</div>
+
+  <div class="quiz-q"><span class="num">Q1.</span> What does R² = 0.72 mean? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يعني R² = 0.72؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q2.</span> How to add a constant (intercept) in statsmodels? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تضيف الثابت في statsmodels؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q3.</span> A p-value of 0.03 for a coefficient means? <span class="ar" style="display:inline;border:none;background:none;padding:0">قيمة p = 0.03 تعني؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q4.</span> How to compute the correlation matrix? <span class="ar" style="display:inline;border:none;background:none;padding:0">كيف تحسب مصفوفة الارتباط؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q5.</span> What seaborn function creates a heatmap? <span class="ar" style="display:inline;border:none;background:none;padding:0">أي دالة seaborn ترسم خريطة الحرارة؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q6.</span> What does positive skewness indicate? <span class="ar" style="display:inline;border:none;background:none;padding:0">ماذا يعني الالتواء الموجب؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q7.</span> Command to fit OLS and print results? <span class="ar" style="display:inline;border:none;background:none;padding:0">أمر تطبيق OLS وطباعة النتائج؟</span><br></div>
+
+  <div class="quiz-q"><span class="num">Q8.</span> Durbin-Watson value near 2 indicates? <span class="ar" style="display:inline;border:none;background:none;padding:0">قيمة Durbin-Watson قريبة من 2 تعني؟</span><br></div>
+</div>
+</body></html>
