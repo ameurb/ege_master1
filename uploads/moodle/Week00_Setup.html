@@ -23,6 +23,7 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
 .badge-rec{background:#2e7d32;color:white;font-size:10px;padding:2px 8px;border-radius:10px}
 .error-box{background:#fff8f8;border-left:3px solid #e53935;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
 .fix-box{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;border-radius:0 6px 6px 0;margin:4px 0;font-size:13px}
+.tip{background:#e8f5e9;border-left:3px solid #2e7d32;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px}
 </style></head><body>
 
 <div class="week-banner">
@@ -30,78 +31,109 @@ table{width:100%;border-collapse:collapse;margin:10px 0}th{background:#1a1a2e;co
   <p>اقرأ قبل الأسبوع الأول &nbsp;|&nbsp; ماستر 1 — بايثون وتحليل البيانات للاقتصاد</p>
 </div>
 
+<!-- OVERVIEW -->
 <div class="section">
   <div class="section-title"><span class="tag tag-tip">Overview / نظرة عامة</span></div>
-  <p>This guide helps you set up your Python environment before Week 1. You have two options: Google Colab (recommended, no installation needed) or a local Jupyter installation via Anaconda.</p>
-  <div class="ar">يهدف هذا الدليل إلى مساعدتك على تهيئة بيئة العمل البرمجية قبل انطلاق الأسبوع الأول. لديك خياران: Google Colab (الخيار الموصى به، لا يستلزم تثبيتاً مسبقاً) أو تثبيت بيئة Jupyter محلياً عبر منصة Anaconda.</div>
+  <p>This guide helps you set up your Python environment before Week 1. You have two options: <strong>Google Colab</strong> (browser-based, no installation) or a <strong>local setup with VS Code + Python + Jupyter</strong>.</p>
+  <div class="ar">يهدف هذا الدليل إلى مساعدتك على تهيئة بيئة العمل البرمجية قبل انطلاق الأسبوع الأول. لديك خياران: <strong>Google Colab</strong> (يعمل عبر المتصفح دون تثبيت) أو <strong>بيئة محلية باستخدام VS Code + Python + Jupyter</strong>.</div>
 
   <table>
     <tr><th>Option</th><th>Pros / المزايا</th><th>Cons / العيوب</th></tr>
-    <tr><td><strong>Google Colab</strong></td><td>No install, free GPU, always up to date, runs in browser</td><td>Needs internet, files reset after session</td></tr>
-    <tr><td><strong>Local Jupyter</strong></td><td>Works offline, files persist, full control</td><td>Requires installation (~3 GB), version management</td></tr>
+    <tr><td><strong>Google Colab</strong></td><td>No install, free GPU, all libraries pre-installed, runs in browser</td><td>Needs internet, files reset after each session</td></tr>
+    <tr><td><strong>VS Code + Python + Jupyter</strong></td><td>Works offline, files persist, full IDE features, Git integration</td><td>Requires installation, manual library setup</td></tr>
   </table>
 </div>
 
+<!-- OPTION A: COLAB -->
 <div class="section">
-  <div class="section-title"><span class="tag tag-colab">Option A</span> Google Colab (Recommended / موصى به)</div>
+  <div class="section-title"><span class="tag tag-colab">Option A</span> Google Colab (No Installation / بدون تثبيت)</div>
 
   <div class="option-card recommended">
-    <h3>Google Colab <span class="badge-rec">Recommended</span></h3>
-    <p>Free, runs in your browser, no installation. All required libraries (pandas, matplotlib, seaborn, statsmodels, scikit-learn) are pre-installed.</p>
-    <div class="ar">مجاني ومتاح عبر المتصفح دون أي تثبيت مسبق. جميع المكتبات البرمجية المطلوبة (pandas, matplotlib, seaborn, statsmodels, scikit-learn) مُثبَّتة بشكل افتراضي في البيئة.</div>
+    <h3>Google Colab <span class="badge-rec">Recommended for beginners</span></h3>
+    <p>Free, runs in your browser, no installation needed. All required libraries (pandas, numpy, matplotlib, seaborn, statsmodels, scikit-learn) are pre-installed.</p>
+    <div class="ar">مجاني ومتاح عبر المتصفح دون أي تثبيت مسبق. جميع المكتبات البرمجية المطلوبة مُثبَّتة افتراضياً في البيئة.</div>
   </div>
 
   <div class="steps">
-    <div class="step">انتقل إلى <strong>colab.research.google.com</strong> وسجّل الدخول بحسابك على Google / Go to <strong>colab.research.google.com</strong> and sign in</div>
-    <div class="step">انقر <strong>File → Upload notebook</strong> واختر ملف دفتر جوبيتر <code>.ipynb</code> الذي نزّلته من المنصة / Click <strong>File → Upload notebook</strong> and select the <code>.ipynb</code> file</div>
-    <div class="step">ارفع ملف البيانات: انقر أيقونة المجلد في الشريط الجانبي → Upload → اختر <code>algeria_economic_combined.csv</code> / Upload the dataset via the folder icon in the sidebar</div>
-    <div class="step">نفِّذ الخلايا البرمجية بـ <strong>Ctrl+Enter</strong> (الخلية الحالية) أو <strong>Shift+Enter</strong> (تنفيذ والانتقال للتالية) / Run cells with <strong>Ctrl+Enter</strong> or <strong>Shift+Enter</strong></div>
-    <div class="step">احفظ عملك: <strong>File → Save a copy in Drive</strong> للاحتفاظ بالتعديلات في Google Drive / Save your work via <strong>File → Save a copy in Drive</strong></div>
+    <div class="step">انتقل إلى <strong>colab.research.google.com</strong> وسجّل الدخول بحسابك على Google / Go to <strong>colab.research.google.com</strong> and sign in with your Google account</div>
+    <div class="step">انقر <strong>File → Upload notebook</strong> واختر ملف دفتر جوبيتر <code>.ipynb</code> الذي نزّلته من المنصة / Click <strong>File → Upload notebook</strong> → select the <code>.ipynb</code> starter file</div>
+    <div class="step">ارفع ملف البيانات: انقر أيقونة المجلد في الشريط الجانبي الأيسر → <strong>Upload</strong> → اختر <code>algeria_economic_combined.csv</code> / Upload the dataset: click the folder icon in the left sidebar → <strong>Upload</strong></div>
+    <div class="step">نفِّذ الخلايا البرمجية بـ <strong>Shift+Enter</strong> (تنفيذ والانتقال للتالية) أو <strong>Ctrl+Enter</strong> (تنفيذ الخلية الحالية) / Run cells: <strong>Shift+Enter</strong> (run &amp; move) or <strong>Ctrl+Enter</strong> (run in place)</div>
+    <div class="step">احفظ عملك في Google Drive: <strong>File → Save a copy in Drive</strong> / Save to Google Drive: <strong>File → Save a copy in Drive</strong></div>
   </div>
 
-  <h2>Upload Dataset in Colab / رفع ملف البيانات في بيئة Colab</h2>
-  <pre># Method 1: Upload from local computer
+  <h2>Upload Dataset in Colab / رفع ملف البيانات</h2>
+  <pre># Upload from your computer / رفع الملف من جهازك
 from google.colab import files
-uploaded = files.upload()   # opens file picker
+uploaded = files.upload()          # opens file picker / يفتح نافذة اختيار الملف
 
-# Method 2: If file is already in the session folder
+# Then load it / ثم حمِّله
 import pandas as pd
 df = pd.read_csv('algeria_economic_combined.csv')
 df.head()</pre>
-  <div class="ar">ملاحظة مهمة: الملفات المرفوعة تُحذف تلقائياً عند انتهاء جلسة العمل. يجب إعادة رفعها في كل جلسة جديدة، أو حفظها في Google Drive لضمان الاستمرارية.</div>
+  <div class="ar">تنبيه مهم: الملفات المرفوعة تُحذف تلقائياً عند انتهاء جلسة العمل. أعد رفعها في كل جلسة جديدة، أو احفظها في Google Drive للاستمرارية.</div>
 </div>
 
+<!-- OPTION B: VS CODE -->
 <div class="section">
-  <div class="section-title"><span class="tag tag-local">Option B</span> Local Installation via Anaconda</div>
+  <div class="section-title"><span class="tag tag-local">Option B</span> VS Code + Python + Jupyter (Local / محلي)</div>
 
-  <div class="steps">
-    <div class="step">نزّل <strong>Anaconda</strong> من <code>anaconda.com/download</code> — اختر Python 3.11 ونظام التشغيل المناسب (Windows/Mac/Linux) / Download <strong>Anaconda</strong> from <code>anaconda.com/download</code></div>
-    <div class="step">ثبّت Anaconda مع الإعدادات الافتراضية (لا تغيّر أي خيار) / Install Anaconda keeping all default options</div>
-    <div class="step">افتح <strong>Anaconda Navigator</strong> ثم انقر <strong>Launch</strong> أسفل Jupyter Notebook / Open <strong>Anaconda Navigator</strong> → click <strong>Launch</strong> under Jupyter Notebook</div>
-    <div class="step">انتقل إلى مجلد مشروعك وافتح ملف دفتر جوبيتر <code>.ipynb</code> / Navigate to your project folder and open the <code>.ipynb</code> file</div>
-    <div class="step">ضع ملفات البيانات بصيغة CSV في <strong>نفس مجلد</strong> دفتر جوبيتر / Place the CSV dataset files in the <strong>same folder</strong> as the notebook</div>
+  <div class="option-card">
+    <h3>VS Code + Python + Jupyter</h3>
+    <p>A full local development environment. VS Code is a free code editor that supports <code>.ipynb</code> notebooks natively via the Jupyter extension.</p>
+    <div class="ar">بيئة تطوير محلية متكاملة. VS Code محرر شيفرة مجاني يدعم دفاتر جوبيتر <code>.ipynb</code> مباشرةً عبر الإضافة الرسمية لـ Jupyter.</div>
   </div>
 
-  <h2>Install Missing Libraries / تثبيت المكتبات البرمجية الناقصة</h2>
-  <p>Anaconda includes most libraries. If any are missing, open the Anaconda Prompt (Windows) or Terminal (Mac/Linux) and run: / تتضمن Anaconda معظم المكتبات. إذا كانت أي منها غير متاحة، افتح Anaconda Prompt (Windows) أو Terminal (Mac/Linux) ونفِّذ:</p>
-  <pre>pip install statsmodels scikit-learn seaborn</pre>
+  <h2>Step 1 — Install Python / تثبيت بايثون</h2>
+  <div class="steps">
+    <div class="step">انتقل إلى <strong>python.org/downloads</strong> ونزّل <strong>Python 3.11</strong> أو أحدث / Go to <strong>python.org/downloads</strong> and download <strong>Python 3.11</strong> or later</div>
+    <div class="step">شغِّل المثبِّت — تأكد من تفعيل خيار <strong>"Add Python to PATH"</strong> قبل النقر على Install / Run the installer — check <strong>"Add Python to PATH"</strong> before clicking Install</div>
+    <div class="step">تحقق من التثبيت: افتح Terminal (أو Command Prompt) ونفِّذ <code>python --version</code> / Verify: open Terminal and run <code>python --version</code></div>
+  </div>
+
+  <h2>Step 2 — Install VS Code / تثبيت VS Code</h2>
+  <div class="steps">
+    <div class="step">نزّل <strong>VS Code</strong> من <strong>code.visualstudio.com</strong> وثبِّته بالإعدادات الافتراضية / Download <strong>VS Code</strong> from <strong>code.visualstudio.com</strong> and install with default settings</div>
+    <div class="step">افتح VS Code → انقر أيقونة الإضافات في الشريط الجانبي (أو <strong>Ctrl+Shift+X</strong>) / Open VS Code → click the Extensions icon (<strong>Ctrl+Shift+X</strong>)</div>
+    <div class="step">ابحث عن <strong>Python</strong> (من Microsoft) وثبِّته / Search for <strong>Python</strong> (by Microsoft) and install it</div>
+    <div class="step">ابحث عن <strong>Jupyter</strong> (من Microsoft) وثبِّته — يُتيح فتح ملفات <code>.ipynb</code> مباشرةً / Search for <strong>Jupyter</strong> (by Microsoft) and install it — enables opening <code>.ipynb</code> files directly</div>
+  </div>
+
+  <h2>Step 3 — Install Required Libraries / تثبيت المكتبات</h2>
+  <p>Open Terminal in VS Code (<strong>Ctrl+`</strong>) and run: / افتح الطرفية في VS Code (<strong>Ctrl+`</strong>) ونفِّذ:</p>
+  <pre>pip install pandas numpy matplotlib seaborn statsmodels scikit-learn scipy</pre>
+  <div class="tip">If pip is not recognized, use: <code>python -m pip install pandas numpy matplotlib seaborn statsmodels scikit-learn scipy</code></div>
+
+  <h2>Step 4 — Open a Notebook / فتح دفتر جوبيتر</h2>
+  <div class="steps">
+    <div class="step">في VS Code: <strong>File → Open Folder</strong> وانتقل إلى مجلد مشروعك الذي يحتوي على ملفات <code>.ipynb</code> وملفات CSV / In VS Code: <strong>File → Open Folder</strong> → navigate to your project folder containing <code>.ipynb</code> and CSV files</div>
+    <div class="step">انقر نقرًا مزدوجاً على ملف <code>.ipynb</code> ليفتح في واجهة دفتر جوبيتر داخل VS Code / Double-click the <code>.ipynb</code> file — it opens as a Jupyter notebook inside VS Code</div>
+    <div class="step">اختر مُفسِّر بايثون: انقر <strong>Select Kernel</strong> (أعلى اليمين) → اختر بيئة Python المثبَّتة / Select kernel: click <strong>Select Kernel</strong> (top right) → choose your installed Python</div>
+    <div class="step">نفِّذ الخلايا بـ <strong>Shift+Enter</strong> أو بالنقر على زر التشغيل بجانب كل خلية / Run cells with <strong>Shift+Enter</strong> or click the play button next to each cell</div>
+  </div>
+
+  <div class="tip">
+    <strong>Important / مهم:</strong> Place your CSV files (<code>algeria_economic_combined.csv</code>, <code>world_bank_economic_indicators.csv</code>) in the <strong>same folder</strong> as your <code>.ipynb</code> notebook. Otherwise you will get a <code>FileNotFoundError</code>.<br>
+    <span dir="rtl">ضع ملفات البيانات بصيغة CSV في <strong>نفس مجلد</strong> دفتر جوبيتر، وإلا ستظهر رسالة الخطأ <code>FileNotFoundError</code>.</span>
+  </div>
 </div>
 
+<!-- LIBRARIES -->
 <div class="section">
-  <div class="section-title"><span class="tag tag-tip">Libraries</span> المكتبات البرمجية المطلوبة / Required Libraries</div>
+  <div class="section-title"><span class="tag tag-tip">Libraries / المكتبات البرمجية</span> Required Libraries / المكتبات المطلوبة</div>
   <table>
     <tr><th>المكتبة / Library</th><th>تُستخدم في / Used in</th><th>أمر الاستدعاء / Import</th></tr>
     <tr><td><code>pandas</code></td><td>أ3 — تحميل البيانات وتصفيتها / W3 — data loading, filtering</td><td><code>import pandas as pd</code></td></tr>
     <tr><td><code>numpy</code></td><td>أ3، أ5، أ6 — الحوسبة العددية / W3, W5, W6 — numerical computing</td><td><code>import numpy as np</code></td></tr>
     <tr><td><code>matplotlib</code></td><td>أ4 — جميع الأشكال البيانية / W4 — all charts</td><td><code>import matplotlib.pyplot as plt</code></td></tr>
     <tr><td><code>seaborn</code></td><td>أ5 — مصفوفة الارتباط الحرارية / W5 — correlation heatmap</td><td><code>import seaborn as sns</code></td></tr>
-    <tr><td><code>statsmodels</code></td><td>أ5 — انحدار OLS / W5 — OLS regression</td><td><code>import statsmodels.api as sm</code></td></tr>
+    <tr><td><code>statsmodels</code></td><td>أ5 — الانحدار OLS / W5 — OLS regression</td><td><code>import statsmodels.api as sm</code></td></tr>
     <tr><td><code>scikit-learn</code></td><td>أ6 — نماذج التعلم الآلي / W6 — ML models</td><td><code>from sklearn.linear_model import LinearRegression</code></td></tr>
     <tr><td><code>scipy</code></td><td>أ5 — الاختبارات الإحصائية / W5 — statistical tests</td><td><code>from scipy import stats</code></td></tr>
   </table>
 
   <h2>Quick Install Test / اختبار التثبيت السريع</h2>
-  <p>نفِّذ هذه الخلية في أي دفتر للتحقق من توفر جميع المكتبات البرمجية / Run this cell in any notebook to verify all libraries are available:</p>
+  <p>نفِّذ هذه الخلية في أي دفتر للتحقق من توفر جميع المكتبات / Run this cell in any notebook to verify all libraries:</p>
   <pre>import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -119,10 +151,11 @@ print("sklearn:     ", __import__('sklearn').__version__)
 print("\nAll libraries ready / كل المكتبات جاهزة")</pre>
 </div>
 
+<!-- DATASETS -->
 <div class="section">
   <div class="section-title"><span class="tag tag-tip">Datasets / مجموعات البيانات</span></div>
   <p>Two CSV files are used throughout the course. Download them from the platform and place them in the same folder as your notebooks.</p>
-  <div class="ar">يستخدم هذا المقياس مجموعتَي بيانات بصيغة CSV. نزّلهما من المنصة وضعهما في نفس مجلد دفاتر جوبيتر الخاصة بك.</div>
+  <div class="ar">يستخدم هذا المقياس مجموعتَي بيانات بصيغة CSV. نزِّلهما من المنصة وضعهما في نفس مجلد دفاتر جوبيتر الخاصة بك.</div>
   <table>
     <tr><th>ملف البيانات / File</th><th>يُستخدم في / Used in</th><th>عدد الصفوف / Rows</th><th>المتغيرات الرئيسية / Key Columns</th></tr>
     <tr><td><code>algeria_economic_combined.csv</code></td><td>TP1–TP4</td><td>24 (2000–2023)</td><td>Year, GDP_Growth_Percent, Inflation_Percent, Unemployment_Rate</td></tr>
@@ -130,23 +163,27 @@ print("\nAll libraries ready / كل المكتبات جاهزة")</pre>
   </table>
 </div>
 
+<!-- COMMON ERRORS -->
 <div class="section">
   <div class="section-title"><span class="tag tag-tip">Common Errors / الأخطاء البرمجية الشائعة</span></div>
 
   <div class="error-box"><strong>FileNotFoundError:</strong> algeria_economic_combined.csv</div>
-  <div class="fix-box">ملف البيانات بصيغة CSV غير موجود في نفس مجلد دفتر جوبيتر. في Colab: أعد رفع الملف. محلياً: انسخ الملف إلى مجلد الدفتر. / The dataset file is not in the same folder as your notebook.</div>
+  <div class="fix-box">ملف البيانات CSV غير موجود في نفس مجلد الدفتر. في Colab: أعد رفع الملف عبر أيقونة المجلد. في VS Code: ضع ملف CSV في نفس مجلد <code>.ipynb</code> / In Colab: re-upload via the folder icon. In VS Code: place the CSV in the same folder as your notebook.</div>
 
   <div class="error-box"><strong>ModuleNotFoundError:</strong> No module named 'statsmodels'</div>
-  <div class="fix-box">المكتبة البرمجية غير مثبَّتة. نفِّذ في خلية جديدة: <code>!pip install statsmodels</code> / The library is not installed. Run in a new cell: <code>!pip install statsmodels</code></div>
+  <div class="fix-box">المكتبة غير مثبَّتة. في VS Code Terminal: <code>pip install statsmodels</code>. في Colab، نفِّذ في خلية جديدة: <code>!pip install statsmodels</code> / In VS Code terminal: <code>pip install statsmodels</code>. In Colab cell: <code>!pip install statsmodels</code></div>
 
   <div class="error-box"><strong>NameError:</strong> name 'df' is not defined</div>
-  <div class="fix-box">تجاوزت خلية برمجية سابقة. نفِّذ جميع الخلايا من البداية: القائمة → Runtime → Run all / You skipped a cell. Run all cells from top to bottom: Menu → Runtime → Run all</div>
+  <div class="fix-box">تجاوزت خلية برمجية سابقة. نفِّذ جميع الخلايا من البداية. في VS Code: <strong>Run All</strong> من قائمة الخلايا. في Colab: <strong>Runtime → Run all</strong> / Run all cells from top. In VS Code: click <strong>Run All</strong>. In Colab: <strong>Runtime → Run all</strong></div>
 
   <div class="error-box"><strong>ValueError:</strong> could not convert string to float</div>
-  <div class="fix-box">أحد الأعمدة يحتوي على نصوص مختلطة بأرقام. تحقق بـ <code>df.dtypes</code> وعالج بـ <code>pd.to_numeric(df['col'], errors='coerce')</code> / A column contains text mixed with numbers.</div>
+  <div class="fix-box">عمود يحتوي على نصوص مختلطة بأرقام. تحقق بـ <code>df.dtypes</code> وعالج بـ <code>pd.to_numeric(df['col'], errors='coerce')</code> / A column contains text mixed with numbers. Check with <code>df.dtypes</code>, fix with <code>pd.to_numeric()</code></div>
 
   <div class="error-box"><strong>KeyError:</strong> 'GDP_Growth'</div>
-  <div class="fix-box">اسم العمود غير مطابق تماماً (الأسماء حساسة لحالة الأحرف). تحقق من الأسماء الدقيقة بـ <code>df.columns.tolist()</code> / Column name mismatch — names are case-sensitive. Check with <code>df.columns.tolist()</code></div>
+  <div class="fix-box">اسم العمود غير مطابق تماماً (الأسماء حساسة لحالة الأحرف). تحقق من الأسماء الدقيقة بـ <code>df.columns.tolist()</code> / Column name mismatch — names are case-sensitive. Check exact names with <code>df.columns.tolist()</code></div>
+
+  <div class="error-box"><strong>VS Code:</strong> "Select Kernel" — no Python environment found</div>
+  <div class="fix-box">VS Code لا يرى بيئة بايثون. تأكد من تثبيت Python وإضافة Python من Microsoft. انقر <strong>Select Kernel → Install suggested extensions</strong> أو أعد تشغيل VS Code / VS Code cannot find Python. Make sure Python is installed and the Python extension is active. Click <strong>Select Kernel → Install suggested extensions</strong> or restart VS Code.</div>
 </div>
 
 </body></html>
