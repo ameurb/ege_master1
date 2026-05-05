@@ -36,6 +36,11 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 # Templates
 templates = Jinja2Templates(directory=Path(__file__).parent / "templates")
 
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/login", status_code=303)
+
+
 # Routers
 app.include_router(auth_router.router)
 app.include_router(upload.router)
