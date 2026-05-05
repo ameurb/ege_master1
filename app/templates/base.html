@@ -178,7 +178,36 @@
 
 <!-- Main content -->
 <div class="lg:ml-60 min-h-screen">
-    <main class="px-4 sm:px-6 lg:px-8 py-6 pt-20 lg:pt-8">
+
+    <!-- Top bar (desktop) -->
+    {% if user %}
+    <div class="hidden lg:flex items-center justify-end gap-2 px-8 py-3 bg-white border-b border-slate-200 sticky top-0 z-20">
+        <a href="/"
+           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+            </svg>
+            Documents
+        </a>
+        <a href="{% if user.role == 'professor' %}/tp/manage{% else %}/tp{% endif %}"
+           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+            TPs
+        </a>
+        <div class="w-px h-5 bg-slate-200 mx-1"></div>
+        <a href="/logout"
+           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            Logout
+        </a>
+    </div>
+    {% endif %}
+
+    <main class="px-4 sm:px-6 lg:px-8 py-6 pt-20 lg:pt-6">
         {% block content %}{% endblock %}
     </main>
 </div>
