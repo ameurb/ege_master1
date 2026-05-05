@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+
+  <!-- Q1 -->
+  <question type="multichoice">
+    <name><text>W8-Q1 — type(3.14)</text></name>
+    <questiontext format="html">
+      <text><![CDATA[What is the output of <code>type(3.14)</code>?<br>
+      <span dir="rtl">ما ناتج <code>type(3.14)</code>؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>float</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>int</text><feedback><text>3.14 has a decimal point — it is a float, not int.</text></feedback></answer>
+    <answer fraction="0"><text>str</text><feedback><text>str is for text values like "hello".</text></feedback></answer>
+    <answer fraction="0"><text>bool</text><feedback><text>bool is True or False only.</text></feedback></answer>
+  </question>
+
+  <!-- Q2 -->
+  <question type="multichoice">
+    <name><text>W8-Q2 — len([10,20,30,40])</text></name>
+    <questiontext format="html">
+      <text><![CDATA[What does <code>len([10, 20, 30, 40])</code> return?<br>
+      <span dir="rtl">ما الناتج؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>4</text><feedback><text>Correct — the list has 4 elements / صحيح، القائمة تحتوي على 4 عناصر</text></feedback></answer>
+    <answer fraction="0"><text>3</text><feedback><text>Count again: [10, 20, 30, 40] has 4 elements.</text></feedback></answer>
+    <answer fraction="0"><text>40</text><feedback><text>len() returns the number of elements, not the last value.</text></feedback></answer>
+    <answer fraction="0"><text>10</text><feedback><text>len() returns the count, not the first element.</text></feedback></answer>
+  </question>
+
+  <!-- Q3 -->
+  <question type="multichoice">
+    <name><text>W8-Q3 — append()</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Which method adds an element to the end of a list?<br>
+      <span dir="rtl">أي دالة تُضيف عنصراً إلى نهاية القائمة؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>append()</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>add()</text><feedback><text>add() is not a list method in Python.</text></feedback></answer>
+    <answer fraction="0"><text>insert()</text><feedback><text>insert() adds at a specific index, not necessarily the end.</text></feedback></answer>
+    <answer fraction="0"><text>push()</text><feedback><text>push() does not exist for Python lists.</text></feedback></answer>
+  </question>
+
+  <!-- Q4 -->
+  <question type="multichoice">
+    <name><text>W8-Q4 — def keyword</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Which keyword is used to define a function in Python?<br>
+      <span dir="rtl">أي كلمة مفتاحية تُستخدم لتعريف الدالة في بايثون؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>def</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>function</text><feedback><text>function is not a Python keyword — use def.</text></feedback></answer>
+    <answer fraction="0"><text>fun</text><feedback><text>fun is not valid Python syntax.</text></feedback></answer>
+    <answer fraction="0"><text>define</text><feedback><text>define is not a Python keyword — use def.</text></feedback></answer>
+  </question>
+
+  <!-- Q5 -->
+  <question type="multichoice">
+    <name><text>W8-Q5 — read_csv</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Which Pandas function loads a CSV file into a DataFrame?<br>
+      <span dir="rtl">أي دالة في Pandas تُحمِّل ملف CSV إلى إطار بيانات؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>pd.read_csv()</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>pd.load_csv()</text><feedback><text>load_csv() does not exist in pandas.</text></feedback></answer>
+    <answer fraction="0"><text>pd.open_csv()</text><feedback><text>open_csv() does not exist in pandas.</text></feedback></answer>
+    <answer fraction="0"><text>pd.import_csv()</text><feedback><text>import_csv() does not exist in pandas.</text></feedback></answer>
+  </question>
+
+  <!-- Q6 -->
+  <question type="multichoice">
+    <name><text>W8-Q6 — isnull().sum()</text></name>
+    <questiontext format="html">
+      <text><![CDATA[What does <code>df.isnull().sum()</code> count?<br>
+      <span dir="rtl">ماذا تحسب <code>df.isnull().sum()</code>؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>The number of missing values per column / عدد القيم المفقودة في كل عمود</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>The total number of rows / إجمالي عدد الصفوف</text><feedback><text>Use df.shape[0] for the number of rows.</text></feedback></answer>
+    <answer fraction="0"><text>The sum of all values in the DataFrame / مجموع كل القيم</text><feedback><text>Use df.sum() for the sum of values.</text></feedback></answer>
+    <answer fraction="0"><text>The number of duplicate rows / عدد الصفوف المكررة</text><feedback><text>Use df.duplicated().sum() for duplicates.</text></feedback></answer>
+  </question>
+
+  <!-- Q7 -->
+  <question type="multichoice">
+    <name><text>W8-Q7 — chart for trend over time</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Which chart type is best for showing a trend over time (e.g. GDP 2000–2023)?<br>
+      <span dir="rtl">أي مخطط يُظهر الاتجاه الزمني (مثلاً: الناتج المحلي 2000–2023)؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>Line chart / المخطط الخطي — ax.plot(x, y)</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>Bar chart / المخطط العمودي — ax.bar(x, y)</text><feedback><text>Bar charts are better for comparing categories, not time trends.</text></feedback></answer>
+    <answer fraction="0"><text>Histogram / المدرّج التكراري — ax.hist(data)</text><feedback><text>Histograms show distributions, not time trends.</text></feedback></answer>
+    <answer fraction="0"><text>Scatter plot / مخطط الانتشار — ax.scatter(x, y)</text><feedback><text>Scatter plots show relationships between two variables, not time trends.</text></feedback></answer>
+  </question>
+
+  <!-- Q8 -->
+  <question type="multichoice">
+    <name><text>W8-Q8 — R² = 0.85</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Your OLS model has R² = 0.85. What does this mean?<br>
+      <span dir="rtl">نموذج الانحدار أعطى R² = 0.85. ماذا يعني ذلك؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>The model explains 85% of the variance in the dependent variable / النموذج يفسّر 85% من تباين المتغير التابع</text><feedback><text>Correct / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>The model has an 85% accuracy rate / دقة النموذج 85%</text><feedback><text>R² is not accuracy — it measures explained variance.</text></feedback></answer>
+    <answer fraction="0"><text>85% of the coefficients are significant / 85% من المعاملات دالة إحصائياً</text><feedback><text>Significance is measured by p-values, not R².</text></feedback></answer>
+    <answer fraction="0"><text>The model makes errors 15% of the time / النموذج يُخطئ 15% من الوقت</text><feedback><text>R² does not measure error frequency — it measures explained variance.</text></feedback></answer>
+  </question>
+
+  <!-- Q9 -->
+  <question type="multichoice">
+    <name><text>W8-Q9 — train_test_split test_size=0.2</text></name>
+    <questiontext format="html">
+      <text><![CDATA[<code>train_test_split(X, y, test_size=0.2)</code> — what percentage of data goes to training?<br>
+      <span dir="rtl">ما النسبة المخصصة للتدريب؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>80% / 80%</text><feedback><text>Correct — test_size=0.2 means 20% test, so 80% train / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>20% / 20%</text><feedback><text>20% is for testing — test_size=0.2.</text></feedback></answer>
+    <answer fraction="0"><text>50% / 50%</text><feedback><text>A 50/50 split would require test_size=0.5.</text></feedback></answer>
+    <answer fraction="0"><text>42% / 42%</text><feedback><text>42 is random_state, not a split percentage.</text></feedback></answer>
+  </question>
+
+  <!-- Q10 -->
+  <question type="multichoice">
+    <name><text>W8-Q10 — MAE vs RMSE</text></name>
+    <questiontext format="html">
+      <text><![CDATA[Which metric penalizes large prediction errors more heavily?<br>
+      <span dir="rtl">أي مقياس يُعاقب الأخطاء الكبيرة في التنبؤ بشكل أكبر؟</span>]]></text>
+    </questiontext>
+    <defaultgrade>1</defaultgrade>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <answer fraction="100"><text>RMSE — because it squares the errors / لأنه يُربِّع الأخطاء</text><feedback><text>Correct — squaring makes large errors count much more / صحيح</text></feedback></answer>
+    <answer fraction="0"><text>MAE — because it uses absolute values / لأنه يستخدم القيمة المطلقة</text><feedback><text>MAE treats all errors equally — it does not penalize large errors more.</text></feedback></answer>
+    <answer fraction="0"><text>R² — because it measures explained variance / لأنه يقيس التباين المُفسَّر</text><feedback><text>R² is not an error metric.</text></feedback></answer>
+    <answer fraction="0"><text>They are identical / هما متطابقان</text><feedback><text>MAE and RMSE differ — RMSE is always ≥ MAE.</text></feedback></answer>
+  </question>
+
+</quiz>
