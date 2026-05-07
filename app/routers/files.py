@@ -24,6 +24,8 @@ def _enrich_files(files: list[dict]) -> list[dict]:
 
 @router.get("/")
 async def home(request: Request):
+    if not request.session.get("user"):
+        return RedirectResponse(url="/login", status_code=303)
     cats = list_categories()
     recent = _enrich_files(list_files())[:20]
     return templates.TemplateResponse("index.html", {
